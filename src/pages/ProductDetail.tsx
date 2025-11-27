@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/contexts/CartContext';
 import { getProductById } from '@/data/products';
 import { useToast } from '@/hooks/use-toast';
-import { ShoppingCart, Check } from 'lucide-react';
+import { ShoppingCart, Check, Heart, Clock, Shield, Factory } from 'lucide-react';
 
 const ProductDetail = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -71,6 +71,11 @@ const ProductDetail = () => {
 
             <p className="text-lg text-foreground/80 mb-6">{product.shortDescription}</p>
 
+            {/* Long Description */}
+            <div className="mb-6">
+              <p className="text-foreground/80 leading-relaxed">{product.longDescription}</p>
+            </div>
+
             {/* Weight Selection */}
             <div className="mb-6">
               <h3 className="text-sm font-semibold mb-3 text-foreground">Select Pack Size:</h3>
@@ -121,7 +126,10 @@ const ProductDetail = () => {
 
             {/* Benefits */}
             <div className="mb-6">
-              <h3 className="text-lg font-serif font-bold text-primary mb-3">Benefits:</h3>
+              <h3 className="text-lg font-serif font-bold text-primary mb-3 flex items-center">
+                <Heart className="w-5 h-5 mr-2 text-secondary" />
+                Benefits:
+              </h3>
               <ul className="space-y-2">
                 {product.benefits.map((benefit, idx) => (
                   <li key={idx} className="flex items-start">
@@ -134,20 +142,47 @@ const ProductDetail = () => {
 
             {/* Usage */}
             <div className="mb-6">
-              <h3 className="text-lg font-serif font-bold text-primary mb-2">Usage:</h3>
+              <h3 className="text-lg font-serif font-bold text-primary mb-2 flex items-center">
+                <Clock className="w-5 h-5 mr-2 text-secondary" />
+                Usage:
+              </h3>
               <p className="text-foreground/80">{product.usage}</p>
             </div>
 
             {/* Dosage */}
             <div className="mb-6">
-              <h3 className="text-lg font-serif font-bold text-primary mb-2">Recommended Dosage:</h3>
+              <h3 className="text-lg font-serif font-bold text-primary mb-2 flex items-center">
+                <Shield className="w-5 h-5 mr-2 text-secondary" />
+                Recommended Dosage:
+              </h3>
               <p className="text-foreground/80">{product.dosage}</p>
             </div>
 
             {/* Storage */}
             <div className="mb-6">
-              <h3 className="text-lg font-serif font-bold text-primary mb-2">Storage Instructions:</h3>
+              <h3 className="text-lg font-serif font-bold text-primary mb-2 flex items-center">
+                <Factory className="w-5 h-5 mr-2 text-secondary" />
+                Storage Instructions:
+              </h3>
               <p className="text-foreground/80">{product.storage}</p>
+            </div>
+
+            {/* Safety Notes */}
+            <div className="mb-6">
+              <h3 className="text-lg font-serif font-bold text-primary mb-2 flex items-center">
+                <Shield className="w-5 h-5 mr-2 text-secondary" />
+                Safety Notes:
+              </h3>
+              <p className="text-foreground/80">{product.safety}</p>
+            </div>
+
+            {/* How It's Made */}
+            <div className="mb-6">
+              <h3 className="text-lg font-serif font-bold text-primary mb-2 flex items-center">
+                <Factory className="w-5 h-5 mr-2 text-secondary" />
+                How It's Made:
+              </h3>
+              <p className="text-foreground/80 whitespace-pre-line">{product.howItMade}</p>
             </div>
 
             {/* Categories */}
