@@ -1,3 +1,5 @@
+import bananaPowderImage from '@/assets/banana raw powder.jpg';
+
 export interface ProductVariant {
   weight: '100g' | '250g' | '500g' | '1kg';
   price: number;
@@ -9,16 +11,19 @@ export interface Product {
   id: string;
   name: string;
   shortDescription: string;
-  longDescription?: string;
+  longDescription: string;
   benefits: string[];
   usage: string;
   dosage: string;
+  safety: string;
   storage: string;
   category: string[];
+  howItMade: string;
   highlights: string[];
   seoKeywords: {
     primary: string;
     secondary: string[];
+    longTail: string[];
   };
   imageUrl: string;
   variants: ProductVariant[];
@@ -28,50 +33,70 @@ export interface Product {
 export const products: Product[] = [
   {
     id: "banana-powder",
-    name: "Banana Powder",
-    shortDescription: "Naturally sweet, nutrient-dense powder from sun-ripened bananas.",
+    name: "BANANA POWDER",
+    shortDescription: "A naturally sweet, nutrient-dense powder made from sun-ripened bananas.",
+    longDescription: "Golden Harvest Banana Powder is made from fully ripe, chemical-free bananas that are cleaned, sliced, and dehydrated at low temperatures to retain natural sweetness and nutrients. Perfect for babies, adults, athletes, and baking recipes.",
     benefits: [
-      "Natural energy boost",
+      "Natural energy booster",
+      "Gentle on digestion",
       "Rich in potassium",
-      "Supports gentle digestion",
-      "Perfect for baking"
+      "Helps maintain satiety",
+      "Naturally sweet (no sugar added)",
+      "Ideal for infants' porridges",
+      "Great for baking and desserts"
     ],
-    usage: "Mix with milk/porridge, smoothies, baking",
-    dosage: "Adults: 2–3 tbsp/day; Children: 1–2 tsp/day",
-    storage: "Store in an airtight container in a cool, dry place away from direct sunlight",
+    usage: "Mix in milk, water, porridges\nAdd to smoothies and shakes\nUse in baking (cakes, muffins)\nBaby food preparations",
+    dosage: "Adults: 2–3 tbsp/day\nChildren: 1–2 tsp/day\nBabies: as advised",
+    safety: "Avoid if allergic to bananas\nIntroduce slowly for infants",
+    storage: "Store in an airtight container, away from moisture and heat.",
     category: ["Energy", "Daily Nutrition", "Kids Nutrition"],
-    highlights: ["100% natural", "No sugar added", "No preservatives"],
+    howItMade: "Sourcing: Ripe local bananas\nCleaning: RO-washed\nDrying: Low-heat dehydration\nGrinding: Fine micro-grinding\nTesting: Purity & quality\nPacking: Airtight pouches",
+    highlights: [
+      "100% natural",
+      "No sugar",
+      "No preservatives",
+      "Fresh banana taste"
+    ],
     seoKeywords: {
       primary: "banana powder",
-      secondary: ["banana powder for kids", "banana powder for smoothies"]
+      secondary: ["banana powder for kids", "banana powder for smoothies"],
+      longTail: ["natural banana powder for babies"]
     },
-    imageUrl: "/images/products/banana-powder.jpg",
+    imageUrl: bananaPowderImage,
     variants: [
-      { weight: '100g', price: 120, stock: 50, sku: 'BAN-100' },
-      { weight: '250g', price: 280, stock: 40, sku: 'BAN-250' },
-      { weight: '500g', price: 520, stock: 30, sku: 'BAN-500' },
-      { weight: '1kg', price: 980, stock: 20, sku: 'BAN-1KG' }
-    ],
-    featured: true
+      { weight: '100g', price: 150, stock: 50, sku: 'BAN-100' },
+      { weight: '250g', price: 350, stock: 40, sku: 'BAN-250' },
+      { weight: '500g', price: 650, stock: 30, sku: 'BAN-500' },
+      { weight: '1kg', price: 1200, stock: 20, sku: 'BAN-1KG' }
+    ]
   },
   {
     id: "beetroot-powder",
-    name: "Beetroot Powder",
-    shortDescription: "Vibrant, nutrient-rich powder from fresh farm beets.",
+    name: "BEETROOT POWDER",
+    shortDescription: "A vibrant, nutrient-rich powder made from fresh farm beetroots.",
+    longDescription: "Golden Harvest Beetroot Powder is a clean, preservative-free superfood made from dehydrated beetroots. Known for its natural colour and earthy sweetness, it's great for smoothies, rotis, soups, and natural food coloring.",
     benefits: [
-      "Supports stamina and endurance",
-      "Natural food colourant",
+      "Supports stamina",
+      "Natural food color",
+      "Daily nutrient support",
       "Rich in antioxidants",
-      "Provides natural energy"
+      "Boosts natural energy"
     ],
-    usage: "Smoothies, soups, doughs, natural food colour",
+    usage: "Mix in water, smoothies\nAdd to dough, soups, gravies\nUse as natural colour",
     dosage: "1–2 tsp/day",
-    storage: "Store in an airtight container in a cool, dry place away from moisture",
+    safety: "Not advised for oxalate-sensitive individuals.",
+    storage: "Cool, dry, airtight.",
     category: ["Energy", "Daily Nutrition"],
-    highlights: ["No artificial colours", "Preservative-free", "Farm fresh"],
+    howItMade: "Beetroots → Cleaned → Sliced → Low-temp dried → Ground → Packed",
+    highlights: [
+      "No colours",
+      "No preservatives",
+      "100% pure beetroot"
+    ],
     seoKeywords: {
       primary: "beetroot powder",
-      secondary: ["beet powder", "beetroot powder for smoothies"]
+      secondary: ["beet powder", "natural beetroot colour"],
+      longTail: ["beetroot powder for smoothies"]
     },
     imageUrl: "/images/products/beetroot-powder.jpg",
     variants: [
@@ -84,22 +109,31 @@ export const products: Product[] = [
   },
   {
     id: "moringa-powder",
-    name: "Moringa Leaf Powder",
+    name: "MORINGA LEAF POWDER",
     shortDescription: "Pure moringa leaves dried and powdered for daily nutrition.",
+    longDescription: "Made from organically grown moringa leaves, this powder is rich in micronutrients and antioxidants. Ideal for mixing into juices, water, or curries.",
     benefits: [
-      "Micronutrient-rich superfood",
-      "Packed with antioxidants",
-      "Supports immune function",
-      "Traditional wellness herb"
+      "Nutrient-rich",
+      "Supports daily wellness",
+      "Helps natural energy",
+      "Natural antioxidants",
+      "Supports immunity"
     ],
-    usage: "Juices, smoothies, curries",
+    usage: "Warm water\nSmoothies\nCurries & soups",
     dosage: "1 tsp/day",
-    storage: "Store in an airtight container away from heat and moisture",
+    safety: "Avoid during pregnancy without guidance.",
+    storage: "Airtight, away from sunlight.",
     category: ["Daily Nutrition", "Wellness"],
-    highlights: ["Shade-dried leaf powder", "No additives", "Pure moringa"],
+    howItMade: "Leaves → Washed → Shade dried → Fine ground → Packed",
+    highlights: [
+      "Pure leaf powder",
+      "No additives",
+      "Naturally nutrient-rich"
+    ],
     seoKeywords: {
       primary: "moringa powder",
-      secondary: ["drumstick leaf powder", "moringa oleifera powder"]
+      secondary: ["drumstick leaf powder"],
+      longTail: ["moringa for daily nutrition"]
     },
     imageUrl: "/images/products/moringa-powder.jpg",
     variants: [
