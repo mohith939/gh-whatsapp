@@ -23,7 +23,7 @@ export interface Product {
   seoKeywords: {
     primary: string;
     secondary: string[];
-    longTail: string[];
+    longTail?: string[];
   };
   imageUrl: string;
   variants: ProductVariant[];

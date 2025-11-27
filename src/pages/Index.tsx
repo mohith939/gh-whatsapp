@@ -22,10 +22,10 @@ const Index = () => {
         </div>
         <div className="relative w-full px-4 py-20 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary mb-6 animate-fade-in">
+            <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary mb-6 animate-fade-in drop-shadow-sm">
               Raw. Real. Truly Pure.
             </h1>
-            <p className="text-xl md:text-2xl text-foreground/80 mb-8 animate-fade-in-delay">
+            <p className="text-xl md:text-2xl text-foreground mb-8 animate-fade-in-delay font-medium">
               Clean, raw, chemical-free powders made from fresh farm produce — naturally pure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
@@ -64,7 +64,7 @@ const Index = () => {
       <section className="py-20 bg-warm-beige">
         <div className="w-full px-4">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16 drop-shadow-sm">
               Why Golden Harvest?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -103,10 +103,10 @@ const Index = () => {
         <div className="w-full px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 drop-shadow-sm">
                 Featured Products
               </h2>
-              <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
+              <p className="text-foreground max-w-2xl mx-auto text-lg">
                 Discover our most popular raw powders, loved by health-conscious families across India.
               </p>
             </div>
@@ -150,7 +150,7 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6 drop-shadow-sm">
                   From Our Villages to Your Home
                 </h2>
                 <p className="text-foreground/80 leading-relaxed mb-6 text-lg">
@@ -186,7 +186,7 @@ const Index = () => {
       <section className="py-20 bg-background">
         <div className="w-full px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-12">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-12 drop-shadow-sm">
               Voices from the Fields
             </h2>
             <Card className="border-border bg-card shadow-xl">
@@ -215,7 +215,7 @@ const Index = () => {
       <section className="py-20 bg-warm-beige">
         <div className="w-full px-4">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16 drop-shadow-sm">
               Shop by Category
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

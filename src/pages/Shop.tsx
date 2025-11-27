@@ -47,10 +47,10 @@ const Shop = () => {
     <div className="w-full py-12">
       <div className="container mx-auto px-4">
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 drop-shadow-sm">
             Shop All Products
           </h1>
-          <p className="text-foreground/70 max-w-2xl">
+          <p className="text-foreground text-lg max-w-2xl">
             Browse our complete collection of 19 pure, raw powders. All products are lab-tested, FSSAI certified, and available in multiple pack sizes.
           </p>
         </div>
