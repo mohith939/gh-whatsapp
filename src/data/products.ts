@@ -148,6 +148,7 @@ export const products: Product[] = [
     id: "ginger-powder",
     name: "Ginger Powder",
     shortDescription: "Sun-dried ginger powder with strong aroma and warmth.",
+    longDescription: "Golden Harvest Ginger Powder is made from mature ginger rhizomes that are cleaned, sliced, and sun-dried to preserve their natural oils and pungency. Perfect for teas, cooking, and traditional wellness drinks.",
     benefits: [
       "Supports healthy digestion",
       "Warming spice",
@@ -156,8 +157,10 @@ export const products: Product[] = [
     ],
     usage: "Teas, curries, kadha, baking",
     dosage: "½–1 tsp/day",
+    safety: "Avoid excessive consumption. Consult doctor if on blood-thinning medication.",
     storage: "Store in an airtight container in a cool, dry place",
     category: ["Digestion", "Wellness"],
+    howItMade: "Fresh ginger → Cleaned → Sliced → Sun-dried → Ground → Quality checked → Packed",
     highlights: ["Aromatic", "No additives", "Pure ginger"],
     seoKeywords: {
       primary: "ginger powder",
@@ -175,6 +178,7 @@ export const products: Product[] = [
     id: "garlic-powder",
     name: "Garlic Powder",
     shortDescription: "Aromatic dehydrated garlic powder for instant flavour.",
+    longDescription: "Made from fresh garlic cloves that are peeled, sliced, and dehydrated at controlled temperatures. Our garlic powder retains its strong aroma and adds instant flavor to any dish without the hassle of peeling and chopping.",
     benefits: [
       "Strong, authentic flavour",
       "Easy seasoning solution",
@@ -183,8 +187,10 @@ export const products: Product[] = [
     ],
     usage: "Gravies, marinades, seasoning",
     dosage: "As per recipe",
+    safety: "Safe for daily use. May cause digestive discomfort if consumed in large quantities.",
     storage: "Store in an airtight container away from moisture",
     category: ["Cooking Essentials"],
+    howItMade: "Garlic cloves → Peeled → Sliced → Low-temp dried → Ground → Packed",
     highlights: ["100% garlic", "No preservatives", "Dehydrated naturally"],
     seoKeywords: {
       primary: "garlic powder",
@@ -202,6 +208,7 @@ export const products: Product[] = [
     id: "turmeric-powder",
     name: "Turmeric Powder",
     shortDescription: "High-colour turmeric from pure desi rhizomes.",
+    longDescription: "Our turmeric powder is made from premium quality desi turmeric rhizomes grown in chemical-free farms. The rhizomes are cleaned, boiled, dried, and ground to produce a vibrant yellow powder with high curcumin content.",
     benefits: [
       "Antioxidant-rich",
       "Daily spice for immunity",
@@ -210,8 +217,10 @@ export const products: Product[] = [
     ],
     usage: "Curries, milk, kadha, smoothies",
     dosage: "½–1 tsp/day",
+    safety: "Safe for daily use. Avoid if allergic. Consult doctor if on specific medications.",
     storage: "Store in an airtight container away from light and moisture",
     category: ["Immunity", "Wellness"],
+    howItMade: "Turmeric rhizomes → Cleaned → Boiled → Dried → Ground → Quality tested → Packed",
     highlights: ["No fillers", "High colour", "Pure turmeric"],
     seoKeywords: {
       primary: "turmeric powder",
@@ -229,6 +238,7 @@ export const products: Product[] = [
     id: "amla-powder",
     name: "Amla Powder",
     shortDescription: "Indian gooseberry powder — natural Vitamin C source.",
+    longDescription: "Golden Harvest Amla Powder is made from fresh Indian gooseberries (amla) that are shade-dried to preserve their natural Vitamin C content. Known for its immunity and hair benefits, this tangy powder is a wellness staple.",
     benefits: [
       "Supports immune function",
       "Hair and skin benefits",
@@ -237,8 +247,10 @@ export const products: Product[] = [
     ],
     usage: "Warm water, smoothies, hair masks",
     dosage: "1 tsp/day",
+    safety: "Safe for most people. May interact with diabetes medication. Consult doctor if unsure.",
     storage: "Store in an airtight container in a cool, dry place",
     category: ["Immunity", "Beauty"],
+    howItMade: "Fresh amla → Washed → Shade-dried → Ground → Packed",
     highlights: ["Shade-dried", "Nutrient-dense", "Pure amla"],
     seoKeywords: {
       primary: "amla powder",
@@ -256,6 +268,7 @@ export const products: Product[] = [
     id: "ashwagandha-powder",
     name: "Ashwagandha Powder",
     shortDescription: "Traditional adaptogenic root powder for stress balance.",
+    longDescription: "Made from premium ashwagandha roots sourced from certified farms. This adaptogenic herb has been used in Ayurveda for centuries to support stress management, relaxation, and overall vitality.",
     benefits: [
       "Supports relaxation",
       "Promotes sleep quality",
@@ -264,8 +277,10 @@ export const products: Product[] = [
     ],
     usage: "Warm milk/tonic, smoothies",
     dosage: "½–1 tsp/day",
+    safety: "Not recommended during pregnancy or breastfeeding. Consult healthcare provider before use.",
     storage: "Store in an airtight container away from heat and moisture",
     category: ["Stress Relief", "Wellness"],
+    howItMade: "Ashwagandha roots → Cleaned → Dried → Ground → Quality tested → Packed",
     highlights: ["Root-only powder", "Clean processing", "Pure ashwagandha"],
     seoKeywords: {
       primary: "ashwagandha powder",
@@ -283,6 +298,7 @@ export const products: Product[] = [
     id: "spirulina-powder",
     name: "Spirulina Powder",
     shortDescription: "Protein-rich blue-green algae powder for daily nutrition.",
+    longDescription: "Our spirulina powder is sourced from controlled cultivation farms where this blue-green algae is grown in pure water. It's dried and powdered to preserve its high protein content and rich micronutrient profile.",
     benefits: [
       "High plant protein content",
       "Natural energy boost",
@@ -291,8 +307,10 @@ export const products: Product[] = [
     ],
     usage: "Smoothies, juices, health drinks",
     dosage: "1 tsp/day",
+    safety: "Start with small amounts. Avoid if allergic to seafood or seaweed. Consult doctor if autoimmune conditions.",
     storage: "Store in an airtight container away from light and moisture",
     category: ["Energy", "Daily Nutrition"],
+    howItMade: "Spirulina cultivation → Harvested → Dried → Ground → Quality tested → Packed",
     highlights: ["Pure spirulina", "No additives", "Nutrient powerhouse"],
     seoKeywords: {
       primary: "spirulina powder",
@@ -310,6 +328,7 @@ export const products: Product[] = [
     id: "wheatgrass-powder",
     name: "Wheatgrass Powder",
     shortDescription: "Chlorophyll-rich tender wheatgrass for detox-style wellness.",
+    longDescription: "Made from young wheat grass harvested at its nutritional peak. The tender grass is immediately dried to lock in chlorophyll, vitamins, and minerals, creating a potent green powder for daily wellness.",
     benefits: [
       "Supports detox wellness",
       "Natural energy boost",
@@ -318,8 +337,10 @@ export const products: Product[] = [
     ],
     usage: "Water shots, smoothies",
     dosage: "1 tsp/day",
+    safety: "Start with small amounts. May cause nausea if taken on empty stomach. Avoid if wheat/gluten sensitive.",
     storage: "Store in an airtight container in a cool, dry place",
     category: ["Detox", "Wellness"],
+    howItMade: "Young wheat grass → Harvested → Washed → Dried → Ground → Packed",
     highlights: ["Freshly dried wheatgrass", "Nutrient-dense", "Pure wheatgrass"],
     seoKeywords: {
       primary: "wheatgrass powder",
@@ -337,6 +358,7 @@ export const products: Product[] = [
     id: "neem-powder",
     name: "Neem Powder",
     shortDescription: "Pure neem leaf powder for skin and wellness.",
+    longDescription: "Made from neem leaves sourced from mature neem trees. The leaves are shade-dried and ground into a fine powder, preserving their natural properties. Used traditionally for skin care and wellness support.",
     benefits: [
       "Supports skin health",
       "Natural detox support",
@@ -345,8 +367,10 @@ export const products: Product[] = [
     ],
     usage: "Water rinses, face/hair packs",
     dosage: "½ tsp/day (topical as needed)",
+    safety: "Not for internal use during pregnancy. External use generally safe. Patch test before use.",
     storage: "Store in an airtight container away from moisture",
     category: ["Skin", "Wellness"],
+    howItMade: "Neem leaves → Cleaned → Shade-dried → Ground → Packed",
     highlights: ["Leaf-only powder", "No fillers", "Pure neem"],
     seoKeywords: {
       primary: "neem powder",
@@ -364,6 +388,7 @@ export const products: Product[] = [
     id: "hibiscus-powder",
     name: "Hibiscus Powder",
     shortDescription: "Flower powder for hair strength, shine and natural colour.",
+    longDescription: "Golden Harvest Hibiscus Powder is made from dried hibiscus flowers (gudhal) known for their hair conditioning properties. The flowers are shade-dried and ground to preserve their natural pigments and nutrients.",
     benefits: [
       "Hair conditioning",
       "Scalp nourishment",
@@ -372,8 +397,10 @@ export const products: Product[] = [
     ],
     usage: "Hair masks, face packs, tea",
     dosage: "As topical or ½–1 tsp infusion",
+    safety: "Safe for topical use. May cause allergic reaction in sensitive individuals. Patch test recommended.",
     storage: "Store in an airtight container away from moisture",
     category: ["Beauty", "Hair Care"],
+    howItMade: "Hibiscus flowers → Dried → Ground → Sieved → Packed",
     highlights: ["Vibrant natural pigment", "No stabilizers", "Pure hibiscus"],
     seoKeywords: {
       primary: "hibiscus powder",
@@ -391,6 +418,7 @@ export const products: Product[] = [
     id: "aloe-vera-powder",
     name: "Aloe Vera Powder",
     shortDescription: "Pure aloe leaf powder for skin hydration and digestion support.",
+    longDescription: "Made from fresh aloe vera leaves that are cleaned, filleted, and spray-dried to preserve their beneficial properties. This powder is known for its soothing and hydrating properties for both internal and external use.",
     benefits: [
       "Hydration support",
       "Skin wellness support",
@@ -399,8 +427,10 @@ export const products: Product[] = [
     ],
     usage: "Smoothies, face packs",
     dosage: "½–1 tsp/day",
+    safety: "Generally safe. Avoid during pregnancy. May have laxative effects in high doses. Consult doctor if unsure.",
     storage: "Store in an airtight container in a cool, dry place",
     category: ["Beauty", "Digestion"],
+    howItMade: "Aloe vera leaves → Cleaned → Filleted → Spray-dried → Ground → Packed",
     highlights: ["Pure leaf powder", "Gentle", "Natural aloe"],
     seoKeywords: {
       primary: "aloe vera powder",
@@ -418,6 +448,7 @@ export const products: Product[] = [
     id: "carrot-powder",
     name: "Carrot Powder",
     shortDescription: "Natural carrot powder high in beta-carotene & colour.",
+    longDescription: "Made from fresh, sweet carrots that are washed, sliced, and dehydrated at low temperatures to retain their natural beta-carotene and vibrant orange colour. Perfect for baby food, smoothies, and baking.",
     benefits: [
       "Vitamin A precursor",
       "Eye and skin support",
@@ -426,8 +457,10 @@ export const products: Product[] = [
     ],
     usage: "Smoothies, soups, baking",
     dosage: "1–2 tsp/day",
+    safety: "Safe for all ages including infants. Introduce gradually to babies. May cause orange tint to skin in large amounts (harmless).",
     storage: "Store in an airtight container away from light",
     category: ["Kids Nutrition", "Daily Wellness"],
+    howItMade: "Fresh carrots → Washed → Sliced → Low-temp dried → Ground → Packed",
     highlights: ["Natural orange", "Nutrient-retentive processing", "Pure carrot"],
     seoKeywords: {
       primary: "carrot powder",
@@ -445,6 +478,7 @@ export const products: Product[] = [
     id: "spinach-powder",
     name: "Spinach Powder",
     shortDescription: "Nutrient-packed spinach powder for daily iron & greens.",
+    longDescription: "Golden Harvest Spinach Powder is made from fresh palak leaves that are thoroughly washed, shade-dried, and ground into a fine powder. A convenient way to add greens to your daily diet.",
     benefits: [
       "Rich in iron",
       "Packed with vitamins",
@@ -453,8 +487,10 @@ export const products: Product[] = [
     ],
     usage: "Smoothies, dough, soups",
     dosage: "1 tsp/day",
+    safety: "Safe for most people. High in oxalates - those with kidney issues should limit intake. Consult doctor if on blood thinners.",
     storage: "Store in an airtight container away from heat and moisture",
     category: ["Daily Nutrition"],
+    howItMade: "Fresh spinach → Washed → Shade-dried → Ground → Packed",
     highlights: ["Shade-dried leaves", "Nutrient retention", "Pure spinach"],
     seoKeywords: {
       primary: "spinach powder",
@@ -472,6 +508,7 @@ export const products: Product[] = [
     id: "fenugreek-powder",
     name: "Fenugreek (Methi) Powder",
     shortDescription: "Natural methi powder for digestion support & hair care.",
+    longDescription: "Made from high-quality fenugreek seeds that are cleaned, roasted lightly, and ground. This versatile powder is used both for cooking and wellness, with a distinctive slightly bitter taste and earthy aroma.",
     benefits: [
       "Digestion aid",
       "Hair conditioning",
@@ -480,8 +517,10 @@ export const products: Product[] = [
     ],
     usage: "Warm water, masala mixes, hair masks",
     dosage: "½–1 tsp/day",
+    safety: "Avoid during pregnancy. May lower blood sugar - diabetics should monitor. May interact with blood-thinning medications.",
     storage: "Store in an airtight container in a cool, dry place",
     category: ["Digestion", "Beauty"],
+    howItMade: "Fenugreek seeds → Cleaned → Light roasting → Ground → Packed",
     highlights: ["Clean-processed methi", "Multi-use", "Pure fenugreek"],
     seoKeywords: {
       primary: "fenugreek powder",
@@ -499,6 +538,7 @@ export const products: Product[] = [
     id: "curry-leaf-powder",
     name: "Curry Leaf Powder",
     shortDescription: "Aromatic curry leaf powder rich in minerals and flavour.",
+    longDescription: "Made from fresh curry leaves (kadi patta) that are plucked, cleaned, and shade-dried to preserve their distinctive aroma and nutrients. An essential ingredient in South Indian cooking and wellness practices.",
     benefits: [
       "Supports digestion",
       "Flavour enhancer",
@@ -507,8 +547,10 @@ export const products: Product[] = [
     ],
     usage: "Curries, seasoning, rice mixes",
     dosage: "As per recipe",
+    safety: "Safe for culinary use. Generally well-tolerated. Start with small amounts to test tolerance.",
     storage: "Store in an airtight container to retain aroma",
     category: ["Daily Nutrition"],
+    howItMade: "Fresh curry leaves → Cleaned → Shade-dried → Ground → Packed",
     highlights: ["Dried fresh curry leaves", "Aromatic finish", "Pure kadi patta"],
     seoKeywords: {
       primary: "curry leaf powder",
@@ -526,6 +568,7 @@ export const products: Product[] = [
     id: "pumpkin-seed-powder",
     name: "Pumpkin Seed Powder",
     shortDescription: "Plant-protein-rich pumpkin seed powder for energy & magnesium.",
+    longDescription: "Made from premium pumpkin seeds that are cleaned, dried, and ground into a fine powder. Rich in plant protein, magnesium, and healthy fats, this powder is perfect for protein-rich smoothies and baked goods.",
     benefits: [
       "High plant protein",
       "Rich in magnesium",
@@ -534,8 +577,10 @@ export const products: Product[] = [
     ],
     usage: "Smoothies, baking, shakes",
     dosage: "1–2 tbsp/day",
+    safety: "Generally safe. May cause digestive upset in large amounts. Store properly to prevent rancidity.",
     storage: "Store in an airtight container in a cool, dry place",
     category: ["Protein", "Energy"],
+    howItMade: "Pumpkin seeds → Cleaned → Dried → Ground → Packed",
     highlights: ["Cold-pressed dried seed powder", "High protein", "Pure pumpkin seeds"],
     seoKeywords: {
       primary: "pumpkin seed powder",
@@ -553,6 +598,7 @@ export const products: Product[] = [
     id: "flaxseed-powder",
     name: "Flaxseed Powder",
     shortDescription: "Fiber- and omega-rich flaxseed powder for digestion and healthy fats.",
+    longDescription: "Made from premium quality flaxseeds (alsi) that are cleaned and ground fresh to preserve their omega-3 fatty acids and fiber content. A nutritional powerhouse for heart health and digestive wellness.",
     benefits: [
       "Supports digestion",
       "Rich in omega fatty acids",
@@ -561,8 +607,10 @@ export const products: Product[] = [
     ],
     usage: "Smoothies, atta mixes, salads",
     dosage: "1–2 tbsp/day",
+    safety: "Start with small amounts to avoid digestive discomfort. Drink plenty of water. Store properly to prevent oxidation.",
     storage: "Store in an airtight container in a cool, dry place",
     category: ["Digestion", "Daily Nutrition"],
+    howItMade: "Flaxseeds → Cleaned → Ground fresh → Packed",
     highlights: ["Ground fresh", "Natural omega content", "Pure flaxseed"],
     seoKeywords: {
       primary: "flaxseed powder",
