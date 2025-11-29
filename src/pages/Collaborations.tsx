@@ -67,7 +67,7 @@ const Collaborations = () => {
     <div className="w-full py-12">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 drop-shadow-sm">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 drop-shadow-sm animate-fade-in">
             Our Partners & Collaborations
           </h1>
           <p className="text-foreground text-lg max-w-2xl mx-auto">

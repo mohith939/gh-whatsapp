@@ -17,8 +17,8 @@ const Cart = () => {
       <div className="w-full py-16">
         <div className="container mx-auto px-4 text-center">
           <ShoppingBag className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-          <h1 className="text-3xl font-serif font-bold text-primary mb-4">Your Cart is Empty</h1>
-          <p className="text-foreground/70 mb-8">Add some products to get started!</p>
+          <h1 className="text-3xl font-serif font-bold text-primary mb-4 animate-fade-in">Your Cart is Empty</h1>
+          <p className="text-foreground/70 mb-8 animate-fade-in-delay">Add some products to get started!</p>
           <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
             <Link to="/shop">Browse Products</Link>
           </Button>
@@ -30,13 +30,13 @@ const Cart = () => {
   return (
     <div className="w-full py-12">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-8">Shopping Cart</h1>
+        <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-8 animate-fade-in">Shopping Cart</h1>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4 animate-fade-in-delay">
             {cartItems.map((item) => (
-              <Card key={`${item.product.id}-${item.variant.weight}`} className="border-border">
+              <Card key={`${item.product.id}-${item.variant.weight}`} className="border-muted bg-muted/50 hover:shadow-md hover:scale-105 transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="flex gap-4">
                     <div className="w-24 h-24 bg-muted rounded-lg overflow-hidden flex-shrink-0">

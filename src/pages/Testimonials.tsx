@@ -83,7 +83,7 @@ const Testimonials = () => {
             <div className="flex gap-6">
               {testimonials.map((testimonial) => (
                 <div key={testimonial.id} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0">
-                  <Card className="h-full border-border bg-card hover:shadow-lg transition-shadow">
+                  <Card className="h-full border-muted bg-muted/50 hover:shadow-md hover:scale-105 transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-center gap-1 mb-3">
                         {Array.from({ length: testimonial.rating }).map((_, i) => (

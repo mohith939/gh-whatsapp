@@ -1,10 +1,36 @@
 import bananaPowderImage from '@/assets/banana raw powder.jpg';
+import beetrootPowderImage from '@/assets/beetroot raw powder.jpg';
+import moringaPowderImage from '@/assets/moringa powder.jpg';
+import gingerPowderImage from '@/assets/ginger powder.jpg';
+import garlicPowderImage from '@/assets/garlic powder.jpg';
+import carrotPowderImage from '@/assets/carrot powders.jpg';
+import curryLeafPowderImage from '@/assets/curry leaves powder.jpg';
+import betelLeafPowderImage from '@/assets/beteal leaf powder.jpg';
+import coconutPowderImage from '@/assets/coconut powder.jpg';
+import datesPowderImage from '@/assets/dates powder.jpg';
+import guavaPowderImage from '@/assets/guava powder.jpg';
+import lemonPowderImage from '@/assets/lemon powder.jpg';
+import papayaPowderImage from '@/assets/papaya powder.jpg';
+import tomatoPowderImage from '@/assets/tomato powder.jpg';
+import neemPowderImage from '@/assets/neem powder.jpg';
+import spinachPowderImage from '@/assets/spinach powder.jpg';
+import turmericPowderImage from '@/assets/turmeric powder.jpg';
+import amlaPowderImage from '@/assets/amla powder.jpg';
 
 export interface ProductVariant {
   weight: '100g' | '250g' | '500g' | '1kg';
   price: number;
   stock: number;
   sku: string;
+}
+
+export interface Review {
+  id: string;
+  author: string;
+  rating: number;
+  comment: string;
+  date: string;
+  verified: boolean;
 }
 
 export interface Product {
@@ -28,6 +54,7 @@ export interface Product {
   imageUrl: string;
   variants: ProductVariant[];
   featured?: boolean;
+  reviews?: Review[];
 }
 
 export const products: Product[] = [
@@ -68,6 +95,32 @@ export const products: Product[] = [
       { weight: '250g', price: 350, stock: 40, sku: 'BAN-250' },
       { weight: '500g', price: 650, stock: 30, sku: 'BAN-500' },
       { weight: '1kg', price: 1200, stock: 20, sku: 'BAN-1KG' }
+    ],
+    reviews: [
+      {
+        id: "rev1",
+        author: "Priya Sharma",
+        rating: 5,
+        comment: "Perfect for my baby's porridge! Natural sweetness and no additives. Highly recommend for parents.",
+        date: "2024-01-15",
+        verified: true
+      },
+      {
+        id: "rev2",
+        author: "Rajesh Kumar",
+        rating: 4,
+        comment: "Great for smoothies. Good quality and authentic taste. Only wish it was available in larger quantities.",
+        date: "2024-01-10",
+        verified: true
+      },
+      {
+        id: "rev3",
+        author: "Meera Patel",
+        rating: 5,
+        comment: "Excellent for baking! My cakes turn out perfect with this natural sweetener.",
+        date: "2024-01-08",
+        verified: true
+      }
     ]
   },
   {
@@ -98,7 +151,7 @@ export const products: Product[] = [
       secondary: ["beet powder", "natural beetroot colour"],
       longTail: ["beetroot powder for smoothies"]
     },
-    imageUrl: "/images/products/beetroot-powder.jpg",
+    imageUrl: beetrootPowderImage,
     variants: [
       { weight: '100g', price: 140, stock: 45, sku: 'BEE-100' },
       { weight: '250g', price: 320, stock: 35, sku: 'BEE-250' },
@@ -135,7 +188,7 @@ export const products: Product[] = [
       secondary: ["drumstick leaf powder"],
       longTail: ["moringa for daily nutrition"]
     },
-    imageUrl: "/images/products/moringa-powder.jpg",
+    imageUrl: moringaPowderImage,
     variants: [
       { weight: '100g', price: 180, stock: 55, sku: 'MOR-100' },
       { weight: '250g', price: 420, stock: 45, sku: 'MOR-250' },
@@ -166,7 +219,7 @@ export const products: Product[] = [
       primary: "ginger powder",
       secondary: ["dry ginger powder", "sonth powder"]
     },
-    imageUrl: "/images/products/ginger-powder.jpg",
+    imageUrl: gingerPowderImage,
     variants: [
       { weight: '100g', price: 90, stock: 60, sku: 'GIN-100' },
       { weight: '250g', price: 210, stock: 50, sku: 'GIN-250' },
@@ -196,7 +249,7 @@ export const products: Product[] = [
       primary: "garlic powder",
       secondary: ["dehydrated garlic", "garlic seasoning powder"]
     },
-    imageUrl: "/images/products/garlic-powder.jpg",
+    imageUrl: garlicPowderImage,
     variants: [
       { weight: '100g', price: 110, stock: 55, sku: 'GAR-100' },
       { weight: '250g', price: 260, stock: 45, sku: 'GAR-250' },
@@ -226,7 +279,7 @@ export const products: Product[] = [
       primary: "turmeric powder",
       secondary: ["haldi powder", "curcumin powder"]
     },
-    imageUrl: "/images/products/turmeric-powder.jpg",
+    imageUrl: turmericPowderImage,
     variants: [
       { weight: '100g', price: 80, stock: 70, sku: 'TUR-100' },
       { weight: '250g', price: 190, stock: 60, sku: 'TUR-250' },
@@ -256,102 +309,12 @@ export const products: Product[] = [
       primary: "amla powder",
       secondary: ["gooseberry powder", "Indian gooseberry powder"]
     },
-    imageUrl: "/images/products/amla-powder.jpg",
+    imageUrl: amlaPowderImage,
     variants: [
       { weight: '100g', price: 100, stock: 50, sku: 'AML-100' },
       { weight: '250g', price: 230, stock: 40, sku: 'AML-250' },
       { weight: '500g', price: 440, stock: 30, sku: 'AML-500' },
       { weight: '1kg', price: 850, stock: 20, sku: 'AML-1KG' }
-    ]
-  },
-  {
-    id: "ashwagandha-powder",
-    name: "Ashwagandha Powder",
-    shortDescription: "Traditional adaptogenic root powder for stress balance.",
-    longDescription: "Made from premium ashwagandha roots sourced from certified farms. This adaptogenic herb has been used in Ayurveda for centuries to support stress management, relaxation, and overall vitality.",
-    benefits: [
-      "Supports relaxation",
-      "Promotes sleep quality",
-      "Supports stress resilience",
-      "Traditional Ayurvedic herb"
-    ],
-    usage: "Warm milk/tonic, smoothies",
-    dosage: "½–1 tsp/day",
-    safety: "Not recommended during pregnancy or breastfeeding. Consult healthcare provider before use.",
-    storage: "Store in an airtight container away from heat and moisture",
-    category: ["Stress Relief", "Wellness"],
-    howItMade: "Ashwagandha roots → Cleaned → Dried → Ground → Quality tested → Packed",
-    highlights: ["Root-only powder", "Clean processing", "Pure ashwagandha"],
-    seoKeywords: {
-      primary: "ashwagandha powder",
-      secondary: ["ashwagandha root powder", "Indian ginseng powder"]
-    },
-    imageUrl: "/images/products/ashwagandha-powder.jpg",
-    variants: [
-      { weight: '100g', price: 200, stock: 40, sku: 'ASH-100' },
-      { weight: '250g', price: 480, stock: 30, sku: 'ASH-250' },
-      { weight: '500g', price: 920, stock: 20, sku: 'ASH-500' },
-      { weight: '1kg', price: 1750, stock: 15, sku: 'ASH-1KG' }
-    ]
-  },
-  {
-    id: "spirulina-powder",
-    name: "Spirulina Powder",
-    shortDescription: "Protein-rich blue-green algae powder for daily nutrition.",
-    longDescription: "Our spirulina powder is sourced from controlled cultivation farms where this blue-green algae is grown in pure water. It's dried and powdered to preserve its high protein content and rich micronutrient profile.",
-    benefits: [
-      "High plant protein content",
-      "Natural energy boost",
-      "Rich in micronutrients",
-      "Supports overall wellness"
-    ],
-    usage: "Smoothies, juices, health drinks",
-    dosage: "1 tsp/day",
-    safety: "Start with small amounts. Avoid if allergic to seafood or seaweed. Consult doctor if autoimmune conditions.",
-    storage: "Store in an airtight container away from light and moisture",
-    category: ["Energy", "Daily Nutrition"],
-    howItMade: "Spirulina cultivation → Harvested → Dried → Ground → Quality tested → Packed",
-    highlights: ["Pure spirulina", "No additives", "Nutrient powerhouse"],
-    seoKeywords: {
-      primary: "spirulina powder",
-      secondary: ["spirulina protein powder", "blue-green algae powder"]
-    },
-    imageUrl: "/images/products/spirulina-powder.jpg",
-    variants: [
-      { weight: '100g', price: 250, stock: 35, sku: 'SPI-100' },
-      { weight: '250g', price: 600, stock: 25, sku: 'SPI-250' },
-      { weight: '500g', price: 1150, stock: 15, sku: 'SPI-500' },
-      { weight: '1kg', price: 2200, stock: 10, sku: 'SPI-1KG' }
-    ]
-  },
-  {
-    id: "wheatgrass-powder",
-    name: "Wheatgrass Powder",
-    shortDescription: "Chlorophyll-rich tender wheatgrass for detox-style wellness.",
-    longDescription: "Made from young wheat grass harvested at its nutritional peak. The tender grass is immediately dried to lock in chlorophyll, vitamins, and minerals, creating a potent green powder for daily wellness.",
-    benefits: [
-      "Supports detox wellness",
-      "Natural energy boost",
-      "Supports immune function",
-      "Rich in chlorophyll"
-    ],
-    usage: "Water shots, smoothies",
-    dosage: "1 tsp/day",
-    safety: "Start with small amounts. May cause nausea if taken on empty stomach. Avoid if wheat/gluten sensitive.",
-    storage: "Store in an airtight container in a cool, dry place",
-    category: ["Detox", "Wellness"],
-    howItMade: "Young wheat grass → Harvested → Washed → Dried → Ground → Packed",
-    highlights: ["Freshly dried wheatgrass", "Nutrient-dense", "Pure wheatgrass"],
-    seoKeywords: {
-      primary: "wheatgrass powder",
-      secondary: ["organic wheatgrass powder", "wheatgrass juice powder"]
-    },
-    imageUrl: "/images/products/wheatgrass-powder.jpg",
-    variants: [
-      { weight: '100g', price: 170, stock: 40, sku: 'WHE-100' },
-      { weight: '250g', price: 400, stock: 30, sku: 'WHE-250' },
-      { weight: '500g', price: 760, stock: 20, sku: 'WHE-500' },
-      { weight: '1kg', price: 1450, stock: 15, sku: 'WHE-1KG' }
     ]
   },
   {
@@ -376,72 +339,12 @@ export const products: Product[] = [
       primary: "neem powder",
       secondary: ["neem leaf powder", "azadirachta indica powder"]
     },
-    imageUrl: "/images/products/neem-powder.jpg",
+    imageUrl: neemPowderImage,
     variants: [
       { weight: '100g', price: 90, stock: 50, sku: 'NEE-100' },
       { weight: '250g', price: 210, stock: 40, sku: 'NEE-250' },
       { weight: '500g', price: 400, stock: 30, sku: 'NEE-500' },
       { weight: '1kg', price: 750, stock: 20, sku: 'NEE-1KG' }
-    ]
-  },
-  {
-    id: "hibiscus-powder",
-    name: "Hibiscus Powder",
-    shortDescription: "Flower powder for hair strength, shine and natural colour.",
-    longDescription: "Golden Harvest Hibiscus Powder is made from dried hibiscus flowers (gudhal) known for their hair conditioning properties. The flowers are shade-dried and ground to preserve their natural pigments and nutrients.",
-    benefits: [
-      "Hair conditioning",
-      "Scalp nourishment",
-      "Natural colour enhancement",
-      "Traditional hair care"
-    ],
-    usage: "Hair masks, face packs, tea",
-    dosage: "As topical or ½–1 tsp infusion",
-    safety: "Safe for topical use. May cause allergic reaction in sensitive individuals. Patch test recommended.",
-    storage: "Store in an airtight container away from moisture",
-    category: ["Beauty", "Hair Care"],
-    howItMade: "Hibiscus flowers → Dried → Ground → Sieved → Packed",
-    highlights: ["Vibrant natural pigment", "No stabilizers", "Pure hibiscus"],
-    seoKeywords: {
-      primary: "hibiscus powder",
-      secondary: ["hibiscus hair powder", "gudhal powder"]
-    },
-    imageUrl: "/images/products/hibiscus-powder.jpg",
-    variants: [
-      { weight: '100g', price: 130, stock: 45, sku: 'HIB-100' },
-      { weight: '250g', price: 300, stock: 35, sku: 'HIB-250' },
-      { weight: '500g', price: 570, stock: 25, sku: 'HIB-500' },
-      { weight: '1kg', price: 1100, stock: 15, sku: 'HIB-1KG' }
-    ]
-  },
-  {
-    id: "aloe-vera-powder",
-    name: "Aloe Vera Powder",
-    shortDescription: "Pure aloe leaf powder for skin hydration and digestion support.",
-    longDescription: "Made from fresh aloe vera leaves that are cleaned, filleted, and spray-dried to preserve their beneficial properties. This powder is known for its soothing and hydrating properties for both internal and external use.",
-    benefits: [
-      "Hydration support",
-      "Skin wellness support",
-      "Digestion-friendly properties",
-      "Soothing and gentle"
-    ],
-    usage: "Smoothies, face packs",
-    dosage: "½–1 tsp/day",
-    safety: "Generally safe. Avoid during pregnancy. May have laxative effects in high doses. Consult doctor if unsure.",
-    storage: "Store in an airtight container in a cool, dry place",
-    category: ["Beauty", "Digestion"],
-    howItMade: "Aloe vera leaves → Cleaned → Filleted → Spray-dried → Ground → Packed",
-    highlights: ["Pure leaf powder", "Gentle", "Natural aloe"],
-    seoKeywords: {
-      primary: "aloe vera powder",
-      secondary: ["aloe powder", "dried aloe vera powder"]
-    },
-    imageUrl: "/images/products/aloe-vera-powder.jpg",
-    variants: [
-      { weight: '100g', price: 150, stock: 40, sku: 'ALO-100' },
-      { weight: '250g', price: 350, stock: 30, sku: 'ALO-250' },
-      { weight: '500g', price: 670, stock: 20, sku: 'ALO-500' },
-      { weight: '1kg', price: 1280, stock: 15, sku: 'ALO-1KG' }
     ]
   },
   {
@@ -466,7 +369,7 @@ export const products: Product[] = [
       primary: "carrot powder",
       secondary: ["dried carrot powder", "carrot powder for babies"]
     },
-    imageUrl: "/images/products/carrot-powder.jpg",
+    imageUrl: carrotPowderImage,
     variants: [
       { weight: '100g', price: 110, stock: 50, sku: 'CAR-100' },
       { weight: '250g', price: 260, stock: 40, sku: 'CAR-250' },
@@ -496,42 +399,12 @@ export const products: Product[] = [
       primary: "spinach powder",
       secondary: ["palak powder", "dried spinach powder"]
     },
-    imageUrl: "/images/products/spinach-powder.jpg",
+    imageUrl: spinachPowderImage,
     variants: [
       { weight: '100g', price: 140, stock: 45, sku: 'SPI-100' },
       { weight: '250g', price: 330, stock: 35, sku: 'SPI-250' },
       { weight: '500g', price: 630, stock: 25, sku: 'SPI-500' },
       { weight: '1kg', price: 1200, stock: 15, sku: 'SPI-1KG' }
-    ]
-  },
-  {
-    id: "fenugreek-powder",
-    name: "Fenugreek (Methi) Powder",
-    shortDescription: "Natural methi powder for digestion support & hair care.",
-    longDescription: "Made from high-quality fenugreek seeds that are cleaned, roasted lightly, and ground. This versatile powder is used both for cooking and wellness, with a distinctive slightly bitter taste and earthy aroma.",
-    benefits: [
-      "Digestion aid",
-      "Hair conditioning",
-      "Cooling properties",
-      "Multi-use wellness herb"
-    ],
-    usage: "Warm water, masala mixes, hair masks",
-    dosage: "½–1 tsp/day",
-    safety: "Avoid during pregnancy. May lower blood sugar - diabetics should monitor. May interact with blood-thinning medications.",
-    storage: "Store in an airtight container in a cool, dry place",
-    category: ["Digestion", "Beauty"],
-    howItMade: "Fenugreek seeds → Cleaned → Light roasting → Ground → Packed",
-    highlights: ["Clean-processed methi", "Multi-use", "Pure fenugreek"],
-    seoKeywords: {
-      primary: "fenugreek powder",
-      secondary: ["methi powder", "fenugreek seed powder"]
-    },
-    imageUrl: "/images/products/fenugreek-powder.jpg",
-    variants: [
-      { weight: '100g', price: 70, stock: 60, sku: 'FEN-100' },
-      { weight: '250g', price: 160, stock: 50, sku: 'FEN-250' },
-      { weight: '500g', price: 300, stock: 40, sku: 'FEN-500' },
-      { weight: '1kg', price: 570, stock: 25, sku: 'FEN-1KG' }
     ]
   },
   {
@@ -556,7 +429,7 @@ export const products: Product[] = [
       primary: "curry leaf powder",
       secondary: ["kadi patta powder", "dried curry leaves powder"]
     },
-    imageUrl: "/images/products/curry-leaf-powder.jpg",
+    imageUrl: curryLeafPowderImage,
     variants: [
       { weight: '100g', price: 120, stock: 50, sku: 'CUR-100' },
       { weight: '250g', price: 280, stock: 40, sku: 'CUR-250' },
@@ -565,63 +438,241 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "pumpkin-seed-powder",
-    name: "Pumpkin Seed Powder",
-    shortDescription: "Plant-protein-rich pumpkin seed powder for energy & magnesium.",
-    longDescription: "Made from premium pumpkin seeds that are cleaned, dried, and ground into a fine powder. Rich in plant protein, magnesium, and healthy fats, this powder is perfect for protein-rich smoothies and baked goods.",
+    id: "betel-leaf-powder",
+    name: "Betel Leaf Powder",
+    shortDescription: "Traditional betel leaf powder for oral health and wellness.",
+    longDescription: "Golden Harvest Betel Leaf Powder is made from fresh betel leaves that are cleaned, dried, and ground into a fine powder. Known for its traditional use in oral care and digestive support, this powder preserves the natural properties of betel leaves.",
     benefits: [
-      "High plant protein",
-      "Rich in magnesium",
-      "Heart wellness support",
-      "Energy boost"
+      "Supports oral health",
+      "Traditional digestive aid",
+      "Natural breath freshener",
+      "Supports overall wellness"
     ],
-    usage: "Smoothies, baking, shakes",
-    dosage: "1–2 tbsp/day",
-    safety: "Generally safe. May cause digestive upset in large amounts. Store properly to prevent rancidity.",
-    storage: "Store in an airtight container in a cool, dry place",
-    category: ["Protein", "Energy"],
-    howItMade: "Pumpkin seeds → Cleaned → Dried → Ground → Packed",
-    highlights: ["Cold-pressed dried seed powder", "High protein", "Pure pumpkin seeds"],
+    usage: "Oral care, traditional preparations",
+    dosage: "½–1 tsp/day (external use)",
+    safety: "External use only. Not for internal consumption. Consult healthcare provider before use.",
+    storage: "Store in an airtight container away from moisture",
+    category: ["Wellness", "Oral Care"],
+    howItMade: "Fresh betel leaves → Cleaned → Dried → Ground → Packed",
+    highlights: [
+      "Traditional herb",
+      "Natural properties",
+      "Pure betel leaf"
+    ],
     seoKeywords: {
-      primary: "pumpkin seed powder",
-      secondary: ["pumpkin protein powder", "pepita powder"]
+      primary: "betel leaf powder",
+      secondary: ["paan leaf powder", "betel powder"]
     },
-    imageUrl: "/images/products/pumpkin-seed-powder.jpg",
+    imageUrl: betelLeafPowderImage,
     variants: [
-      { weight: '100g', price: 180, stock: 35, sku: 'PUM-100' },
-      { weight: '250g', price: 420, stock: 25, sku: 'PUM-250' },
-      { weight: '500g', price: 800, stock: 20, sku: 'PUM-500' },
-      { weight: '1kg', price: 1550, stock: 15, sku: 'PUM-1KG' }
+      { weight: '100g', price: 140, stock: 40, sku: 'BET-100' },
+      { weight: '250g', price: 330, stock: 30, sku: 'BET-250' },
+      { weight: '500g', price: 630, stock: 20, sku: 'BET-500' },
+      { weight: '1kg', price: 1200, stock: 15, sku: 'BET-1KG' }
     ]
   },
   {
-    id: "flaxseed-powder",
-    name: "Flaxseed Powder",
-    shortDescription: "Fiber- and omega-rich flaxseed powder for digestion and healthy fats.",
-    longDescription: "Made from premium quality flaxseeds (alsi) that are cleaned and ground fresh to preserve their omega-3 fatty acids and fiber content. A nutritional powerhouse for heart health and digestive wellness.",
+    id: "coconut-powder",
+    name: "Coconut Powder",
+    shortDescription: "Desiccated coconut powder for cooking and baking.",
+    longDescription: "Made from fresh coconut meat that is dried and ground into a fine powder. This versatile powder adds a rich, tropical flavor to various dishes and is perfect for both sweet and savory recipes.",
+    benefits: [
+      "Rich in healthy fats",
+      "Natural flavor enhancer",
+      "Versatile cooking ingredient",
+      "Supports energy needs"
+    ],
+    usage: "Baking, curries, smoothies, desserts",
+    dosage: "As per recipe",
+    safety: "Safe for daily use. May cause digestive discomfort in large amounts.",
+    storage: "Store in an airtight container in a cool, dry place",
+    category: ["Cooking Essentials", "Energy"],
+    howItMade: "Fresh coconut → Meat extracted → Dried → Ground → Packed",
+    highlights: [
+      "Desiccated coconut",
+      "Natural flavor",
+      "Versatile use"
+    ],
+    seoKeywords: {
+      primary: "coconut powder",
+      secondary: ["desiccated coconut powder", "coconut flour"]
+    },
+    imageUrl: coconutPowderImage,
+    variants: [
+      { weight: '100g', price: 120, stock: 50, sku: 'COC-100' },
+      { weight: '250g', price: 280, stock: 40, sku: 'COC-250' },
+      { weight: '500g', price: 530, stock: 30, sku: 'COC-500' },
+      { weight: '1kg', price: 1020, stock: 20, sku: 'COC-1KG' }
+    ]
+  },
+  {
+    id: "dates-powder",
+    name: "Dates Powder",
+    shortDescription: "Natural sweetener powder from sun-dried dates.",
+    longDescription: "Golden Harvest Dates Powder is made from premium quality dates that are pitted, dried, and ground into a fine powder. This natural sweetener is rich in natural sugars and minerals, perfect for healthy baking and sweetening.",
+    benefits: [
+      "Natural sweetener",
+      "Rich in minerals",
+      "Energy booster",
+      "Healthy baking alternative"
+    ],
+    usage: "Baking, smoothies, desserts, energy bars",
+    dosage: "1–2 tbsp/day",
+    safety: "Safe for most people. May cause digestive discomfort if consumed in large amounts. High in natural sugars.",
+    storage: "Store in an airtight container away from moisture",
+    category: ["Energy", "Cooking Essentials"],
+    howItMade: "Fresh dates → Pitted → Dried → Ground → Packed",
+    highlights: [
+      "Natural sweetener",
+      "No added sugar",
+      "Rich in nutrients"
+    ],
+    seoKeywords: {
+      primary: "dates powder",
+      secondary: ["date powder", "dried dates powder"]
+    },
+    imageUrl: datesPowderImage,
+    variants: [
+      { weight: '100g', price: 160, stock: 45, sku: 'DAT-100' },
+      { weight: '250g', price: 380, stock: 35, sku: 'DAT-250' },
+      { weight: '500g', price: 720, stock: 25, sku: 'DAT-500' },
+      { weight: '1kg', price: 1380, stock: 15, sku: 'DAT-1KG' }
+    ]
+  },
+  {
+    id: "guava-powder",
+    name: "Guava Powder",
+    shortDescription: "Nutrient-rich guava powder for daily wellness.",
+    longDescription: "Made from fresh guava fruit that is cleaned, dried, and ground into a fine powder. Rich in vitamin C and fiber, this powder is an excellent addition to smoothies and wellness drinks.",
+    benefits: [
+      "High in vitamin C",
+      "Rich in fiber",
+      "Supports immune function",
+      "Natural energy source"
+    ],
+    usage: "Smoothies, juices, wellness drinks",
+    dosage: "1–2 tsp/day",
+    safety: "Safe for most people. May cause digestive discomfort if consumed in large amounts.",
+    storage: "Store in an airtight container in a cool, dry place",
+    category: ["Immunity", "Daily Nutrition"],
+    howItMade: "Fresh guava → Cleaned → Dried → Ground → Packed",
+    highlights: [
+      "Vitamin C rich",
+      "Natural fiber",
+      "Immune support"
+    ],
+    seoKeywords: {
+      primary: "guava powder",
+      secondary: ["dried guava powder", "guava fruit powder"]
+    },
+    imageUrl: guavaPowderImage,
+    variants: [
+      { weight: '100g', price: 130, stock: 40, sku: 'GUA-100' },
+      { weight: '250g', price: 300, stock: 30, sku: 'GUA-250' },
+      { weight: '500g', price: 570, stock: 20, sku: 'GUA-500' },
+      { weight: '1kg', price: 1100, stock: 15, sku: 'GUA-1KG' }
+    ]
+  },
+  {
+    id: "lemon-powder",
+    name: "Lemon Powder",
+    shortDescription: "Tangy lemon powder for flavor and wellness.",
+    longDescription: "Golden Harvest Lemon Powder is made from fresh lemons that are dried and ground into a fine powder. This versatile powder adds a bright, tangy flavor to dishes and drinks while providing natural wellness benefits.",
+    benefits: [
+      "Natural flavor enhancer",
+      "Supports digestion",
+      "Rich in vitamin C",
+      "Antioxidant properties"
+    ],
+    usage: "Drinks, marinades, baking, teas",
+    dosage: "½–1 tsp/day",
+    safety: "Safe for daily use. May cause digestive discomfort in large amounts. Avoid if allergic to citrus.",
+    storage: "Store in an airtight container away from moisture",
+    category: ["Digestion", "Wellness"],
+    howItMade: "Fresh lemons → Dried → Ground → Packed",
+    highlights: [
+      "Natural tanginess",
+      "Vitamin C source",
+      "Versatile flavor"
+    ],
+    seoKeywords: {
+      primary: "lemon powder",
+      secondary: ["dried lemon powder", "lemon zest powder"]
+    },
+    imageUrl: lemonPowderImage,
+    variants: [
+      { weight: '100g', price: 100, stock: 50, sku: 'LEM-100' },
+      { weight: '250g', price: 230, stock: 40, sku: 'LEM-250' },
+      { weight: '500g', price: 440, stock: 30, sku: 'LEM-500' },
+      { weight: '1kg', price: 850, stock: 20, sku: 'LEM-1KG' }
+    ]
+  },
+  {
+    id: "papaya-powder",
+    name: "Papaya Powder",
+    shortDescription: "Digestive enzyme-rich papaya powder for wellness.",
+    longDescription: "Made from fresh papaya fruit that is dried and ground into a fine powder. Rich in papain enzyme, this powder supports digestion and provides natural wellness benefits.",
     benefits: [
       "Supports digestion",
-      "Rich in omega fatty acids",
-      "High fiber content",
-      "Heart wellness support"
+      "Rich in papain enzyme",
+      "Natural wellness aid",
+      "Supports overall health"
     ],
-    usage: "Smoothies, atta mixes, salads",
-    dosage: "1–2 tbsp/day",
-    safety: "Start with small amounts to avoid digestive discomfort. Drink plenty of water. Store properly to prevent oxidation.",
+    usage: "Smoothies, wellness drinks, marinades",
+    dosage: "½–1 tsp/day",
+    safety: "Safe for most people. May cause digestive discomfort if consumed in large amounts. Avoid during pregnancy.",
     storage: "Store in an airtight container in a cool, dry place",
-    category: ["Digestion", "Daily Nutrition"],
-    howItMade: "Flaxseeds → Cleaned → Ground fresh → Packed",
-    highlights: ["Ground fresh", "Natural omega content", "Pure flaxseed"],
+    category: ["Digestion", "Wellness"],
+    howItMade: "Fresh papaya → Dried → Ground → Packed",
+    highlights: [
+      "Digestive enzyme rich",
+      "Natural papain",
+      "Wellness support"
+    ],
     seoKeywords: {
-      primary: "flaxseed powder",
-      secondary: ["alsi powder", "ground flaxseed powder"]
+      primary: "papaya powder",
+      secondary: ["dried papaya powder", "papaya enzyme powder"]
     },
-    imageUrl: "/images/products/flaxseed-powder.jpg",
+    imageUrl: papayaPowderImage,
     variants: [
-      { weight: '100g', price: 90, stock: 60, sku: 'FLA-100' },
-      { weight: '250g', price: 210, stock: 50, sku: 'FLA-250' },
-      { weight: '500g', price: 400, stock: 40, sku: 'FLA-500' },
-      { weight: '1kg', price: 760, stock: 25, sku: 'FLA-1KG' }
+      { weight: '100g', price: 140, stock: 45, sku: 'PAP-100' },
+      { weight: '250g', price: 330, stock: 35, sku: 'PAP-250' },
+      { weight: '500g', price: 630, stock: 25, sku: 'PAP-500' },
+      { weight: '1kg', price: 1200, stock: 15, sku: 'PAP-1KG' }
+    ]
+  },
+  {
+    id: "tomato-powder",
+    name: "Tomato Powder",
+    shortDescription: "Concentrated tomato powder for cooking and nutrition.",
+    longDescription: "Golden Harvest Tomato Powder is made from fresh tomatoes that are dried and ground into a fine powder. This concentrated powder adds rich flavor and nutrition to various dishes and is perfect for soups, sauces, and seasonings.",
+    benefits: [
+      "Rich in lycopene",
+      "Natural flavor enhancer",
+      "Supports immune function",
+      "Antioxidant properties"
+    ],
+    usage: "Soups, sauces, seasoning, baking",
+    dosage: "As per recipe",
+    safety: "Safe for daily use. May cause digestive discomfort in large amounts.",
+    storage: "Store in an airtight container away from moisture",
+    category: ["Cooking Essentials", "Immunity"],
+    howItMade: "Fresh tomatoes → Dried → Ground → Packed",
+    highlights: [
+      "Lycopene rich",
+      "Natural color",
+      "Versatile cooking"
+    ],
+    seoKeywords: {
+      primary: "tomato powder",
+      secondary: ["dried tomato powder", "tomato seasoning powder"]
+    },
+    imageUrl: tomatoPowderImage,
+    variants: [
+      { weight: '100g', price: 110, stock: 50, sku: 'TOM-100' },
+      { weight: '250g', price: 260, stock: 40, sku: 'TOM-250' },
+      { weight: '500g', price: 490, stock: 30, sku: 'TOM-500' },
+      { weight: '1kg', price: 940, stock: 20, sku: 'TOM-1KG' }
     ]
   }
 ];

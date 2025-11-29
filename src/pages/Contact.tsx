@@ -6,7 +6,7 @@ const Contact = () => {
     <div className="w-full py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-serif font-bold text-primary mb-8 text-center">Contact Us</h1>
+          <h1 className="text-4xl font-serif font-bold text-primary mb-8 text-center animate-fade-in">Contact Us</h1>
           
           <Card className="border-border">
             <CardContent className="p-8">

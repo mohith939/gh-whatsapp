@@ -141,7 +141,7 @@ const Checkout = () => {
   return (
     <div className="w-full py-12">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-8">Checkout</h1>
+        <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-8 animate-fade-in">Checkout</h1>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Checkout Form */}
@@ -329,8 +329,8 @@ const Checkout = () => {
           </div>
 
           {/* Order Summary */}
-          <div>
-            <Card className="border-border sticky top-20">
+          <div className="animate-fade-in-delay-2">
+            <Card className="border-muted bg-muted/50 sticky top-20 hover:shadow-md hover:scale-105 transition-all duration-300">
               <CardContent className="p-6">
                 <h2 className="text-xl font-serif font-bold text-primary mb-6">Order Summary</h2>
                 

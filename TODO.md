@@ -1,0 +1,4 @@
+- [x] Add imports for certificate images (fassi.avif, gmp.avif, iso.avif) in src/pages/Index.tsx
+- [x] Remove "Our Certifications" heading and carousel, replace with horizontal scrolling section showing all three logos at once moving from right to left on green background
+- [x] Add CSS animation for horizontal scrolling
+- [x] Test horizontal scrolling animation

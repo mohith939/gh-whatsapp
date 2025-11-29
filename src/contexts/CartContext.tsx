@@ -7,14 +7,22 @@ export interface CartItem {
   quantity: number;
 }
 
+export interface WishlistItem {
+  productId: string;
+}
+
 interface CartContextType {
   cartItems: CartItem[];
+  wishlistItems: WishlistItem[];
   addToCart: (product: Product, variant: ProductVariant, quantity?: number) => void;
   removeFromCart: (productId: string, variantWeight: string) => void;
   updateQuantity: (productId: string, variantWeight: string, quantity: number) => void;
   clearCart: () => void;
   getCartTotal: () => number;
   getCartCount: () => number;
+  addToWishlist: (productId: string) => void;
+  removeFromWishlist: (productId: string) => void;
+  isInWishlist: (productId: string) => boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -25,9 +33,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
+  const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>(() => {
+    const savedWishlist = localStorage.getItem('goldenHarvestWishlist');
+    return savedWishlist ? JSON.parse(savedWishlist) : [];
+  });
+
   useEffect(() => {
     localStorage.setItem('goldenHarvestCart', JSON.stringify(cartItems));
   }, [cartItems]);
+
+  useEffect(() => {
+    localStorage.setItem('goldenHarvestWishlist', JSON.stringify(wishlistItems));
+  }, [wishlistItems]);
 
   const addToCart = (product: Product, variant: ProductVariant, quantity: number = 1) => {
     setCartItems(prevItems => {
@@ -82,16 +99,39 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return cartItems.reduce((count, item) => count + item.quantity, 0);
   };
 
+  const addToWishlist = (productId: string) => {
+    setWishlistItems(prevItems => {
+      if (!prevItems.find(item => item.productId === productId)) {
+        return [...prevItems, { productId }];
+      }
+      return prevItems;
+    });
+  };
+
+  const removeFromWishlist = (productId: string) => {
+    setWishlistItems(prevItems =>
+      prevItems.filter(item => item.productId !== productId)
+    );
+  };
+
+  const isInWishlist = (productId: string) => {
+    return wishlistItems.some(item => item.productId === productId);
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
+        wishlistItems,
         addToCart,
         removeFromCart,
         updateQuantity,
         clearCart,
         getCartTotal,
         getCartCount,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist,
       }}
     >
       {children}

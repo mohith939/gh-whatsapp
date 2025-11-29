@@ -3,8 +3,56 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Leaf, Award, Users } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { getFeaturedProducts } from '@/data/products';
 import heroImage from '@/assets/hero-bg.jpg';
+import fassiCert from '@/assets/Certificates/fassi.avif';
+import gmpCert from '@/assets/Certificates/gmp.avif';
+import isoCert from '@/assets/Certificates/iso.avif';
+import Autoplay from 'embla-carousel-autoplay';
+
+const instagramReels = [
+  {
+    embedUrl: 'https://www.instagram.com/reel/DRPiND2iExP/embed/',
+  },
+  {
+    embedUrl: 'https://www.instagram.com/reel/DQ9QML2jLNU/embed/',
+  },
+  {
+    embedUrl: 'https://www.instagram.com/reel/DQO0rFQiGUe/embed/',
+  },
+];
+
+const fieldTestimonials = [
+  {
+    id: 1,
+    name: 'Rajesh Kumar',
+    location: 'Farmer, Uttar Pradesh',
+    text: 'For generations, our family has grown these vegetables with love and care. Golden Harvest helps us share our harvest with families across India, ensuring our traditional farming methods reach modern kitchens. It\'s not just business — it\'s preserving our way of life.',
+    icon: Users,
+  },
+  {
+    id: 2,
+    name: 'Meera Singh',
+    location: 'Farmer, Rajasthan',
+    text: 'Working with Golden Harvest has been a blessing. They value our organic farming practices and pay fair prices. Our turmeric and amla are now reaching health-conscious families everywhere.',
+    icon: Leaf,
+  },
+  {
+    id: 3,
+    name: 'Arun Patel',
+    location: 'Farmer, Gujarat',
+    text: 'The partnership with Golden Harvest has transformed our small farm. Their commitment to quality and sustainability matches our own values. We\'re proud to be part of this pure journey.',
+    icon: Award,
+  },
+  {
+    id: 4,
+    name: 'Sunita Devi',
+    location: 'Farmer, Bihar',
+    text: 'Golden Harvest understands the heart of farming. They support our traditional methods while ensuring our produce reaches those who appreciate real, natural nutrition.',
+    icon: CheckCircle,
+  },
+];
 
 const Index = () => {
   const featuredProducts = getFeaturedProducts();
@@ -25,8 +73,8 @@ const Index = () => {
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary mb-6 animate-fade-in drop-shadow-sm">
               Raw. Real. Truly Pure.
             </h1>
-            <p className="text-xl md:text-2xl text-foreground mb-8 animate-fade-in-delay font-medium">
-              Clean, raw, chemical-free powders made from fresh farm produce — naturally pure.
+            <p className="text-xl md:text-2xl text-foreground mb-8 animate-fade-in-delay font-serif font-semibold">
+              Clean, raw, chemical-free powders made from fresh farm produce naturally pure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
@@ -40,19 +88,15 @@ const Index = () => {
             {/* Trust Badges */}
             <div className="flex flex-wrap gap-3 justify-center mt-12 animate-fade-in-delay-3">
               <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                <CheckCircle className="w-4 h-4 mr-2" />
                 Lab Tested
               </Badge>
               <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                <Award className="w-4 h-4 mr-2" />
                 FSSAI Certified
               </Badge>
               <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                <Leaf className="w-4 h-4 mr-2" />
                 No Preservatives
               </Badge>
               <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                <Users className="w-4 h-4 mr-2" />
                 Direct from Farmers
               </Badge>
             </div>
@@ -86,7 +130,7 @@ const Index = () => {
                   description: 'Serving health-conscious families and businesses nationwide with COD delivery.'
                 }
               ].map((feature, index) => (
-                <Card key={index} className="border-border bg-card shadow-lg hover:shadow-xl transition-shadow">
+                <Card key={index} className="border-muted bg-muted/50 shadow-lg hover:shadow-md hover:scale-105 transition-all duration-300">
                   <CardContent className="p-8 text-center">
                     <h3 className="text-xl font-semibold text-primary mb-4">{feature.title}</h3>
                     <p className="text-foreground/70 leading-relaxed">{feature.description}</p>
@@ -182,31 +226,118 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Farmer Testimonial */}
+      {/* Farmer Testimonials */}
       <section className="py-20 bg-background">
         <div className="w-full px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-12 drop-shadow-sm">
               Voices from the Fields
             </h2>
-            <Card className="border-border bg-card shadow-xl">
-              <CardContent className="p-8 md:p-12">
-                <div className="flex flex-col items-center">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                    <Users className="w-8 h-8 text-primary" />
-                  </div>
-                  <blockquote className="text-lg md:text-xl text-foreground/80 leading-relaxed mb-6 italic">
-                    "For generations, our family has grown these vegetables with love and care. Golden Harvest helps us share our harvest
-                    with families across India, ensuring our traditional farming methods reach modern kitchens. It's not just business —
-                    it's preserving our way of life."
-                  </blockquote>
-                  <div className="text-center">
-                    <p className="font-semibold text-primary">Rajesh Kumar</p>
-                    <p className="text-sm text-foreground/60">Farmer, Uttar Pradesh</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="relative">
+              <Carousel
+                className="w-full max-w-4xl mx-auto"
+                plugins={[
+                  Autoplay({
+                    delay: 5000,
+                  }),
+                ]}
+                opts={{
+                  loop: true,
+                }}
+              >
+                <CarouselContent>
+                  {fieldTestimonials.map((testimonial) => {
+                    const IconComponent = testimonial.icon;
+                    return (
+                      <CarouselItem key={testimonial.id}>
+                        <Card className="border-border bg-card shadow-xl">
+                          <CardContent className="p-8 md:p-12">
+                            <div className="flex flex-col items-center">
+                              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <IconComponent className="w-8 h-8 text-primary" />
+                              </div>
+                              <blockquote className="text-lg md:text-xl text-foreground/80 leading-relaxed mb-6 italic">
+                                "{testimonial.text}"
+                              </blockquote>
+                              <div className="text-center">
+                                <p className="font-semibold text-primary">{testimonial.name}</p>
+                                <p className="text-sm text-foreground/60">{testimonial.location}</p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </CarouselItem>
+                    );
+                  })}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Scroller */}
+      <section className="py-12 bg-primary overflow-hidden">
+        <div className="w-full">
+          <div className="animate-scroll flex space-x-48">
+            {[
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert,
+              fassiCert, gmpCert, isoCert
+            ].map((cert, index) => (
+              <img key={index} src={cert} alt={`Certificate ${index + 1}`} className="h-32 object-contain flex-shrink-0" />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram Reels */}
+      <section className="py-20 bg-background">
+        <div className="w-full px-4">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16 drop-shadow-sm">
+              Instagram Reels
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {instagramReels.map((reel, index) => (
+                <Card key={index} className="border-border bg-card shadow-lg hover:shadow-xl transition-shadow">
+                  <CardContent className="p-4">
+                    <div className="aspect-[9/16] bg-muted rounded-lg overflow-hidden">
+                      <iframe
+                        src={reel.embedUrl}
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        scrolling="no"
+                        allowTransparency={true}
+                        allow="encrypted-media"
+                        title={`Instagram Reel ${index + 1}`}
+                        className="w-full h-full"
+                      ></iframe>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>

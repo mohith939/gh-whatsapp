@@ -47,7 +47,7 @@ const Shop = () => {
     <div className="w-full py-12">
       <div className="container mx-auto px-4">
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 drop-shadow-sm">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 drop-shadow-sm animate-fade-in">
             Shop All Products
           </h1>
           <p className="text-foreground text-lg max-w-2xl">
@@ -97,7 +97,7 @@ const Shop = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredAndSortedProducts.map((product) => (
               <Link key={product.id} to={`/product/${product.id}`}>
-                <Card className="h-full hover:shadow-lg transition-shadow border-border bg-card group">
+                <Card className="h-full hover:shadow-md hover:scale-105 transition-all duration-300 border-muted bg-muted/50 group">
                   <CardContent className="p-6">
                     <div className="aspect-square bg-muted rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                       <img 

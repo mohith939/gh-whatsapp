@@ -5,9 +5,9 @@ const About = () => {
     <div className="w-full py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6 text-center">About Golden Harvest</h1>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6 text-center animate-fade-in">About Golden Harvest</h1>
           
-          <Card className="border-border mb-8">
+          <Card className="border-muted bg-muted/50 mb-8 hover:shadow-md hover:scale-105 transition-all duration-300">
             <CardContent className="p-8">
               <h2 className="text-2xl font-serif font-bold text-primary mb-4">Our Mission</h2>
               <p className="text-foreground/80 leading-relaxed mb-6">
@@ -19,7 +19,7 @@ const About = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-border mb-8">
+          <Card className="border-muted bg-muted/50 mb-8 animate-fade-in-delay-2 hover:shadow-md hover:scale-105 transition-all duration-300">
             <CardContent className="p-8">
               <h2 className="text-2xl font-serif font-bold text-primary mb-4">Our Values</h2>
               <div className="space-y-4">
