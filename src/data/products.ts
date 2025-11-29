@@ -52,9 +52,11 @@ export interface Product {
     longTail?: string[];
   };
   imageUrl: string;
+  imageUrls: string[]; // Array of image URLs for multiple images
   variants: ProductVariant[];
   featured?: boolean;
   reviews?: Review[];
+  averageRating?: number; // Calculated average rating from reviews
 }
 
 export const products: Product[] = [
@@ -90,6 +92,8 @@ export const products: Product[] = [
       longTail: ["natural banana powder for babies"]
     },
     imageUrl: bananaPowderImage,
+    imageUrls: [bananaPowderImage],
+    averageRating: 4.7,
     variants: [
       { weight: '100g', price: 150, stock: 50, sku: 'BAN-100' },
       { weight: '250g', price: 350, stock: 40, sku: 'BAN-250' },
@@ -152,6 +156,7 @@ export const products: Product[] = [
       longTail: ["beetroot powder for smoothies"]
     },
     imageUrl: beetrootPowderImage,
+    imageUrls: [beetrootPowderImage],
     variants: [
       { weight: '100g', price: 140, stock: 45, sku: 'BEE-100' },
       { weight: '250g', price: 320, stock: 35, sku: 'BEE-250' },
@@ -189,6 +194,7 @@ export const products: Product[] = [
       longTail: ["moringa for daily nutrition"]
     },
     imageUrl: moringaPowderImage,
+    imageUrls: [moringaPowderImage],
     variants: [
       { weight: '100g', price: 180, stock: 55, sku: 'MOR-100' },
       { weight: '250g', price: 420, stock: 45, sku: 'MOR-250' },
@@ -220,6 +226,7 @@ export const products: Product[] = [
       secondary: ["dry ginger powder", "sonth powder"]
     },
     imageUrl: gingerPowderImage,
+    imageUrls: [gingerPowderImage],
     variants: [
       { weight: '100g', price: 90, stock: 60, sku: 'GIN-100' },
       { weight: '250g', price: 210, stock: 50, sku: 'GIN-250' },
@@ -250,6 +257,7 @@ export const products: Product[] = [
       secondary: ["dehydrated garlic", "garlic seasoning powder"]
     },
     imageUrl: garlicPowderImage,
+    imageUrls: [garlicPowderImage],
     variants: [
       { weight: '100g', price: 110, stock: 55, sku: 'GAR-100' },
       { weight: '250g', price: 260, stock: 45, sku: 'GAR-250' },
@@ -280,6 +288,7 @@ export const products: Product[] = [
       secondary: ["haldi powder", "curcumin powder"]
     },
     imageUrl: turmericPowderImage,
+    imageUrls: [turmericPowderImage],
     variants: [
       { weight: '100g', price: 80, stock: 70, sku: 'TUR-100' },
       { weight: '250g', price: 190, stock: 60, sku: 'TUR-250' },
@@ -310,6 +319,7 @@ export const products: Product[] = [
       secondary: ["gooseberry powder", "Indian gooseberry powder"]
     },
     imageUrl: amlaPowderImage,
+    imageUrls: [amlaPowderImage],
     variants: [
       { weight: '100g', price: 100, stock: 50, sku: 'AML-100' },
       { weight: '250g', price: 230, stock: 40, sku: 'AML-250' },
@@ -340,6 +350,7 @@ export const products: Product[] = [
       secondary: ["neem leaf powder", "azadirachta indica powder"]
     },
     imageUrl: neemPowderImage,
+    imageUrls: [neemPowderImage],
     variants: [
       { weight: '100g', price: 90, stock: 50, sku: 'NEE-100' },
       { weight: '250g', price: 210, stock: 40, sku: 'NEE-250' },
@@ -370,6 +381,7 @@ export const products: Product[] = [
       secondary: ["dried carrot powder", "carrot powder for babies"]
     },
     imageUrl: carrotPowderImage,
+    imageUrls: [carrotPowderImage],
     variants: [
       { weight: '100g', price: 110, stock: 50, sku: 'CAR-100' },
       { weight: '250g', price: 260, stock: 40, sku: 'CAR-250' },
@@ -400,6 +412,7 @@ export const products: Product[] = [
       secondary: ["palak powder", "dried spinach powder"]
     },
     imageUrl: spinachPowderImage,
+    imageUrls: [spinachPowderImage],
     variants: [
       { weight: '100g', price: 140, stock: 45, sku: 'SPI-100' },
       { weight: '250g', price: 330, stock: 35, sku: 'SPI-250' },
@@ -430,6 +443,7 @@ export const products: Product[] = [
       secondary: ["kadi patta powder", "dried curry leaves powder"]
     },
     imageUrl: curryLeafPowderImage,
+    imageUrls: [curryLeafPowderImage],
     variants: [
       { weight: '100g', price: 120, stock: 50, sku: 'CUR-100' },
       { weight: '250g', price: 280, stock: 40, sku: 'CUR-250' },
@@ -464,6 +478,7 @@ export const products: Product[] = [
       secondary: ["paan leaf powder", "betel powder"]
     },
     imageUrl: betelLeafPowderImage,
+    imageUrls: [betelLeafPowderImage],
     variants: [
       { weight: '100g', price: 140, stock: 40, sku: 'BET-100' },
       { weight: '250g', price: 330, stock: 30, sku: 'BET-250' },
@@ -498,6 +513,7 @@ export const products: Product[] = [
       secondary: ["desiccated coconut powder", "coconut flour"]
     },
     imageUrl: coconutPowderImage,
+    imageUrls: [coconutPowderImage],
     variants: [
       { weight: '100g', price: 120, stock: 50, sku: 'COC-100' },
       { weight: '250g', price: 280, stock: 40, sku: 'COC-250' },
@@ -532,6 +548,7 @@ export const products: Product[] = [
       secondary: ["date powder", "dried dates powder"]
     },
     imageUrl: datesPowderImage,
+    imageUrls: [datesPowderImage],
     variants: [
       { weight: '100g', price: 160, stock: 45, sku: 'DAT-100' },
       { weight: '250g', price: 380, stock: 35, sku: 'DAT-250' },
@@ -566,6 +583,7 @@ export const products: Product[] = [
       secondary: ["dried guava powder", "guava fruit powder"]
     },
     imageUrl: guavaPowderImage,
+    imageUrls: [guavaPowderImage],
     variants: [
       { weight: '100g', price: 130, stock: 40, sku: 'GUA-100' },
       { weight: '250g', price: 300, stock: 30, sku: 'GUA-250' },
@@ -600,6 +618,7 @@ export const products: Product[] = [
       secondary: ["dried lemon powder", "lemon zest powder"]
     },
     imageUrl: lemonPowderImage,
+    imageUrls: [lemonPowderImage],
     variants: [
       { weight: '100g', price: 100, stock: 50, sku: 'LEM-100' },
       { weight: '250g', price: 230, stock: 40, sku: 'LEM-250' },
@@ -634,6 +653,7 @@ export const products: Product[] = [
       secondary: ["dried papaya powder", "papaya enzyme powder"]
     },
     imageUrl: papayaPowderImage,
+    imageUrls: [papayaPowderImage],
     variants: [
       { weight: '100g', price: 140, stock: 45, sku: 'PAP-100' },
       { weight: '250g', price: 330, stock: 35, sku: 'PAP-250' },
@@ -668,6 +688,7 @@ export const products: Product[] = [
       secondary: ["dried tomato powder", "tomato seasoning powder"]
     },
     imageUrl: tomatoPowderImage,
+    imageUrls: [tomatoPowderImage],
     variants: [
       { weight: '100g', price: 110, stock: 50, sku: 'TOM-100' },
       { weight: '250g', price: 260, stock: 40, sku: 'TOM-250' },

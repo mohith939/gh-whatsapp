@@ -8,11 +8,20 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { products } from '@/data/products';
 import companyLogo from '@/assets/company_logo.png';
 
 const Header = () => {
   const { getCartCount } = useCart();
   const [isOpen, setIsOpen] = useState(false);
+
+  const categories = Array.from(new Set(products.flatMap(p => p.category))).sort();
 
   const navLinks = [
     { to: '/', label: 'Home' },
@@ -65,6 +74,27 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
                 <nav className="flex flex-col space-y-6 mt-12">
+                  <div className="space-y-4">
+                    <Link
+                      to="/shop"
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg font-medium text-foreground/80 hover:text-primary transition-colors hover:translate-x-2 transform duration-200 block"
+                    >
+                      Shop All Products
+                    </Link>
+                    <div className="pl-4 space-y-2">
+                      {categories.map((category) => (
+                        <Link
+                          key={category}
+                          to={`/shop?category=${encodeURIComponent(category)}`}
+                          onClick={() => setIsOpen(false)}
+                          className="text-base font-medium text-foreground/70 hover:text-primary transition-colors hover:translate-x-2 transform duration-200 block"
+                        >
+                          {category}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                   {navLinks.map((link) => (
                     <Link
                       key={link.to}

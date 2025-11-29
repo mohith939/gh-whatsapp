@@ -4,7 +4,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { products } from "@/data/products";
+import { CheckCircle, Award, Shield, Truck, Users, Star, Factory, Clock, Package, Zap, Heart, Globe } from "lucide-react";
 
 interface BulkInquiryForm {
   name: string;
@@ -34,9 +37,40 @@ const BulkInquiry = () => {
   });
 
   const onSubmit = (data: BulkInquiryForm) => {
-    console.log("Bulk Inquiry Form Data:", data);
+    // Rate limiting check
+    if (!rateLimiter.isAllowed('bulk_inquiry_form', 3, 60000)) { // 3 attempts per minute
+      alert("Too many attempts. Please wait a minute before submitting again.");
+      return;
+    }
+
+    // Sanitize input data
+    const sanitizedData = {
+      ...data,
+      name: sanitizeName(data.name),
+      businessName: sanitizeName(data.businessName),
+      email: sanitizeEmail(data.email),
+      phone: sanitizePhone(data.phone),
+      location: sanitizeName(data.location),
+      quantity: data.quantity.replace(/<[^>]*>/g, '').trim(),
+      notes: data.notes ? sanitizeMessage(data.notes) : ''
+    };
+
+    // Validate form data
+    const validation = validateBulkInquiryForm(sanitizedData);
+    if (!validation.isValid) {
+      alert(`Validation Error: ${validation.errors.join(' ')}`);
+      return;
+    }
+
+    // Track form submission
+    trackFormSubmission('bulk_inquiry_form', true);
+
+    console.log("Bulk Inquiry Form Data:", sanitizedData);
     // TODO: Integrate with backend or email service
     alert("Thank you for your inquiry! We'll get back to you within 2-4 hours.");
+
+    // Reset rate limiter on successful submission
+    rateLimiter.reset('bulk_inquiry_form');
   };
 
   return (
@@ -51,6 +85,44 @@ const BulkInquiry = () => {
           Golden Harvest Raw Powders is a trusted bulk supplier for brands and businesses looking for consistent quality, clean ingredients, and dependable service. We work closely with manufacturers, retailers, and food brands across India to deliver fresh, pure, and ethically sourced raw powders at scale.
         </p>
       </div>
+
+      {/* Trust Signals */}
+      <section className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-8 shadow-sm mb-12">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-serif font-bold text-primary mb-4">Trusted by Industry Leaders</h2>
+          <p className="text-foreground/70">Certified quality and compliance you can rely on</p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Card className="text-center p-4 border-muted bg-background/50">
+            <CardContent className="p-4">
+              <Award className="w-12 h-12 text-primary mx-auto mb-3" />
+              <h3 className="font-semibold text-primary mb-2">FSSAI Certified</h3>
+              <p className="text-sm text-foreground/70">Food Safety Standards Authority of India</p>
+            </CardContent>
+          </Card>
+          <Card className="text-center p-4 border-muted bg-background/50">
+            <CardContent className="p-4">
+              <Shield className="w-12 h-12 text-primary mx-auto mb-3" />
+              <h3 className="font-semibold text-primary mb-2">Lab Tested</h3>
+              <p className="text-sm text-foreground/70">Independent quality testing</p>
+            </CardContent>
+          </Card>
+          <Card className="text-center p-4 border-muted bg-background/50">
+            <CardContent className="p-4">
+              <Globe className="w-12 h-12 text-primary mx-auto mb-3" />
+              <h3 className="font-semibold text-primary mb-2">Pan-India Delivery</h3>
+              <p className="text-sm text-foreground/70">Nationwide shipping network</p>
+            </CardContent>
+          </Card>
+          <Card className="text-center p-4 border-muted bg-background/50">
+            <CardContent className="p-4">
+              <Users className="w-12 h-12 text-primary mx-auto mb-3" />
+              <h3 className="font-semibold text-primary mb-2">500+ Partners</h3>
+              <p className="text-sm text-foreground/70">Trusted by leading brands</p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
       {/* Who We Serve */}
       <section className="bg-muted/50 rounded-lg p-6 shadow-sm mb-8">

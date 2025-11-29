@@ -10,16 +10,17 @@ import fassiCert from '@/assets/Certificates/fassi.avif';
 import gmpCert from '@/assets/Certificates/gmp.avif';
 import isoCert from '@/assets/Certificates/iso.avif';
 import Autoplay from 'embla-carousel-autoplay';
+import { useEffect } from 'react';
 
 const instagramReels = [
   {
-    embedUrl: 'https://www.instagram.com/reel/DRPiND2iExP/embed/',
+    permalink: 'https://www.instagram.com/p/DRmcqR6CAZK/',
   },
   {
-    embedUrl: 'https://www.instagram.com/reel/DQ9QML2jLNU/embed/',
+    permalink: 'https://www.instagram.com/p/DRPiND2iExP/',
   },
   {
-    embedUrl: 'https://www.instagram.com/reel/DQO0rFQiGUe/embed/',
+    permalink: 'https://www.instagram.com/p/DKOT8uJoGSj/',
   },
 ];
 
@@ -56,6 +57,48 @@ const fieldTestimonials = [
 
 const Index = () => {
   const featuredProducts = getFeaturedProducts();
+
+  useEffect(() => {
+    const processEmbeds = () => {
+      if (window.instgrm && window.instgrm.Embeds) {
+        window.instgrm.Embeds.process();
+      }
+    };
+
+    // Process embeds immediately
+    processEmbeds();
+
+    // Process with increasing delays to handle slow loading
+    const timers = [
+      setTimeout(processEmbeds, 500),
+      setTimeout(processEmbeds, 1000),
+      setTimeout(processEmbeds, 2000),
+      setTimeout(processEmbeds, 5000),
+      setTimeout(processEmbeds, 10000)
+    ];
+
+    // Process when window loads
+    const handleLoad = () => {
+      setTimeout(processEmbeds, 1000);
+    };
+    window.addEventListener('load', handleLoad);
+
+    // Process when DOM content is loaded
+    const handleDOMContentLoaded = () => {
+      setTimeout(processEmbeds, 500);
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
+    } else {
+      handleDOMContentLoaded();
+    }
+
+    return () => {
+      timers.forEach(clearTimeout);
+      window.removeEventListener('load', handleLoad);
+      document.removeEventListener('DOMContentLoaded', handleDOMContentLoaded);
+    };
+  }, []);
 
   return (
     <div className="w-full">
@@ -143,34 +186,34 @@ const Index = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-20 bg-background">
+      <section className="py-24 bg-background">
         <div className="w-full px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 drop-shadow-sm">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6 drop-shadow-sm">
                 Featured Products
               </h2>
-              <p className="text-foreground max-w-2xl mx-auto text-lg">
+              <p className="text-foreground max-w-3xl mx-auto text-lg leading-relaxed">
                 Discover our most popular raw powders, loved by health-conscious families across India.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
               {featuredProducts.map((product) => (
                 <Link key={product.id} to={`/product/${product.id}`}>
                   <Card className="h-full hover:shadow-xl transition-all duration-300 border-border bg-card group hover:-translate-y-2">
-                    <CardContent className="p-8">
-                      <div className="aspect-square bg-muted rounded-lg mb-6 flex items-center justify-center overflow-hidden">
+                    <CardContent className="p-10">
+                      <div className="aspect-square bg-muted rounded-lg mb-8 flex items-center justify-center overflow-hidden">
                         <img
                           src={product.imageUrl}
                           alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                         />
                       </div>
-                      <h3 className="text-xl font-semibold text-primary mb-3">{product.name}</h3>
-                      <p className="text-foreground/70 mb-6 line-clamp-2 leading-relaxed">{product.shortDescription}</p>
+                      <h3 className="text-xl font-semibold text-primary mb-4">{product.name}</h3>
+                      <p className="text-foreground/70 mb-8 line-clamp-2 leading-relaxed text-base">{product.shortDescription}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-primary font-bold text-lg">₹{product.variants[0].price}</span>
+                        <span className="text-primary font-bold text-xl">₹{product.variants[0].price}</span>
                         <span className="text-sm text-foreground/60">{product.variants[0].weight}</span>
                       </div>
                     </CardContent>
@@ -180,9 +223,81 @@ const Index = () => {
             </div>
 
             <div className="text-center">
-              <Button asChild variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10">
+              <Button asChild variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10 px-8 py-4 h-auto">
                 <Link to="/shop">View All Products</Link>
               </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Promotional Callouts */}
+      <section className="py-20 bg-warm-beige">
+        <div className="w-full px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Bulk Order Special */}
+              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Award className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold text-primary mb-4">Bulk Orders Available</h3>
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Special pricing for restaurants, cafes, and retailers. Minimum 5 KG per product with custom packaging options.
+                  </p>
+                  <ul className="text-sm text-foreground/70 space-y-2 mb-6">
+                    <li>• Special Pricing</li>
+                    <li>• Personalized Service</li>
+                    <li>• Fast Delivery</li>
+                  </ul>
+                  <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/10">
+                    <Link to="/bulk-inquiry">Request Quote</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* New Arrivals */}
+              <Card className="border-secondary/20 bg-gradient-to-br from-secondary/5 to-secondary/10 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Leaf className="w-8 h-8 text-secondary" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold text-primary mb-4">New Arrivals</h3>
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Discover our latest additions: Organic Neem Powder and Raw Papaya Powder, straight from this season's harvest.
+                  </p>
+                  <ul className="text-sm text-foreground/70 space-y-2 mb-6">
+                    <li>• 100% Natural</li>
+                    <li>• Fresh Harvest</li>
+                    <li>• Lab Tested</li>
+                  </ul>
+                  <Button asChild className="bg-secondary hover:bg-secondary/90">
+                    <Link to="/shop">Shop New Products</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Bundle Deals */}
+              <Card className="border-accent/20 bg-gradient-to-br from-accent/5 to-accent/10 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle className="w-8 h-8 text-accent" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold text-primary mb-4">Bundle & Save</h3>
+                  <p className="text-foreground/80 mb-6 leading-relaxed">
+                    Mix and match your favorites! Get 15% off when you buy 3 or more different powders.
+                  </p>
+                  <ul className="text-sm text-foreground/70 space-y-2 mb-6">
+                    <li>• 15% Discount</li>
+                    <li>• Free Shipping</li>
+                    <li>• Mix Any Products</li>
+                  </ul>
+                  <Button asChild variant="outline" className="border-accent text-accent hover:bg-accent/10">
+                    <Link to="/shop">Create Bundle</Link>
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -278,6 +393,40 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Instagram Reels */}
+      <section className="py-20 bg-warm-beige">
+        <div className="w-full px-4">
+          <div className="max-w-7xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-12 drop-shadow-sm">
+              Follow Us on Instagram
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {instagramReels.map((reel, index) => (
+                <div key={index} className="instagram-embed">
+                  <blockquote
+                    className="instagram-media"
+                    data-instgrm-permalink={reel.permalink}
+                    data-instgrm-version="14"
+                    style={{ maxWidth: '540px', width: '100%', border: 'none' }}
+                  >
+                    <div style={{ padding: '16px' }}>
+                      <a
+                        href={reel.permalink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#000', fontFamily: 'Arial,sans-serif', fontSize: '14px', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '17px', textDecoration: 'none', wordWrap: 'break-word' }}
+                      >
+                        View this post on Instagram
+                      </a>
+                    </div>
+                  </blockquote>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Certifications Scroller */}
       <section className="py-12 bg-primary overflow-hidden">
         <div className="w-full">
@@ -310,37 +459,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Instagram Reels */}
-      <section className="py-20 bg-background">
-        <div className="w-full px-4">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16 drop-shadow-sm">
-              Instagram Reels
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {instagramReels.map((reel, index) => (
-                <Card key={index} className="border-border bg-card shadow-lg hover:shadow-xl transition-shadow">
-                  <CardContent className="p-4">
-                    <div className="aspect-[9/16] bg-muted rounded-lg overflow-hidden">
-                      <iframe
-                        src={reel.embedUrl}
-                        width="100%"
-                        height="100%"
-                        frameBorder="0"
-                        scrolling="no"
-                        allowTransparency={true}
-                        allow="encrypted-media"
-                        title={`Instagram Reel ${index + 1}`}
-                        className="w-full h-full"
-                      ></iframe>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Categories */}
       <section className="py-20 bg-warm-beige">

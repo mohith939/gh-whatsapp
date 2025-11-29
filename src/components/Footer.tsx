@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Twitter, Mail, Youtube, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, Youtube, Phone, MapPin, Star, Quote, Award, Shield, CheckCircle, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
 import companyLogo from '@/assets/company_logo.png';
 
 const Footer = () => {
@@ -101,19 +102,29 @@ const Footer = () => {
               <li className="text-sm text-foreground/70">FSSAI: 12345678901234</li>
               <li className="text-sm text-foreground/70">GST: 22AAAAA0000A1Z5</li>
             </ul>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                Lab Tested
-              </span>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                FSSAI Certified
-              </span>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                Organic
-              </span>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                Non-GMO
-              </span>
+            <div className="mt-6">
+              <h5 className="text-sm font-semibold text-primary mb-3 flex items-center">
+                <Award className="w-4 h-4 mr-2" />
+                Trust Badges
+              </h5>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex items-center gap-2 p-2 bg-primary/5 rounded-lg">
+                  <Shield className="w-4 h-4 text-green-600" />
+                  <span className="text-xs font-medium text-primary">Lab Tested</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 bg-primary/5 rounded-lg">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span className="text-xs font-medium text-primary">FSSAI Certified</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 bg-primary/5 rounded-lg">
+                  <Award className="w-4 h-4 text-green-600" />
+                  <span className="text-xs font-medium text-primary">Organic</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 bg-primary/5 rounded-lg">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span className="text-xs font-medium text-primary">Non-GMO</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
