@@ -394,27 +394,45 @@ const Index = () => {
       </section>
 
       {/* Instagram Reels */}
-      <section className="py-20 bg-warm-beige">
+      <section className="py-20 bg-warm-beige overflow-hidden">
         <div className="w-full px-4">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-12 drop-shadow-sm">
               Follow Us on Instagram
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
               {instagramReels.map((reel, index) => (
-                <div key={index} className="instagram-embed">
+                <div key={index} className="w-full max-w-[540px] mx-auto">
                   <blockquote
                     className="instagram-media"
+                    data-instgrm-captioned
                     data-instgrm-permalink={reel.permalink}
                     data-instgrm-version="14"
-                    style={{ maxWidth: '540px', width: '100%', border: 'none' }}
+                    style={{ 
+                      background: '#FFF',
+                      border: '0',
+                      borderRadius: '3px',
+                      boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)',
+                      margin: '1px',
+                      maxWidth: '540px',
+                      minWidth: '326px',
+                      padding: '0',
+                      width: 'calc(100% - 2px)'
+                    }}
                   >
                     <div style={{ padding: '16px' }}>
                       <a
                         href={reel.permalink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: '#000', fontFamily: 'Arial,sans-serif', fontSize: '14px', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '17px', textDecoration: 'none', wordWrap: 'break-word' }}
+                        style={{ 
+                          background: '#FFFFFF',
+                          lineHeight: '0',
+                          padding: '0 0',
+                          textAlign: 'center',
+                          textDecoration: 'none',
+                          width: '100%'
+                        }}
                       >
                         View this post on Instagram
                       </a>
@@ -429,30 +447,9 @@ const Index = () => {
 
       {/* Certifications Scroller */}
       <section className="py-12 bg-primary overflow-hidden">
-        <div className="w-full">
-          <div className="animate-scroll flex space-x-48">
-            {[
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert,
-              fassiCert, gmpCert, isoCert
-            ].map((cert, index) => (
+        <div className="w-full overflow-hidden">
+          <div className="animate-scroll flex space-x-16">
+            {[...Array(8)].flatMap(() => [fassiCert, gmpCert, isoCert]).map((cert, index) => (
               <img key={index} src={cert} alt={`Certificate ${index + 1}`} className="h-32 object-contain flex-shrink-0" />
             ))}
           </div>
