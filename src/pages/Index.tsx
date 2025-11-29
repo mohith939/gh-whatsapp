@@ -60,8 +60,8 @@ const Index = () => {
 
   useEffect(() => {
     const processEmbeds = () => {
-      if (window.instgrm && window.instgrm.Embeds) {
-        window.instgrm.Embeds.process();
+      if ((window as any).instgrm && (window as any).instgrm.Embeds) {
+        (window as any).instgrm.Embeds.process();
       }
     };
 
