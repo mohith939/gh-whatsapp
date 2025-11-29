@@ -37,40 +37,10 @@ const BulkInquiry = () => {
   });
 
   const onSubmit = (data: BulkInquiryForm) => {
-    // Rate limiting check
-    if (!rateLimiter.isAllowed('bulk_inquiry_form', 3, 60000)) { // 3 attempts per minute
-      alert("Too many attempts. Please wait a minute before submitting again.");
-      return;
-    }
-
-    // Sanitize input data
-    const sanitizedData = {
-      ...data,
-      name: sanitizeName(data.name),
-      businessName: sanitizeName(data.businessName),
-      email: sanitizeEmail(data.email),
-      phone: sanitizePhone(data.phone),
-      location: sanitizeName(data.location),
-      quantity: data.quantity.replace(/<[^>]*>/g, '').trim(),
-      notes: data.notes ? sanitizeMessage(data.notes) : ''
-    };
-
-    // Validate form data
-    const validation = validateBulkInquiryForm(sanitizedData);
-    if (!validation.isValid) {
-      alert(`Validation Error: ${validation.errors.join(' ')}`);
-      return;
-    }
-
-    // Track form submission
-    trackFormSubmission('bulk_inquiry_form', true);
-
-    console.log("Bulk Inquiry Form Data:", sanitizedData);
+    console.log("Bulk Inquiry Form Data:", data);
     // TODO: Integrate with backend or email service
     alert("Thank you for your inquiry! We'll get back to you within 2-4 hours.");
-
-    // Reset rate limiter on successful submission
-    rateLimiter.reset('bulk_inquiry_form');
+    form.reset();
   };
 
   return (

@@ -24,21 +24,21 @@ const ProductDetail = () => {
     trackProductView({
       id: product.id,
       name: product.name,
-      category: product.category,
-      price: product.price,
+      category: product.category.join(', '),
+      price: product.variants[0]?.price || 0,
     });
   }, [product]);
 
   const handleAddToCart = () => {
-    // Find the first variant or create a default one
-    const variant = product.variants?.[0] || { weight: '1kg', price: product.price };
+    // Find the first variant
+    const variant = product.variants[0];
     addToCart(product, variant, quantity);
     // Track add to cart event
     trackAddToCart({
       id: product.id,
       name: product.name,
-      category: product.category,
-      price: product.price,
+      category: product.category.join(', '),
+      price: variant.price,
       quantity,
     });
   };
@@ -59,11 +59,15 @@ const ProductDetail = () => {
         <div className="space-y-6">
           <div>
             <h1 className="text-4xl font-bold text-primary mb-2">{product.name}</h1>
-            <p className="text-2xl font-semibold text-primary mb-4">₹{product.price}</p>
-            <Badge variant="secondary" className="mb-4">{product.category}</Badge>
+            <p className="text-2xl font-semibold text-primary mb-4">₹{product.variants[0].price}</p>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {product.category.map((cat, idx) => (
+                <Badge key={idx} variant="secondary">{cat}</Badge>
+              ))}
+            </div>
           </div>
 
-          <p className="text-foreground/80 leading-relaxed">{product.description}</p>
+          <p className="text-foreground/80 leading-relaxed">{product.shortDescription}</p>
 
           {/* Trust Signals */}
           <div className="grid grid-cols-2 gap-4 mb-6">
@@ -118,7 +122,7 @@ const ProductDetail = () => {
 
           {/* Add to Cart Button */}
           <Button onClick={handleAddToCart} className="w-full py-3 text-lg">
-            Add to Cart - ₹{product.price * quantity}
+            Add to Cart - ₹{product.variants[0].price * quantity}
           </Button>
 
           {/* Additional Info */}
