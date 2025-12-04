@@ -27,7 +27,7 @@ function App() {
 
   return (
     <CartProvider>
-      <Router>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ScrollToTop />
         <div className="min-h-screen flex flex-col">
           <Header />

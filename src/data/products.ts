@@ -1,4 +1,7 @@
 import bananaPowderImage from '@/assets/banana raw powder.jpg';
+import bananaPowderBackImage from '@/assets/banana raw powder back photo.jpg';
+import bananaPowderBowlImage from '@/assets/bowl banana powder.jpg';
+import bananaPowderBenefitsImage from '@/assets/benefits of banana powder.jpg';
 import beetrootPowderImage from '@/assets/beetroot raw powder.jpg';
 import moringaPowderImage from '@/assets/moringa powder.jpg';
 import gingerPowderImage from '@/assets/ginger powder.jpg';
@@ -18,7 +21,7 @@ import turmericPowderImage from '@/assets/turmeric powder.jpg';
 import amlaPowderImage from '@/assets/amla powder.jpg';
 
 export interface ProductVariant {
-  weight: '100g' | '250g' | '500g' | '1kg';
+  weight: '150g' | '500g';
   price: number;
   stock: number;
   sku: string;
@@ -78,7 +81,7 @@ export const products: Product[] = [
     dosage: "Adults: 2–3 tbsp/day\nChildren: 1–2 tsp/day\nBabies: as advised",
     safety: "Avoid if allergic to bananas\nIntroduce slowly for infants",
     storage: "Store in an airtight container, away from moisture and heat.",
-    category: ["Energy", "Daily Nutrition", "Kids Nutrition"],
+    category: ["Fruit Powders"],
     howItMade: "Sourcing: Ripe local bananas\nCleaning: RO-washed\nDrying: Low-heat dehydration\nGrinding: Fine micro-grinding\nTesting: Purity & quality\nPacking: Airtight pouches",
     highlights: [
       "100% natural",
@@ -92,13 +95,11 @@ export const products: Product[] = [
       longTail: ["natural banana powder for babies"]
     },
     imageUrl: bananaPowderImage,
-    imageUrls: [bananaPowderImage],
+    imageUrls: [bananaPowderImage, bananaPowderBackImage, bananaPowderBowlImage, bananaPowderBenefitsImage],
     averageRating: 4.7,
     variants: [
-      { weight: '100g', price: 150, stock: 50, sku: 'BAN-100' },
-      { weight: '250g', price: 350, stock: 40, sku: 'BAN-250' },
-      { weight: '500g', price: 650, stock: 30, sku: 'BAN-500' },
-      { weight: '1kg', price: 1200, stock: 20, sku: 'BAN-1KG' }
+      { weight: '150g', price: 225, stock: 50, sku: 'BAN-150' },
+      { weight: '500g', price: 650, stock: 30, sku: 'BAN-500' }
     ],
     reviews: [
       {
@@ -143,7 +144,7 @@ export const products: Product[] = [
     dosage: "1–2 tsp/day",
     safety: "Not advised for oxalate-sensitive individuals.",
     storage: "Cool, dry, airtight.",
-    category: ["Energy", "Daily Nutrition"],
+    category: ["Vegetable Powder"],
     howItMade: "Beetroots → Cleaned → Sliced → Low-temp dried → Ground → Packed",
     highlights: [
       "No colours",
@@ -158,10 +159,8 @@ export const products: Product[] = [
     imageUrl: beetrootPowderImage,
     imageUrls: [beetrootPowderImage],
     variants: [
-      { weight: '100g', price: 140, stock: 45, sku: 'BEE-100' },
-      { weight: '250g', price: 320, stock: 35, sku: 'BEE-250' },
-      { weight: '500g', price: 600, stock: 25, sku: 'BEE-500' },
-      { weight: '1kg', price: 1150, stock: 15, sku: 'BEE-1KG' }
+      { weight: '150g', price: 210, stock: 45, sku: 'BEE-150' },
+      { weight: '500g', price: 600, stock: 25, sku: 'BEE-500' }
     ],
     featured: true
   },
@@ -181,7 +180,7 @@ export const products: Product[] = [
     dosage: "1 tsp/day",
     safety: "Avoid during pregnancy without guidance.",
     storage: "Airtight, away from sunlight.",
-    category: ["Daily Nutrition", "Wellness"],
+    category: ["Leafy Vegetable Powder"],
     howItMade: "Leaves → Washed → Shade dried → Fine ground → Packed",
     highlights: [
       "Pure leaf powder",
@@ -196,10 +195,8 @@ export const products: Product[] = [
     imageUrl: moringaPowderImage,
     imageUrls: [moringaPowderImage],
     variants: [
-      { weight: '100g', price: 180, stock: 55, sku: 'MOR-100' },
-      { weight: '250g', price: 420, stock: 45, sku: 'MOR-250' },
-      { weight: '500g', price: 800, stock: 30, sku: 'MOR-500' },
-      { weight: '1kg', price: 1500, stock: 20, sku: 'MOR-1KG' }
+      { weight: '150g', price: 270, stock: 55, sku: 'MOR-150' },
+      { weight: '500g', price: 800, stock: 30, sku: 'MOR-500' }
     ],
     featured: true
   },
@@ -218,7 +215,7 @@ export const products: Product[] = [
     dosage: "½–1 tsp/day",
     safety: "Avoid excessive consumption. Consult doctor if on blood-thinning medication.",
     storage: "Store in an airtight container in a cool, dry place",
-    category: ["Digestion", "Wellness"],
+    category: ["Vegetable Powder"],
     howItMade: "Fresh ginger → Cleaned → Sliced → Sun-dried → Ground → Quality checked → Packed",
     highlights: ["Aromatic", "No additives", "Pure ginger"],
     seoKeywords: {
@@ -228,10 +225,8 @@ export const products: Product[] = [
     imageUrl: gingerPowderImage,
     imageUrls: [gingerPowderImage],
     variants: [
-      { weight: '100g', price: 90, stock: 60, sku: 'GIN-100' },
-      { weight: '250g', price: 210, stock: 50, sku: 'GIN-250' },
-      { weight: '500g', price: 400, stock: 40, sku: 'GIN-500' },
-      { weight: '1kg', price: 750, stock: 25, sku: 'GIN-1KG' }
+      { weight: '150g', price: 135, stock: 60, sku: 'GIN-150' },
+      { weight: '500g', price: 400, stock: 40, sku: 'GIN-500' }
     ]
   },
   {
@@ -249,7 +244,7 @@ export const products: Product[] = [
     dosage: "As per recipe",
     safety: "Safe for daily use. May cause digestive discomfort if consumed in large quantities.",
     storage: "Store in an airtight container away from moisture",
-    category: ["Cooking Essentials"],
+    category: ["Vegetable Powder"],
     howItMade: "Garlic cloves → Peeled → Sliced → Low-temp dried → Ground → Packed",
     highlights: ["100% garlic", "No preservatives", "Dehydrated naturally"],
     seoKeywords: {
@@ -259,10 +254,8 @@ export const products: Product[] = [
     imageUrl: garlicPowderImage,
     imageUrls: [garlicPowderImage],
     variants: [
-      { weight: '100g', price: 110, stock: 55, sku: 'GAR-100' },
-      { weight: '250g', price: 260, stock: 45, sku: 'GAR-250' },
-      { weight: '500g', price: 490, stock: 35, sku: 'GAR-500' },
-      { weight: '1kg', price: 920, stock: 20, sku: 'GAR-1KG' }
+      { weight: '150g', price: 165, stock: 55, sku: 'GAR-150' },
+      { weight: '500g', price: 490, stock: 35, sku: 'GAR-500' }
     ]
   },
   {
@@ -280,7 +273,7 @@ export const products: Product[] = [
     dosage: "½–1 tsp/day",
     safety: "Safe for daily use. Avoid if allergic. Consult doctor if on specific medications.",
     storage: "Store in an airtight container away from light and moisture",
-    category: ["Immunity", "Wellness"],
+    category: ["Vegetable Powder"],
     howItMade: "Turmeric rhizomes → Cleaned → Boiled → Dried → Ground → Quality tested → Packed",
     highlights: ["No fillers", "High colour", "Pure turmeric"],
     seoKeywords: {
@@ -290,10 +283,8 @@ export const products: Product[] = [
     imageUrl: turmericPowderImage,
     imageUrls: [turmericPowderImage],
     variants: [
-      { weight: '100g', price: 80, stock: 70, sku: 'TUR-100' },
-      { weight: '250g', price: 190, stock: 60, sku: 'TUR-250' },
-      { weight: '500g', price: 360, stock: 50, sku: 'TUR-500' },
-      { weight: '1kg', price: 680, stock: 30, sku: 'TUR-1KG' }
+      { weight: '150g', price: 120, stock: 70, sku: 'TUR-150' },
+      { weight: '500g', price: 360, stock: 50, sku: 'TUR-500' }
     ]
   },
   {
@@ -311,7 +302,7 @@ export const products: Product[] = [
     dosage: "1 tsp/day",
     safety: "Safe for most people. May interact with diabetes medication. Consult doctor if unsure.",
     storage: "Store in an airtight container in a cool, dry place",
-    category: ["Immunity", "Beauty"],
+    category: ["Fruit Powders"],
     howItMade: "Fresh amla → Washed → Shade-dried → Ground → Packed",
     highlights: ["Shade-dried", "Nutrient-dense", "Pure amla"],
     seoKeywords: {
@@ -321,10 +312,8 @@ export const products: Product[] = [
     imageUrl: amlaPowderImage,
     imageUrls: [amlaPowderImage],
     variants: [
-      { weight: '100g', price: 100, stock: 50, sku: 'AML-100' },
-      { weight: '250g', price: 230, stock: 40, sku: 'AML-250' },
-      { weight: '500g', price: 440, stock: 30, sku: 'AML-500' },
-      { weight: '1kg', price: 850, stock: 20, sku: 'AML-1KG' }
+      { weight: '150g', price: 150, stock: 50, sku: 'AML-150' },
+      { weight: '500g', price: 440, stock: 30, sku: 'AML-500' }
     ]
   },
   {
@@ -342,7 +331,7 @@ export const products: Product[] = [
     dosage: "½ tsp/day (topical as needed)",
     safety: "Not for internal use during pregnancy. External use generally safe. Patch test before use.",
     storage: "Store in an airtight container away from moisture",
-    category: ["Skin", "Wellness"],
+    category: ["Leafy Vegetable Powder"],
     howItMade: "Neem leaves → Cleaned → Shade-dried → Ground → Packed",
     highlights: ["Leaf-only powder", "No fillers", "Pure neem"],
     seoKeywords: {
@@ -352,10 +341,8 @@ export const products: Product[] = [
     imageUrl: neemPowderImage,
     imageUrls: [neemPowderImage],
     variants: [
-      { weight: '100g', price: 90, stock: 50, sku: 'NEE-100' },
-      { weight: '250g', price: 210, stock: 40, sku: 'NEE-250' },
-      { weight: '500g', price: 400, stock: 30, sku: 'NEE-500' },
-      { weight: '1kg', price: 750, stock: 20, sku: 'NEE-1KG' }
+      { weight: '150g', price: 135, stock: 50, sku: 'NEE-150' },
+      { weight: '500g', price: 400, stock: 30, sku: 'NEE-500' }
     ]
   },
   {
@@ -373,7 +360,7 @@ export const products: Product[] = [
     dosage: "1–2 tsp/day",
     safety: "Safe for all ages including infants. Introduce gradually to babies. May cause orange tint to skin in large amounts (harmless).",
     storage: "Store in an airtight container away from light",
-    category: ["Kids Nutrition", "Daily Wellness"],
+    category: ["Vegetable Powder"],
     howItMade: "Fresh carrots → Washed → Sliced → Low-temp dried → Ground → Packed",
     highlights: ["Natural orange", "Nutrient-retentive processing", "Pure carrot"],
     seoKeywords: {
@@ -383,10 +370,8 @@ export const products: Product[] = [
     imageUrl: carrotPowderImage,
     imageUrls: [carrotPowderImage],
     variants: [
-      { weight: '100g', price: 110, stock: 50, sku: 'CAR-100' },
-      { weight: '250g', price: 260, stock: 40, sku: 'CAR-250' },
-      { weight: '500g', price: 490, stock: 30, sku: 'CAR-500' },
-      { weight: '1kg', price: 940, stock: 20, sku: 'CAR-1KG' }
+      { weight: '150g', price: 165, stock: 50, sku: 'CAR-150' },
+      { weight: '500g', price: 490, stock: 30, sku: 'CAR-500' }
     ]
   },
   {
@@ -404,7 +389,7 @@ export const products: Product[] = [
     dosage: "1 tsp/day",
     safety: "Safe for most people. High in oxalates - those with kidney issues should limit intake. Consult doctor if on blood thinners.",
     storage: "Store in an airtight container away from heat and moisture",
-    category: ["Daily Nutrition"],
+    category: ["Leafy Vegetable Powder"],
     howItMade: "Fresh spinach → Washed → Shade-dried → Ground → Packed",
     highlights: ["Shade-dried leaves", "Nutrient retention", "Pure spinach"],
     seoKeywords: {
@@ -414,10 +399,8 @@ export const products: Product[] = [
     imageUrl: spinachPowderImage,
     imageUrls: [spinachPowderImage],
     variants: [
-      { weight: '100g', price: 140, stock: 45, sku: 'SPI-100' },
-      { weight: '250g', price: 330, stock: 35, sku: 'SPI-250' },
-      { weight: '500g', price: 630, stock: 25, sku: 'SPI-500' },
-      { weight: '1kg', price: 1200, stock: 15, sku: 'SPI-1KG' }
+      { weight: '150g', price: 210, stock: 45, sku: 'SPI-150' },
+      { weight: '500g', price: 630, stock: 25, sku: 'SPI-500' }
     ]
   },
   {
@@ -435,7 +418,7 @@ export const products: Product[] = [
     dosage: "As per recipe",
     safety: "Safe for culinary use. Generally well-tolerated. Start with small amounts to test tolerance.",
     storage: "Store in an airtight container to retain aroma",
-    category: ["Daily Nutrition"],
+    category: ["Leafy Vegetable Powder"],
     howItMade: "Fresh curry leaves → Cleaned → Shade-dried → Ground → Packed",
     highlights: ["Dried fresh curry leaves", "Aromatic finish", "Pure kadi patta"],
     seoKeywords: {
@@ -445,10 +428,8 @@ export const products: Product[] = [
     imageUrl: curryLeafPowderImage,
     imageUrls: [curryLeafPowderImage],
     variants: [
-      { weight: '100g', price: 120, stock: 50, sku: 'CUR-100' },
-      { weight: '250g', price: 280, stock: 40, sku: 'CUR-250' },
-      { weight: '500g', price: 530, stock: 30, sku: 'CUR-500' },
-      { weight: '1kg', price: 1020, stock: 20, sku: 'CUR-1KG' }
+      { weight: '150g', price: 180, stock: 50, sku: 'CUR-150' },
+      { weight: '500g', price: 530, stock: 30, sku: 'CUR-500' }
     ]
   },
   {
@@ -466,7 +447,7 @@ export const products: Product[] = [
     dosage: "½–1 tsp/day (external use)",
     safety: "External use only. Not for internal consumption. Consult healthcare provider before use.",
     storage: "Store in an airtight container away from moisture",
-    category: ["Wellness", "Oral Care"],
+    category: ["Leafy Vegetable Powder"],
     howItMade: "Fresh betel leaves → Cleaned → Dried → Ground → Packed",
     highlights: [
       "Traditional herb",
@@ -480,10 +461,8 @@ export const products: Product[] = [
     imageUrl: betelLeafPowderImage,
     imageUrls: [betelLeafPowderImage],
     variants: [
-      { weight: '100g', price: 140, stock: 40, sku: 'BET-100' },
-      { weight: '250g', price: 330, stock: 30, sku: 'BET-250' },
-      { weight: '500g', price: 630, stock: 20, sku: 'BET-500' },
-      { weight: '1kg', price: 1200, stock: 15, sku: 'BET-1KG' }
+      { weight: '150g', price: 210, stock: 40, sku: 'BET-150' },
+      { weight: '500g', price: 630, stock: 20, sku: 'BET-500' }
     ]
   },
   {
@@ -501,7 +480,7 @@ export const products: Product[] = [
     dosage: "As per recipe",
     safety: "Safe for daily use. May cause digestive discomfort in large amounts.",
     storage: "Store in an airtight container in a cool, dry place",
-    category: ["Cooking Essentials", "Energy"],
+    category: ["Flakes"],
     howItMade: "Fresh coconut → Meat extracted → Dried → Ground → Packed",
     highlights: [
       "Desiccated coconut",
@@ -515,10 +494,8 @@ export const products: Product[] = [
     imageUrl: coconutPowderImage,
     imageUrls: [coconutPowderImage],
     variants: [
-      { weight: '100g', price: 120, stock: 50, sku: 'COC-100' },
-      { weight: '250g', price: 280, stock: 40, sku: 'COC-250' },
-      { weight: '500g', price: 530, stock: 30, sku: 'COC-500' },
-      { weight: '1kg', price: 1020, stock: 20, sku: 'COC-1KG' }
+      { weight: '150g', price: 180, stock: 50, sku: 'COC-150' },
+      { weight: '500g', price: 530, stock: 30, sku: 'COC-500' }
     ]
   },
   {
@@ -536,7 +513,7 @@ export const products: Product[] = [
     dosage: "1–2 tbsp/day",
     safety: "Safe for most people. May cause digestive discomfort if consumed in large amounts. High in natural sugars.",
     storage: "Store in an airtight container away from moisture",
-    category: ["Energy", "Cooking Essentials"],
+    category: ["Fruit Powders"],
     howItMade: "Fresh dates → Pitted → Dried → Ground → Packed",
     highlights: [
       "Natural sweetener",
@@ -550,10 +527,8 @@ export const products: Product[] = [
     imageUrl: datesPowderImage,
     imageUrls: [datesPowderImage],
     variants: [
-      { weight: '100g', price: 160, stock: 45, sku: 'DAT-100' },
-      { weight: '250g', price: 380, stock: 35, sku: 'DAT-250' },
-      { weight: '500g', price: 720, stock: 25, sku: 'DAT-500' },
-      { weight: '1kg', price: 1380, stock: 15, sku: 'DAT-1KG' }
+      { weight: '150g', price: 240, stock: 45, sku: 'DAT-150' },
+      { weight: '500g', price: 720, stock: 25, sku: 'DAT-500' }
     ]
   },
   {
@@ -571,7 +546,7 @@ export const products: Product[] = [
     dosage: "1–2 tsp/day",
     safety: "Safe for most people. May cause digestive discomfort if consumed in large amounts.",
     storage: "Store in an airtight container in a cool, dry place",
-    category: ["Immunity", "Daily Nutrition"],
+    category: ["Fruit Powders"],
     howItMade: "Fresh guava → Cleaned → Dried → Ground → Packed",
     highlights: [
       "Vitamin C rich",
@@ -585,10 +560,8 @@ export const products: Product[] = [
     imageUrl: guavaPowderImage,
     imageUrls: [guavaPowderImage],
     variants: [
-      { weight: '100g', price: 130, stock: 40, sku: 'GUA-100' },
-      { weight: '250g', price: 300, stock: 30, sku: 'GUA-250' },
-      { weight: '500g', price: 570, stock: 20, sku: 'GUA-500' },
-      { weight: '1kg', price: 1100, stock: 15, sku: 'GUA-1KG' }
+      { weight: '150g', price: 195, stock: 40, sku: 'GUA-150' },
+      { weight: '500g', price: 570, stock: 20, sku: 'GUA-500' }
     ]
   },
   {
@@ -620,10 +593,8 @@ export const products: Product[] = [
     imageUrl: lemonPowderImage,
     imageUrls: [lemonPowderImage],
     variants: [
-      { weight: '100g', price: 100, stock: 50, sku: 'LEM-100' },
-      { weight: '250g', price: 230, stock: 40, sku: 'LEM-250' },
-      { weight: '500g', price: 440, stock: 30, sku: 'LEM-500' },
-      { weight: '1kg', price: 850, stock: 20, sku: 'LEM-1KG' }
+      { weight: '150g', price: 150, stock: 50, sku: 'LEM-150' },
+      { weight: '500g', price: 440, stock: 30, sku: 'LEM-500' }
     ]
   },
   {
@@ -655,10 +626,8 @@ export const products: Product[] = [
     imageUrl: papayaPowderImage,
     imageUrls: [papayaPowderImage],
     variants: [
-      { weight: '100g', price: 140, stock: 45, sku: 'PAP-100' },
-      { weight: '250g', price: 330, stock: 35, sku: 'PAP-250' },
-      { weight: '500g', price: 630, stock: 25, sku: 'PAP-500' },
-      { weight: '1kg', price: 1200, stock: 15, sku: 'PAP-1KG' }
+      { weight: '150g', price: 210, stock: 45, sku: 'PAP-150' },
+      { weight: '500g', price: 630, stock: 25, sku: 'PAP-500' }
     ]
   },
   {
@@ -676,7 +645,7 @@ export const products: Product[] = [
     dosage: "As per recipe",
     safety: "Safe for daily use. May cause digestive discomfort in large amounts.",
     storage: "Store in an airtight container away from moisture",
-    category: ["Cooking Essentials", "Immunity"],
+    category: ["Vegetable Powder"],
     howItMade: "Fresh tomatoes → Dried → Ground → Packed",
     highlights: [
       "Lycopene rich",
@@ -690,10 +659,8 @@ export const products: Product[] = [
     imageUrl: tomatoPowderImage,
     imageUrls: [tomatoPowderImage],
     variants: [
-      { weight: '100g', price: 110, stock: 50, sku: 'TOM-100' },
-      { weight: '250g', price: 260, stock: 40, sku: 'TOM-250' },
-      { weight: '500g', price: 490, stock: 30, sku: 'TOM-500' },
-      { weight: '1kg', price: 940, stock: 20, sku: 'TOM-1KG' }
+      { weight: '150g', price: 165, stock: 50, sku: 'TOM-150' },
+      { weight: '500g', price: 490, stock: 30, sku: 'TOM-500' }
     ]
   }
 ];

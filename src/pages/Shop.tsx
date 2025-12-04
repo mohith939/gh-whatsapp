@@ -9,13 +9,7 @@ const Shop = () => {
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('featured');
 
-  const categories = useMemo(() => {
-    const cats = new Set<string>();
-    products.forEach(product => {
-      product.category.forEach(cat => cats.add(cat));
-    });
-    return Array.from(cats).sort();
-  }, []);
+  const categories = ['Flakes', 'Fruit Powders', 'Vegetable Powder', 'Leafy Vegetable Powder'];
 
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = products;
@@ -56,7 +50,7 @@ const Shop = () => {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-in-delay-2">
           <div className="flex-1">
             <label className="text-sm font-medium mb-2 block text-foreground">Category</label>
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
@@ -71,7 +65,7 @@ const Shop = () => {
               </SelectContent>
             </Select>
           </div>
-          
+
           <div className="flex-1">
             <label className="text-sm font-medium mb-2 block text-foreground">Sort By</label>
             <Select value={sortBy} onValueChange={setSortBy}>
@@ -90,11 +84,11 @@ const Shop = () => {
 
         {/* Products Grid */}
         {filteredAndSortedProducts.length === 0 ? (
-          <div className="text-center py-12">
+          <div className="text-center py-12 animate-fade-in">
             <p className="text-foreground/60">No products found matching your criteria.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-fade-in-delay-3">
             {filteredAndSortedProducts.map((product) => (
               <Link key={product.id} to={`/product/${product.id}`}>
                 <Card className="h-full hover:shadow-md hover:scale-105 transition-all duration-300 border-muted bg-muted/50 group">

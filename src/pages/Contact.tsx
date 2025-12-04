@@ -185,14 +185,14 @@ const Contact = () => {
             </Card>
 
             {/* Contact Information & Trust Elements */}
-            <div className="space-y-8">
+            <div className="space-y-8 animate-slide-in-right">
               {/* Contact Details */}
-              <Card className="border-border">
+              <Card className="border-border animate-fade-in-delay-2">
                 <CardHeader>
                   <CardTitle className="text-2xl font-serif text-primary">Contact Information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4 animate-fade-in-delay-3">
                     <Mail className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-primary mb-1">Email</h3>
@@ -200,7 +200,7 @@ const Contact = () => {
                       <p className="text-sm text-foreground/60">We respond within 2-4 hours</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4 animate-fade-in-delay-4">
                     <Phone className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-primary mb-1">Phone</h3>
@@ -208,14 +208,14 @@ const Contact = () => {
                       <p className="text-sm text-foreground/60">Mon-Fri, 9 AM - 6 PM IST</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4 animate-fade-in-delay-5">
                     <MapPin className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-primary mb-1">Address</h3>
                       <p className="text-foreground/70">Golden Harvest Farms<br />Rural India</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4 animate-fade-in-delay-6">
                     <Clock className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-primary mb-1">Business Hours</h3>

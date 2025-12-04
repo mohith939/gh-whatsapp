@@ -9,6 +9,10 @@ import heroImage from '@/assets/hero-bg.jpg';
 import fassiCert from '@/assets/Certificates/fassi.avif';
 import gmpCert from '@/assets/Certificates/gmp.avif';
 import isoCert from '@/assets/Certificates/iso.avif';
+import flakesImage from '@/assets/coconut powder.jpg';
+import fruitPowdersImage from '@/assets/amla powder.jpg';
+import vegetablePowderImage from '@/assets/carrot powders.jpg';
+import leafyVegetablePowderImage from '@/assets/spinach powder.jpg';
 import Autoplay from 'embla-carousel-autoplay';
 import { useEffect } from 'react';
 
@@ -101,9 +105,9 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative bg-background min-h-screen flex items-center">
+      <section className="relative bg-background min-h-[80vh] flex items-center">
         <div className="absolute inset-0 overflow-hidden">
           <img
             src={heroImage}
@@ -113,7 +117,7 @@ const Index = () => {
         </div>
         <div className="relative w-full px-4 py-20 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary mb-6 animate-fade-in drop-shadow-sm">
+            <h1 className="text-4xl md:text-7xl font-serif font-bold text-primary mb-6 animate-fade-in drop-shadow-sm">
               Raw. Real. Truly Pure.
             </h1>
             <p className="text-xl md:text-2xl text-foreground mb-8 animate-fade-in-delay font-serif font-semibold">
@@ -127,31 +131,15 @@ const Index = () => {
                 <Link to="/about">Our Story</Link>
               </Button>
             </div>
-
-            {/* Trust Badges */}
-            <div className="flex flex-wrap gap-3 justify-center mt-12 animate-fade-in-delay-3">
-              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                Lab Tested
-              </Badge>
-              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                FSSAI Certified
-              </Badge>
-              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                No Preservatives
-              </Badge>
-              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                Direct from Farmers
-              </Badge>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Why Golden Harvest */}
-      <section className="py-20 bg-warm-beige">
+      <section className="py-20 bg-warm-beige animate-fade-in">
         <div className="w-full px-4">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16 drop-shadow-sm">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16 drop-shadow-sm animate-slide-up">
               Why Golden Harvest?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -173,7 +161,7 @@ const Index = () => {
                   description: 'Serving health-conscious families and businesses nationwide with COD delivery.'
                 }
               ].map((feature, index) => (
-                <Card key={index} className="border-muted bg-muted/50 shadow-lg hover:shadow-md hover:scale-105 transition-all duration-300">
+                <Card key={index} className={`border-muted bg-muted/50 shadow-lg hover:shadow-md hover:scale-105 transition-all duration-300 animate-fade-in-delay-${index + 1}`}>
                   <CardContent className="p-8 text-center">
                     <h3 className="text-xl font-semibold text-primary mb-4">{feature.title}</h3>
                     <p className="text-foreground/70 leading-relaxed">{feature.description}</p>
@@ -232,12 +220,12 @@ const Index = () => {
       </section>
 
       {/* Promotional Callouts */}
-      <section className="py-20 bg-warm-beige">
+      <section className="py-20 bg-warm-beige animate-fade-in">
         <div className="w-full px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Bulk Order Special */}
-              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 shadow-lg hover:shadow-xl transition-all duration-300">
+              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-left">
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Award className="w-8 h-8 text-primary" />
@@ -258,7 +246,7 @@ const Index = () => {
               </Card>
 
               {/* New Arrivals */}
-              <Card className="border-secondary/20 bg-gradient-to-br from-secondary/5 to-secondary/10 shadow-lg hover:shadow-xl transition-all duration-300">
+              <Card className="border-secondary/20 bg-gradient-to-br from-secondary/5 to-secondary/10 shadow-lg hover:shadow-xl transition-all duration-300 animate-scale-in">
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Leaf className="w-8 h-8 text-secondary" />
@@ -279,7 +267,7 @@ const Index = () => {
               </Card>
 
               {/* Bundle Deals */}
-              <Card className="border-accent/20 bg-gradient-to-br from-accent/5 to-accent/10 shadow-lg hover:shadow-xl transition-all duration-300">
+              <Card className="border-accent/20 bg-gradient-to-br from-accent/5 to-accent/10 shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right">
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-8 h-8 text-accent" />
@@ -342,7 +330,7 @@ const Index = () => {
       </section>
 
       {/* Farmer Testimonials */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-background overflow-x-hidden">
         <div className="w-full px-4">
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-12 drop-shadow-sm">
@@ -385,8 +373,8 @@ const Index = () => {
                     );
                   })}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="hidden sm:flex" />
+                <CarouselNext className="hidden sm:flex" />
               </Carousel>
             </div>
           </div>
@@ -469,11 +457,23 @@ const Index = () => {
               Shop by Category
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {['Energy', 'Immunity', 'Digestion', 'Beauty', 'Daily Nutrition', 'Kids Nutrition', 'Wellness', 'Cooking Essentials'].map((category) => (
-                <Link key={category} to={`/shop?category=${encodeURIComponent(category)}`}>
+              {[
+                { name: 'Flakes', image: flakesImage },
+                { name: 'Fruit Powders', image: fruitPowdersImage },
+                { name: 'Vegetable Powder', image: vegetablePowderImage },
+                { name: 'Leafy Vegetable Powder', image: leafyVegetablePowderImage }
+              ].map((category) => (
+                <Link key={category.name} to={`/shop?category=${encodeURIComponent(category.name)}`}>
                   <Card className="hover:shadow-lg transition-all duration-300 border-border bg-card hover:-translate-y-1 group">
                     <CardContent className="p-8 text-center">
-                      <h3 className="font-semibold text-primary group-hover:text-primary/80 transition-colors">{category}</h3>
+                      <div className="aspect-square bg-muted rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                        <img
+                          src={category.image}
+                          alt={category.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                        />
+                      </div>
+                      <h3 className="font-semibold text-primary group-hover:text-primary/80 transition-colors">{category.name}</h3>
                     </CardContent>
                   </Card>
                 </Link>

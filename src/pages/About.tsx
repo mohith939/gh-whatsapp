@@ -37,11 +37,11 @@ const About = () => {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-background animate-fade-in">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
+              <div className="animate-slide-in-left">
                 <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">
                   From Farm to Your Home
                 </h2>
@@ -55,7 +55,7 @@ const About = () => {
                   <Link to="/shop">Explore Our Range</Link>
                 </Button>
               </div>
-              <div className="relative">
+              <div className="relative animate-slide-in-right">
                 <div className="aspect-square bg-muted rounded-2xl overflow-hidden shadow-2xl">
                   <img
                     src={heroImage}
@@ -73,7 +73,7 @@ const About = () => {
       </section>
 
       {/* Our Process */}
-      <section className="py-20 bg-warm-beige">
+      <section className="py-20 bg-warm-beige animate-fade-in">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16">
@@ -121,7 +121,7 @@ const About = () => {
       </section>
 
       {/* Our Values */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-background animate-fade-in">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16">
@@ -189,7 +189,7 @@ const About = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="py-20 bg-primary text-primary-foreground animate-fade-in">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
