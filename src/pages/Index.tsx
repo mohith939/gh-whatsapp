@@ -9,10 +9,10 @@ import heroImage from '@/assets/hero-bg.jpg';
 import fassiCert from '@/assets/Certificates/fassi.avif';
 import gmpCert from '@/assets/Certificates/gmp.avif';
 import isoCert from '@/assets/Certificates/iso.avif';
-import flakesImage from '@/assets/coconut powder.jpg';
-import fruitPowdersImage from '@/assets/amla powder.jpg';
-import vegetablePowderImage from '@/assets/carrot powders.jpg';
-import leafyVegetablePowderImage from '@/assets/spinach powder.jpg';
+import flakesImage from '@/assets/coconut-powder.jpg';
+import fruitPowdersImage from '@/assets/amla-powder.jpg';
+import vegetablePowderImage from '@/assets/carrot-powder.jpg';
+import leafyVegetablePowderImage from '@/assets/spinach-powder.jpg';
 import Autoplay from 'embla-carousel-autoplay';
 import { useEffect } from 'react';
 
