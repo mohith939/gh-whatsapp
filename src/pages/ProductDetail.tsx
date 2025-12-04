@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import WheelGestures from 'embla-carousel-wheel-gestures';
-import { products } from '@/data/products';
+import { products, type ProductVariant } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { CheckCircle, Star, Truck, Shield, Award, Users } from 'lucide-react';
 import { trackProductView, trackAddToCart } from '@/utils/analytics';
