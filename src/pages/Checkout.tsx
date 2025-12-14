@@ -25,6 +25,7 @@ import {
 } from '@/components/ui/form';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const indianStates = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
@@ -83,87 +84,75 @@ const Checkout = () => {
   const onSubmit = async (data: CheckoutFormData) => {
     setIsSubmitting(true);
     try {
-      const orderData = {
-        formType: 'order',
-        orderId: `GH${Date.now()}`,
-        customer_name: data.fullName,
-        phone: data.phone,
-        email: data.email || null,
-        address_line1: data.addressLine1,
-        address_line2: data.addressLine2 || null,
-        city: data.city,
-        state: data.state,
-        pincode: data.pincode,
-        order_notes: data.orderNotes || null,
-        items: cartItems.map(item => ({
-          product_id: item.product.id,
-          product_name: item.product.name,
-          variant: item.variant.weight,
-          price: item.variant.price,
-          quantity: item.quantity,
-        })),
-        subtotal,
-        shipping_charge: shippingCost,
-        total,
-        payment_method: data.paymentMethod,
-        order_status: data.paymentMethod === 'COD' ? 'Pending' : 'Payment Pending',
-      };
+      const orderItems = cartItems.map(item => ({
+        product_id: item.product.id,
+        product_name: item.product.name,
+        variant: item.variant.weight,
+        price: item.variant.price,
+        quantity: item.quantity,
+      }));
 
-      console.log('Submitting order to local storage...');
+      // Insert order into Supabase
+      const { data: insertedOrder, error: insertError } = await supabase
+        .from('orders')
+        .insert({
+          customer_name: data.fullName,
+          phone: data.phone,
+          email: data.email || null,
+          address_line1: data.addressLine1,
+          address_line2: data.addressLine2 || null,
+          city: data.city,
+          state: data.state,
+          pincode: data.pincode,
+          order_notes: data.orderNotes || null,
+          items: orderItems,
+          subtotal,
+          shipping_charge: shippingCost,
+          total,
+          payment_method: data.paymentMethod,
+          order_status: data.paymentMethod === 'COD' ? 'Received' : 'Payment Pending',
+        })
+        .select('id')
+        .single();
 
-      // Submit order data to local server for storage
-      const response = await fetch('http://localhost:3001/store-order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit order');
+      if (insertError) {
+        console.error('Order insert error:', insertError);
+        throw new Error('Failed to create order');
       }
 
-      const result = await response.json();
-      console.log('Order submitted successfully:', result);
+      const orderId = insertedOrder.id;
+      console.log('Order created in database:', orderId);
 
       if (data.paymentMethod === 'COD') {
-        // COD flow - order is already created with 'Pending' status
+        // COD flow - order is already created with 'Received' status
         clearCart();
-        navigate('/order-confirmation', { state: { orderId: orderData.orderId } });
+        navigate('/order-confirmation', { state: { orderId } });
 
         toast({
           title: 'Order placed successfully!',
-          description: `Your order #${orderData.orderId} has been placed and will be delivered via Cash on Delivery.`,
+          description: `Your order has been placed and will be delivered via Cash on Delivery.`,
         });
       } else {
-        // Razorpay flow
+        // Razorpay flow - create order via edge function
         try {
-          // Create Razorpay order
-          const razorpayResponse = await fetch('http://localhost:3001/create-order', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
+          const { data: razorpayOrder, error: razorpayError } = await supabase.functions.invoke('create-razorpay-order', {
+            body: {
               amount: total,
               currency: 'INR',
-              receipt: `receipt_${orderData.orderId}`,
-              notes: {
-                order_id: orderData.orderId,
-              },
-            }),
+              receipt: `receipt_${orderId}`,
+              notes: { order_id: orderId },
+            },
           });
 
-          if (!razorpayResponse.ok) {
-            throw new Error('Failed to create Razorpay order');
+          if (razorpayError || razorpayOrder?.error) {
+            throw new Error(razorpayOrder?.error || 'Failed to create payment order');
           }
 
-          const razorpayOrder = await razorpayResponse.json();
+          console.log('Razorpay order created:', razorpayOrder.id);
 
           // Open Razorpay checkout
           const options = {
-            key: 'YOUR_KEY_ID', // Replace with your Razorpay key_id
+            key: razorpayOrder.key_id,
             amount: razorpayOrder.amount,
             currency: razorpayOrder.currency,
             name: 'Golden Harvest',
@@ -176,61 +165,34 @@ const Checkout = () => {
             },
             handler: async (response: any) => {
               try {
-                // Verify payment
-                const verifyResponse = await fetch('http://localhost:3001/verify-payment', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
+                // Verify payment via edge function
+                const { data: verifyData, error: verifyError } = await supabase.functions.invoke('verify-razorpay-payment', {
+                  body: {
                     razorpay_order_id: response.razorpay_order_id,
                     razorpay_payment_id: response.razorpay_payment_id,
                     razorpay_signature: response.razorpay_signature,
-                  }),
+                    order_id: orderId,
+                  },
                 });
 
-                if (verifyResponse.ok) {
-                  // Update order status to 'Paid' in local storage
-                  const updateData = {
-                    formType: 'order',
-                    orderId: orderData.orderId,
-                    order_status: 'Paid',
-                  };
-
-                  await fetch('http://localhost:3001/store-order', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(updateData),
-                  });
-
-                  clearCart();
-                  navigate('/order-confirmation', { state: { orderId: orderData.orderId } });
-
-                  toast({
-                    title: 'Payment successful!',
-                    description: `Your order #${orderData.orderId} has been confirmed and payment received.`,
-                  });
-                } else {
+                if (verifyError || verifyData?.status !== 'ok') {
                   throw new Error('Payment verification failed');
                 }
-              } catch (verifyError) {
-                console.error('Payment verification error:', verifyError);
-                // Update order status to 'Payment Failed'
-                const updateData = {
-                  formType: 'order',
-                  orderId: orderData.orderId,
-                  order_status: 'Payment Failed',
-                };
 
-                await fetch('http://localhost:3001/store-order', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(updateData),
+                clearCart();
+                navigate('/order-confirmation', { state: { orderId } });
+
+                toast({
+                  title: 'Payment successful!',
+                  description: 'Your order has been confirmed and payment received.',
                 });
+              } catch (verifyErr) {
+                console.error('Payment verification error:', verifyErr);
+                // Update order status to 'Payment Failed'
+                await supabase
+                  .from('orders')
+                  .update({ order_status: 'Payment Failed' })
+                  .eq('id', orderId);
 
                 toast({
                   title: 'Payment verification failed',
@@ -242,19 +204,10 @@ const Checkout = () => {
             modal: {
               ondismiss: async () => {
                 // Payment cancelled - update order status
-                const updateData = {
-                  formType: 'order',
-                  orderId: orderData.orderId,
-                  order_status: 'Payment Cancelled',
-                };
-
-                await fetch('http://localhost:3001/store-order', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(updateData),
-                });
+                await supabase
+                  .from('orders')
+                  .update({ order_status: 'Payment Cancelled' })
+                  .eq('id', orderId);
 
                 toast({
                   title: 'Payment cancelled',
@@ -270,22 +223,13 @@ const Checkout = () => {
 
           const rzp = new (window as any).Razorpay(options);
           rzp.open();
-        } catch (razorpayError) {
-          console.error('Razorpay error:', razorpayError);
+        } catch (razorpayErr) {
+          console.error('Razorpay error:', razorpayErr);
           // Update order status to 'Payment Failed'
-          const updateData = {
-            formType: 'order',
-            orderId: orderData.orderId,
-            order_status: 'Payment Failed',
-          };
-
-          await fetch('http://localhost:3001/store-order', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updateData),
-          });
+          await supabase
+            .from('orders')
+            .update({ order_status: 'Payment Failed' })
+            .eq('id', orderId);
 
           toast({
             title: 'Payment initialization failed',
