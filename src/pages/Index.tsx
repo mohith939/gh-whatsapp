@@ -201,7 +201,11 @@ const Index = () => {
                       <h3 className="text-xl font-semibold text-primary mb-4">{product.name}</h3>
                       <p className="text-foreground/70 mb-8 line-clamp-2 leading-relaxed text-base">{product.shortDescription}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-primary font-bold text-xl">₹{product.variants[0].price}</span>
+                        <div className="flex flex-col">
+                          <span className="text-sm text-muted-foreground line-through">₹{product.variants[0].originalPrice}</span>
+                          <span className="text-primary font-bold text-xl">₹{product.variants[0].price}</span>
+                          <span className="text-xs text-green-600 font-medium">{product.variants[0].discountPercentage}% off</span>
+                        </div>
                         <span className="text-sm text-foreground/60">{product.variants[0].weight}</span>
                       </div>
                     </CardContent>

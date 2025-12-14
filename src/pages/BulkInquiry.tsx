@@ -8,6 +8,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { products } from "@/data/products";
 import { CheckCircle, Award, Shield, Truck, Users, Star, Factory, Clock, Package, Zap, Heart, Globe } from "lucide-react";
+import { submitFormXHR } from "@/utils/formSubmission";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { validateBulkInquiryForm, rateLimiter } from "@/utils/security";
+import { trackFormSubmission } from "@/utils/analytics";
 
 interface BulkInquiryForm {
   name: string;
@@ -22,6 +27,9 @@ interface BulkInquiryForm {
 }
 
 const BulkInquiry = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<BulkInquiryForm>({
     defaultValues: {
       name: "",
@@ -36,11 +44,57 @@ const BulkInquiry = () => {
     },
   });
 
-  const onSubmit = (data: BulkInquiryForm) => {
-    console.log("Bulk Inquiry Form Data:", data);
-    // TODO: Integrate with backend or email service
-    alert("Thank you for your inquiry! We'll get back to you within 2-4 hours.");
-    form.reset();
+  const onSubmit = async (data: BulkInquiryForm) => {
+    // Rate limiting check
+    if (!rateLimiter.isAllowed('bulk_inquiry_form', 3, 60000)) { // 3 attempts per minute
+      toast({
+        title: "Too many attempts",
+        description: "Please wait a minute before submitting again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate form data
+    const validation = validateBulkInquiryForm(data);
+    if (!validation.isValid) {
+      toast({
+        title: "Validation Error",
+        description: validation.errors.join(' '),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await submitFormXHR({
+        ...data,
+        formType: 'bulk_inquiry'
+      });
+
+      if (result.success) {
+        toast({
+          title: "Inquiry Submitted Successfully!",
+          description: "Thank you for your inquiry! We'll get back to you within 2-4 hours.",
+        });
+        // Track form submission
+        trackFormSubmission('bulk_inquiry_form', true);
+        // Reset form
+        form.reset();
+        rateLimiter.reset('bulk_inquiry_form');
+      } else {
+        throw new Error(result.error || 'Submission failed');
+      }
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your inquiry. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -66,10 +120,9 @@ const BulkInquiry = () => {
               <FormField
                 control={form.control}
                 name="name"
-                rules={{ required: "Name is required" }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Name *</FormLabel>
                     <FormControl>
                       <Input placeholder="Your full name" {...field} />
                     </FormControl>
@@ -80,10 +133,9 @@ const BulkInquiry = () => {
               <FormField
                 control={form.control}
                 name="businessName"
-                rules={{ required: "Business/Brand Name is required" }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Business/Brand Name</FormLabel>
+                    <FormLabel>Business/Brand Name *</FormLabel>
                     <FormControl>
                       <Input placeholder="Your business name" {...field} />
                     </FormControl>
@@ -94,10 +146,9 @@ const BulkInquiry = () => {
               <FormField
                 control={form.control}
                 name="phone"
-                rules={{ required: "Phone Number is required" }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel>Phone Number *</FormLabel>
                     <FormControl>
                       <Input placeholder="Your phone number" {...field} />
                     </FormControl>
@@ -108,10 +159,9 @@ const BulkInquiry = () => {
               <FormField
                 control={form.control}
                 name="email"
-                rules={{ required: "Email is required", pattern: { value: /^\S+@\S+$/, message: "Invalid email" } }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Email *</FormLabel>
                     <FormControl>
                       <Input placeholder="Your email address" {...field} />
                     </FormControl>
@@ -122,10 +172,9 @@ const BulkInquiry = () => {
               <FormField
                 control={form.control}
                 name="location"
-                rules={{ required: "Location is required" }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Location</FormLabel>
+                    <FormLabel>Location *</FormLabel>
                     <FormControl>
                       <Input placeholder="City, State" {...field} />
                     </FormControl>
@@ -136,10 +185,9 @@ const BulkInquiry = () => {
               <FormField
                 control={form.control}
                 name="productsRequired"
-                rules={{ required: "Select at least one product" }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Product(s) Required</FormLabel>
+                    <FormLabel>Product(s) Required *</FormLabel>
                     <FormControl>
                       <Select onValueChange={(value) => field.onChange([value])} value={field.value?.[0] || ""}>
                         <SelectTrigger>
@@ -161,10 +209,9 @@ const BulkInquiry = () => {
               <FormField
                 control={form.control}
                 name="quantity"
-                rules={{ required: "Quantity is required" }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Quantity Required</FormLabel>
+                    <FormLabel>Quantity Required *</FormLabel>
                     <FormControl>
                       <Input placeholder="e.g., 10 KG Banana Powder" {...field} />
                     </FormControl>
@@ -175,10 +222,9 @@ const BulkInquiry = () => {
               <FormField
                 control={form.control}
                 name="frequency"
-                rules={{ required: "Expected Order Frequency is required" }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Expected Order Frequency</FormLabel>
+                    <FormLabel>Expected Order Frequency *</FormLabel>
                     <FormControl>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <SelectTrigger>
@@ -210,7 +256,9 @@ const BulkInquiry = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">Submit Inquiry</Button>
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit Inquiry"}
+            </Button>
           </form>
         </Form>
         <p className="mt-4 text-sm text-foreground/70">Our team responds within 2–4 business hours.</p>
