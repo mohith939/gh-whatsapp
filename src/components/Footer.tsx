@@ -3,9 +3,57 @@ import { Facebook, Instagram, Twitter, Mail, Youtube, Phone, MapPin, Star, Quote
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { submitFormXHR } from '@/utils/formSubmission';
 import companyLogo from '@/assets/company_logo.png';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !email.includes('@')) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await submitFormXHR({
+        email,
+        name: '',
+        formType: 'newsletter'
+      });
+
+      if (result.success) {
+        toast({
+          title: "Subscribed Successfully!",
+          description: "Thank you for subscribing to our newsletter!",
+        });
+        setEmail('');
+      } else {
+        throw new Error(result.error || 'Subscription failed');
+      }
+    } catch (error) {
+      console.error('Newsletter subscription error:', error);
+      toast({
+        title: "Subscription Failed",
+        description: "There was an error subscribing. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <footer className="bg-warm-beige border-t border-border">
       {/* Newsletter Section */}
@@ -18,16 +66,19 @@ const Footer = () => {
             <p className="text-foreground/70 mb-6">
               Get the latest on new products, farming stories, and exclusive offers delivered to your inbox.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <Input
                 type="email"
                 placeholder="Enter your email"
                 className="flex-1"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
-              <Button className="bg-primary hover:bg-primary/90">
-                Subscribe
+              <Button type="submit" className="bg-primary hover:bg-primary/90" disabled={isSubmitting}>
+                {isSubmitting ? "Subscribing..." : "Subscribe"}
               </Button>
-            </div>
+            </form>
             <p className="text-xs text-foreground/60 mt-4">
               We respect your privacy. Unsubscribe at any time.
             </p>

@@ -105,7 +105,15 @@ const ProductDetail = () => {
             <div>
               <h1 className="text-4xl font-bold text-primary mb-3">{product.name}</h1>
               <div className="flex items-center gap-3 mb-4">
-                <p className="text-3xl font-bold text-primary">₹{currentPrice}</p>
+                <div className="flex flex-col">
+                  <span className="text-lg text-muted-foreground line-through">₹{selectedVariant.originalPrice}</span>
+                  <div className="flex items-center gap-2">
+                    <p className="text-3xl font-bold text-primary">₹{currentPrice}</p>
+                    <span className="text-sm text-green-600 font-medium bg-green-100 dark:bg-green-900 px-2 py-1 rounded">
+                      {selectedVariant.discountPercentage}% off
+                    </span>
+                  </div>
+                </div>
                 {product.averageRating && (
                   <div className="flex items-center gap-1">
                     <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
@@ -124,16 +132,26 @@ const ProductDetail = () => {
               <div className="space-y-3 mb-6">
                 <label className="text-sm font-medium">Select Size:</label>
                 <div className="flex flex-wrap gap-2">
-                  {product.variants.map((variant) => (
-                    <Button
-                      key={variant.weight}
-                      variant={selectedVariant.weight === variant.weight ? "default" : "outline"}
-                      onClick={() => setSelectedVariant(variant)}
-                      className="px-4 py-2 text-sm"
-                    >
-                      {variant.weight} - ₹{variant.price}
-                    </Button>
-                  ))}
+                  {product.variants.map((variant) => {
+                    const isSelected = selectedVariant.weight === variant.weight;
+                    return (
+                      <Button
+                        key={variant.weight}
+                        variant={isSelected ? "default" : "outline"}
+                        onClick={() => setSelectedVariant(variant)}
+                        className="px-6 py-4 text-sm flex flex-col items-center min-w-[100px] h-auto"
+                      >
+                        <span className={`font-semibold text-base mb-1 ${isSelected ? 'text-white' : 'text-primary'}`}>{variant.weight}</span>
+                        <div className="flex flex-col items-center space-y-1">
+                          <span className={`text-sm line-through ${isSelected ? 'text-white/80' : 'text-muted-foreground'}`}>₹{variant.originalPrice}</span>
+                          <span className={`font-bold text-lg ${isSelected ? 'text-white' : 'text-primary'}`}>₹{variant.price}</span>
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded ${isSelected ? 'bg-white text-primary' : 'bg-green-100 dark:bg-green-900 text-green-600'}`}>
+                            {variant.discountPercentage}% off
+                          </span>
+                        </div>
+                      </Button>
+                    );
+                  })}
                 </div>
               </div>
 

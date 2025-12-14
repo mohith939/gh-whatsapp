@@ -21,8 +21,10 @@ import turmericPowderImage from '@/assets/turmeric-powder.jpg';
 import amlaPowderImage from '@/assets/amla-powder.jpg';
 
 export interface ProductVariant {
-  weight: '150g' | '500g';
+  weight: '100g' | '150g' | '500g';
   price: number;
+  originalPrice: number;
+  discountPercentage: number;
   stock: number;
   sku: string;
 }
@@ -98,8 +100,8 @@ export const products: Product[] = [
     imageUrls: [bananaPowderImage, bananaPowderBackImage, bananaPowderBowlImage, bananaPowderBenefitsImage],
     averageRating: 4.7,
     variants: [
-      { weight: '150g', price: 225, stock: 50, sku: 'BAN-150' },
-      { weight: '500g', price: 650, stock: 30, sku: 'BAN-500' }
+      { weight: '150g', price: 187, originalPrice: 220, discountPercentage: 15, stock: 50, sku: 'BAN-150' },
+      { weight: '500g', price: 595, originalPrice: 700, discountPercentage: 15, stock: 30, sku: 'BAN-500' }
     ],
     reviews: [
       {
@@ -159,8 +161,8 @@ export const products: Product[] = [
     imageUrl: beetrootPowderImage,
     imageUrls: [beetrootPowderImage],
     variants: [
-      { weight: '150g', price: 210, stock: 45, sku: 'BEE-150' },
-      { weight: '500g', price: 600, stock: 25, sku: 'BEE-500' }
+      { weight: '150g', price: 238, originalPrice: 280, discountPercentage: 15, stock: 45, sku: 'BEE-150' },
+      { weight: '500g', price: 808, originalPrice: 950, discountPercentage: 15, stock: 25, sku: 'BEE-500' }
     ],
     featured: true
   },
@@ -195,8 +197,8 @@ export const products: Product[] = [
     imageUrl: moringaPowderImage,
     imageUrls: [moringaPowderImage],
     variants: [
-      { weight: '150g', price: 270, stock: 55, sku: 'MOR-150' },
-      { weight: '500g', price: 800, stock: 30, sku: 'MOR-500' }
+      { weight: '150g', price: 229, originalPrice: 270, discountPercentage: 15, stock: 55, sku: 'MOR-150' },
+      { weight: '500g', price: 723, originalPrice: 850, discountPercentage: 15, stock: 30, sku: 'MOR-500' }
     ],
     featured: true
   },
@@ -225,8 +227,8 @@ export const products: Product[] = [
     imageUrl: gingerPowderImage,
     imageUrls: [gingerPowderImage],
     variants: [
-      { weight: '150g', price: 135, stock: 60, sku: 'GIN-150' },
-      { weight: '500g', price: 400, stock: 40, sku: 'GIN-500' }
+      { weight: '150g', price: 135, originalPrice: 159, discountPercentage: 15, stock: 60, sku: 'GIN-150' },
+      { weight: '500g', price: 400, originalPrice: 471, discountPercentage: 15, stock: 40, sku: 'GIN-500' }
     ]
   },
   {
@@ -254,8 +256,8 @@ export const products: Product[] = [
     imageUrl: garlicPowderImage,
     imageUrls: [garlicPowderImage],
     variants: [
-      { weight: '150g', price: 165, stock: 55, sku: 'GAR-150' },
-      { weight: '500g', price: 490, stock: 35, sku: 'GAR-500' }
+      { weight: '150g', price: 165, originalPrice: 194, discountPercentage: 15, stock: 55, sku: 'GAR-150' },
+      { weight: '500g', price: 490, originalPrice: 576, discountPercentage: 15, stock: 35, sku: 'GAR-500' }
     ]
   },
   {
@@ -283,8 +285,8 @@ export const products: Product[] = [
     imageUrl: turmericPowderImage,
     imageUrls: [turmericPowderImage],
     variants: [
-      { weight: '150g', price: 120, stock: 70, sku: 'TUR-150' },
-      { weight: '500g', price: 360, stock: 50, sku: 'TUR-500' }
+      { weight: '150g', price: 120, originalPrice: 141, discountPercentage: 15, stock: 70, sku: 'TUR-150' },
+      { weight: '500g', price: 360, originalPrice: 424, discountPercentage: 15, stock: 50, sku: 'TUR-500' }
     ]
   },
   {
@@ -312,8 +314,8 @@ export const products: Product[] = [
     imageUrl: amlaPowderImage,
     imageUrls: [amlaPowderImage],
     variants: [
-      { weight: '150g', price: 150, stock: 50, sku: 'AML-150' },
-      { weight: '500g', price: 440, stock: 30, sku: 'AML-500' }
+      { weight: '150g', price: 150, originalPrice: 176, discountPercentage: 15, stock: 50, sku: 'AML-150' },
+      { weight: '500g', price: 440, originalPrice: 518, discountPercentage: 15, stock: 30, sku: 'AML-500' }
     ]
   },
   {
@@ -341,8 +343,8 @@ export const products: Product[] = [
     imageUrl: neemPowderImage,
     imageUrls: [neemPowderImage],
     variants: [
-      { weight: '150g', price: 135, stock: 50, sku: 'NEE-150' },
-      { weight: '500g', price: 400, stock: 30, sku: 'NEE-500' }
+      { weight: '150g', price: 135, originalPrice: 159, discountPercentage: 15, stock: 50, sku: 'NEE-150' },
+      { weight: '500g', price: 400, originalPrice: 471, discountPercentage: 15, stock: 30, sku: 'NEE-500' }
     ]
   },
   {
@@ -370,8 +372,8 @@ export const products: Product[] = [
     imageUrl: carrotPowderImage,
     imageUrls: [carrotPowderImage],
     variants: [
-      { weight: '150g', price: 165, stock: 50, sku: 'CAR-150' },
-      { weight: '500g', price: 490, stock: 30, sku: 'CAR-500' }
+      { weight: '150g', price: 165, originalPrice: 194, discountPercentage: 15, stock: 50, sku: 'CAR-150' },
+      { weight: '500g', price: 490, originalPrice: 576, discountPercentage: 15, stock: 30, sku: 'CAR-500' }
     ]
   },
   {
@@ -399,8 +401,8 @@ export const products: Product[] = [
     imageUrl: spinachPowderImage,
     imageUrls: [spinachPowderImage],
     variants: [
-      { weight: '150g', price: 210, stock: 45, sku: 'SPI-150' },
-      { weight: '500g', price: 630, stock: 25, sku: 'SPI-500' }
+      { weight: '150g', price: 210, originalPrice: 247, discountPercentage: 15, stock: 45, sku: 'SPI-150' },
+      { weight: '500g', price: 630, originalPrice: 741, discountPercentage: 15, stock: 25, sku: 'SPI-500' }
     ]
   },
   {
@@ -428,8 +430,8 @@ export const products: Product[] = [
     imageUrl: curryLeafPowderImage,
     imageUrls: [curryLeafPowderImage],
     variants: [
-      { weight: '150g', price: 180, stock: 50, sku: 'CUR-150' },
-      { weight: '500g', price: 530, stock: 30, sku: 'CUR-500' }
+      { weight: '150g', price: 180, originalPrice: 212, discountPercentage: 15, stock: 50, sku: 'CUR-150' },
+      { weight: '500g', price: 530, originalPrice: 624, discountPercentage: 15, stock: 30, sku: 'CUR-500' }
     ]
   },
   {
@@ -461,8 +463,8 @@ export const products: Product[] = [
     imageUrl: betelLeafPowderImage,
     imageUrls: [betelLeafPowderImage],
     variants: [
-      { weight: '150g', price: 210, stock: 40, sku: 'BET-150' },
-      { weight: '500g', price: 630, stock: 20, sku: 'BET-500' }
+      { weight: '150g', price: 210, originalPrice: 247, discountPercentage: 15, stock: 40, sku: 'BET-150' },
+      { weight: '500g', price: 630, originalPrice: 741, discountPercentage: 15, stock: 20, sku: 'BET-500' }
     ]
   },
   {
@@ -494,8 +496,8 @@ export const products: Product[] = [
     imageUrl: coconutPowderImage,
     imageUrls: [coconutPowderImage],
     variants: [
-      { weight: '150g', price: 180, stock: 50, sku: 'COC-150' },
-      { weight: '500g', price: 530, stock: 30, sku: 'COC-500' }
+      { weight: '150g', price: 180, originalPrice: 212, discountPercentage: 15, stock: 50, sku: 'COC-150' },
+      { weight: '500g', price: 530, originalPrice: 624, discountPercentage: 15, stock: 30, sku: 'COC-500' }
     ]
   },
   {
@@ -527,8 +529,8 @@ export const products: Product[] = [
     imageUrl: datesPowderImage,
     imageUrls: [datesPowderImage],
     variants: [
-      { weight: '150g', price: 240, stock: 45, sku: 'DAT-150' },
-      { weight: '500g', price: 720, stock: 25, sku: 'DAT-500' }
+      { weight: '150g', price: 240, originalPrice: 282, discountPercentage: 15, stock: 45, sku: 'DAT-150' },
+      { weight: '500g', price: 720, originalPrice: 847, discountPercentage: 15, stock: 25, sku: 'DAT-500' }
     ]
   },
   {
@@ -560,8 +562,8 @@ export const products: Product[] = [
     imageUrl: guavaPowderImage,
     imageUrls: [guavaPowderImage],
     variants: [
-      { weight: '150g', price: 195, stock: 40, sku: 'GUA-150' },
-      { weight: '500g', price: 570, stock: 20, sku: 'GUA-500' }
+      { weight: '150g', price: 195, originalPrice: 229, discountPercentage: 15, stock: 40, sku: 'GUA-150' },
+      { weight: '500g', price: 570, originalPrice: 671, discountPercentage: 15, stock: 20, sku: 'GUA-500' }
     ]
   },
   {
@@ -593,8 +595,8 @@ export const products: Product[] = [
     imageUrl: lemonPowderImage,
     imageUrls: [lemonPowderImage],
     variants: [
-      { weight: '150g', price: 150, stock: 50, sku: 'LEM-150' },
-      { weight: '500g', price: 440, stock: 30, sku: 'LEM-500' }
+      { weight: '150g', price: 150, originalPrice: 176, discountPercentage: 15, stock: 50, sku: 'LEM-150' },
+      { weight: '500g', price: 440, originalPrice: 518, discountPercentage: 15, stock: 30, sku: 'LEM-500' }
     ]
   },
   {
@@ -626,8 +628,8 @@ export const products: Product[] = [
     imageUrl: papayaPowderImage,
     imageUrls: [papayaPowderImage],
     variants: [
-      { weight: '150g', price: 210, stock: 45, sku: 'PAP-150' },
-      { weight: '500g', price: 630, stock: 25, sku: 'PAP-500' }
+      { weight: '150g', price: 210, originalPrice: 247, discountPercentage: 15, stock: 45, sku: 'PAP-150' },
+      { weight: '500g', price: 630, originalPrice: 741, discountPercentage: 15, stock: 25, sku: 'PAP-500' }
     ]
   },
   {
@@ -659,8 +661,8 @@ export const products: Product[] = [
     imageUrl: tomatoPowderImage,
     imageUrls: [tomatoPowderImage],
     variants: [
-      { weight: '150g', price: 165, stock: 50, sku: 'TOM-150' },
-      { weight: '500g', price: 490, stock: 30, sku: 'TOM-500' }
+      { weight: '150g', price: 165, originalPrice: 194, discountPercentage: 15, stock: 50, sku: 'TOM-150' },
+      { weight: '500g', price: 490, originalPrice: 576, discountPercentage: 15, stock: 30, sku: 'TOM-500' }
     ]
   }
 ];

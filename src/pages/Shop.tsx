@@ -103,7 +103,11 @@ const Shop = () => {
                     <h3 className="text-lg font-semibold text-primary mb-2">{product.name}</h3>
                     <p className="text-sm text-foreground/70 mb-4 line-clamp-2">{product.shortDescription}</p>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-primary font-bold">From ₹{product.variants[0].price}</span>
+                      <div className="flex flex-col">
+                        <span className="text-sm text-muted-foreground line-through">₹{product.variants[0].originalPrice}</span>
+                        <span className="text-primary font-bold">From ₹{product.variants[0].price}</span>
+                        <span className="text-xs text-green-600 font-medium">{product.variants[0].discountPercentage}% off</span>
+                      </div>
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {product.highlights.slice(0, 2).map((highlight, idx) => (

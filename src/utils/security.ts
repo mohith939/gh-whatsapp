@@ -40,15 +40,15 @@ export const validateEmail = (email: string): boolean => {
 
 export const validatePhone = (phone: string): boolean => {
   const sanitized = sanitizePhone(phone);
-  // Allow international format with + and various separators
-  const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+  // Allow international format with + and various separators, including numbers starting with 0
+  const phoneRegex = /^[\+]?[\d]{1,15}$/;
   const cleanPhone = sanitized.replace(/[\s\-\(\)]/g, '');
   return phoneRegex.test(cleanPhone) && cleanPhone.length >= 10 && cleanPhone.length <= 15;
 };
 
 export const validateMessage = (message: string): boolean => {
   const sanitized = sanitizeMessage(message);
-  return sanitized.length >= 10 && sanitized.length <= 1000;
+  return sanitized.length >= 1 && sanitized.length <= 1000;
 };
 
 // Rate limiting for form submissions
@@ -145,7 +145,7 @@ export const validateContactForm = (data: {
   }
 
   if (!validateMessage(data.message)) {
-    errors.push('Message must be 10-1000 characters long.');
+    errors.push('Message must be 5-1000 characters long.');
   }
 
   return {

@@ -15,6 +15,7 @@ import {
   validateContactForm,
   rateLimiter
 } from '@/utils/security';
+import { submitFormXHR } from '@/utils/formSubmission';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -51,7 +53,7 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: sanitizedValue }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Rate limiting check
@@ -75,20 +77,36 @@ const Contact = () => {
       return;
     }
 
-    // Track form submission
-    trackFormSubmission('contact_form', true);
+    setIsSubmitting(true);
+    try {
+      const result = await submitFormXHR({
+        ...formData,
+        formType: 'contact'
+      });
 
-    // TODO: Implement actual form submission to backend
-    console.log('Form submitted:', formData);
-
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you within 24 hours.",
-    });
-
-    // Reset form
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    rateLimiter.reset('contact_form');
+      if (result.success) {
+        toast({
+          title: "Message sent!",
+          description: "We'll get back to you within 24 hours.",
+        });
+        // Track form submission
+        trackFormSubmission('contact_form', true);
+        // Reset form
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        rateLimiter.reset('contact_form');
+      } else {
+        throw new Error(result.error || 'Submission failed');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error sending your message. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -104,8 +122,8 @@ const Contact = () => {
                 <CardTitle className="text-2xl font-serif text-primary">Get In Touch</CardTitle>
                 <p className="text-foreground/70">Have questions about our products or need assistance? We're here to help!</p>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+              <CardContent className="pb-0">
+                <form onSubmit={handleSubmit} className="space-y-2">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="name" className="text-sm font-medium text-foreground">Full Name *</Label>
@@ -177,14 +195,14 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-                    Send Message
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
             </Card>
 
-            {/* Contact Information & Trust Elements */}
+            {/* Contact Information & Customer Testimonials */}
             <div className="space-y-8 animate-slide-in-right">
               {/* Contact Details */}
               <Card className="border-border animate-fade-in-delay-2">
@@ -226,52 +244,55 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              {/* Trust Elements */}
-              <Card className="border-border bg-gradient-to-br from-primary/5 to-primary/10">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-serif text-primary">Why Choose Golden Harvest?</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
-                    <span className="text-foreground/80">Direct from farmers, no middlemen</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
-                    <span className="text-foreground/80">Lab-tested for purity and safety</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
-                    <span className="text-foreground/80">FSSAI certified and compliant</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
-                    <span className="text-foreground/80">Cash on Delivery available</span>
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Testimonials and Why Choose side by side */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Customer Testimonials */}
+                <Card className="border-border">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-serif text-primary flex items-center gap-2">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      What Our Customers Say
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="border-l-4 border-primary pl-4">
+                        <p className="text-foreground/80 italic text-sm">"Excellent customer service and pure products. Highly recommend!"</p>
+                        <p className="text-xs text-foreground/60 mt-2">- Priya S., Mumbai</p>
+                      </div>
+                      <div className="border-l-4 border-primary pl-4">
+                        <p className="text-foreground/80 italic text-sm">"Fast delivery and authentic quality. Will order again."</p>
+                        <p className="text-xs text-foreground/60 mt-2">- Rajesh K., Delhi</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-              {/* Customer Testimonials */}
-              <Card className="border-border">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-serif text-primary flex items-center gap-2">
-                    <Star className="w-5 h-5 text-yellow-500" />
-                    What Our Customers Say
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="border-l-4 border-primary pl-4">
-                      <p className="text-foreground/80 italic">"Excellent customer service and pure products. Highly recommend!"</p>
-                      <p className="text-sm text-foreground/60 mt-2">- Priya S., Mumbai</p>
+                {/* Why Choose Golden Harvest */}
+                <Card className="border-border bg-gradient-to-br from-primary/5 to-primary/10">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-serif text-primary">Why Choose Golden Harvest?</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span className="text-foreground/80 text-sm">Direct from farmers, no middlemen</span>
                     </div>
-                    <div className="border-l-4 border-primary pl-4">
-                      <p className="text-foreground/80 italic">"Fast delivery and authentic quality. Will order again."</p>
-                      <p className="text-sm text-foreground/60 mt-2">- Rajesh K., Delhi</p>
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span className="text-foreground/80 text-sm">Lab-tested for purity and safety</span>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span className="text-foreground/80 text-sm">FSSAI certified and compliant</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span className="text-foreground/80 text-sm">Cash on Delivery available</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
