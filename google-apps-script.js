@@ -234,32 +234,52 @@ function doPost(e) {
   }
 }
 
+function escapeHtml(input) {
+  return String(input || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function sanitizeValue(value, fallback = 'N/A') {
+  if (value === null || value === undefined) return fallback;
+  return escapeHtml(value);
+}
+
+function sanitizeArray(arr) {
+  if (!Array.isArray(arr)) return '';
+  return arr.map(item => escapeHtml(item)).join(', ');
+}
+
 function generateBulkInquiryEmail(data) {
   return `
     <h2>New Bulk Inquiry Received</h2>
-    <p><strong>Name:</strong> ${data.name}</p>
-    <p><strong>Business Name:</strong> ${data.businessName}</p>
-    <p><strong>Phone:</strong> ${data.phone}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Location:</strong> ${data.location}</p>
-    <p><strong>Products Required:</strong> ${data.productsRequired.join(', ')}</p>
-    <p><strong>Quantity:</strong> ${data.quantity}</p>
-    <p><strong>Frequency:</strong> ${data.frequency}</p>
-    <p><strong>Notes:</strong> ${data.notes || 'None'}</p>
+    <p><strong>Name:</strong> ${sanitizeValue(data.name, 'N/A')}</p>
+    <p><strong>Business Name:</strong> ${sanitizeValue(data.businessName, 'N/A')}</p>
+    <p><strong>Phone:</strong> ${sanitizeValue(data.phone, 'N/A')}</p>
+    <p><strong>Email:</strong> ${sanitizeValue(data.email, 'N/A')}</p>
+    <p><strong>Location:</strong> ${sanitizeValue(data.location, 'N/A')}</p>
+    <p><strong>Products Required:</strong> ${sanitizeArray(data.productsRequired)}</p>
+    <p><strong>Quantity:</strong> ${sanitizeValue(data.quantity, 'N/A')}</p>
+    <p><strong>Frequency:</strong> ${sanitizeValue(data.frequency, 'N/A')}</p>
+    <p><strong>Notes:</strong> ${sanitizeValue(data.notes || 'None', 'None')}</p>
     <hr>
     <p>Please respond within 2-4 hours as per our policy.</p>
   `;
 }
 
 function generateContactEmail(data) {
+  const safeMessage = escapeHtml((data.message || 'N/A')).replace(/\n/g, '<br>');
   return `
     <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> ${data.name || 'N/A'}</p>
-    <p><strong>Email:</strong> ${data.email || 'N/A'}</p>
-    <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
-    <p><strong>Subject:</strong> ${data.subject || 'N/A'}</p>
+    <p><strong>Name:</strong> ${sanitizeValue(data.name, 'N/A')}</p>
+    <p><strong>Email:</strong> ${sanitizeValue(data.email, 'N/A')}</p>
+    <p><strong>Phone:</strong> ${sanitizeValue(data.phone, 'N/A')}</p>
+    <p><strong>Subject:</strong> ${sanitizeValue(data.subject, 'N/A')}</p>
     <p><strong>Message:</strong></p>
-    <p>${(data.message || 'N/A').replace(/\n/g, '<br>')}</p>
+    <p>${safeMessage}</p>
     <hr>
     <p>Please respond within 24 hours as per our policy.</p>
   `;
@@ -268,8 +288,8 @@ function generateContactEmail(data) {
 function generateNewsletterEmail(data) {
   return `
     <h2>New Newsletter Subscription</h2>
-    <p><strong>Email:</strong> ${data.email || 'N/A'}</p>
-    <p><strong>Name:</strong> ${data.name || 'Not provided'}</p>
+    <p><strong>Email:</strong> ${sanitizeValue(data.email, 'N/A')}</p>
+    <p><strong>Name:</strong> ${sanitizeValue(data.name, 'Not provided')}</p>
     <hr>
     <p>New subscriber added to the newsletter list.</p>
   `;
@@ -277,25 +297,25 @@ function generateNewsletterEmail(data) {
 
 function generateOrderEmail(data) {
   const itemsList = Array.isArray(data.items)
-    ? data.items.map(item => `${item.product_name} (${item.variant}) x${item.quantity} - ₹${item.price}`).join('<br>')
+    ? data.items.map(item => `${escapeHtml(item.product_name)} (${escapeHtml(item.variant)}) x${escapeHtml(item.quantity)} - ₹${escapeHtml(item.price)}`).join('<br>')
     : 'No items';
 
   return `
     <h2>New Order Received</h2>
-    <p><strong>Order ID:</strong> ${data.orderId || 'N/A'}</p>
-    <p><strong>Customer Name:</strong> ${data.customer_name || 'N/A'}</p>
-    <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
-    <p><strong>Email:</strong> ${data.email || 'N/A'}</p>
+    <p><strong>Order ID:</strong> ${sanitizeValue(data.orderId, 'N/A')}</p>
+    <p><strong>Customer Name:</strong> ${sanitizeValue(data.customer_name, 'N/A')}</p>
+    <p><strong>Phone:</strong> ${sanitizeValue(data.phone, 'N/A')}</p>
+    <p><strong>Email:</strong> ${sanitizeValue(data.email, 'N/A')}</p>
     <p><strong>Address:</strong><br>
-    ${data.address_line1 || ''}${data.address_line2 ? '<br>' + data.address_line2 : ''}<br>
-    ${data.city || ''}, ${data.state || ''} - ${data.pincode || ''}</p>
-    <p><strong>Order Notes:</strong> ${data.order_notes || 'None'}</p>
+    ${sanitizeValue(data.address_line1, '')}${data.address_line2 ? '<br>' + sanitizeValue(data.address_line2, '') : ''}<br>
+    ${sanitizeValue(data.city, '')}, ${sanitizeValue(data.state, '')} - ${sanitizeValue(data.pincode, '')}</p>
+    <p><strong>Order Notes:</strong> ${sanitizeValue(data.order_notes || 'None', 'None')}</p>
     <p><strong>Items:</strong><br>${itemsList}</p>
-    <p><strong>Subtotal:</strong> ₹${data.subtotal || '0'}</p>
-    <p><strong>Shipping Charge:</strong> ₹${data.shipping_charge || '0'}</p>
-    <p><strong>Total:</strong> ₹${data.total || '0'}</p>
-    <p><strong>Payment Method:</strong> ${data.payment_method || 'N/A'}</p>
-    <p><strong>Order Status:</strong> ${data.order_status || 'N/A'}</p>
+    <p><strong>Subtotal:</strong> ₹${sanitizeValue(data.subtotal, '0')}</p>
+    <p><strong>Shipping Charge:</strong> ₹${sanitizeValue(data.shipping_charge, '0')}</p>
+    <p><strong>Total:</strong> ₹${sanitizeValue(data.total, '0')}</p>
+    <p><strong>Payment Method:</strong> ${sanitizeValue(data.payment_method, 'N/A')}</p>
+    <p><strong>Order Status:</strong> ${sanitizeValue(data.order_status, 'N/A')}</p>
     <hr>
     <p>Please process this order promptly.</p>
   `;

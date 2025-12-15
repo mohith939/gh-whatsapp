@@ -2,11 +2,9 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts';
 
 const FRONTEND_URL = Deno.env.get('FRONTEND_URL') || '';
-const getCorsHeaders = (req: Request) => {
-  const origin = req.headers.get('origin') || '';
-  const allowedOrigin = FRONTEND_URL || origin || '*';
+const getCorsHeaders = () => {
   return {
-    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Origin': FRONTEND_URL || 'null',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   };
 };
