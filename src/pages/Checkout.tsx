@@ -290,6 +290,47 @@ const Checkout = () => {
           });
           
           rzp.open();
+
+          // Fallback: when user returns from UPI app, the handler may not fire.
+          // We poll the order status on visibility/focus and auto-complete if paid.
+          let pollInterval: NodeJS.Timeout | null = null;
+          const checkPaymentStatus = async () => {
+            const { data: orderData } = await supabase
+              .from('orders')
+              .select('order_status')
+              .eq('id', orderId)
+              .single();
+
+            if (orderData?.order_status === 'Paid') {
+              if (pollInterval) clearInterval(pollInterval);
+              document.removeEventListener('visibilitychange', onVisibilityChange);
+              clearCart();
+              navigate('/order-confirmation', { state: { orderId } });
+              toast({
+                title: 'Payment successful!',
+                description: 'Your order has been confirmed.',
+              });
+            }
+          };
+
+          const onVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+              // Check once on return to the browser
+              checkPaymentStatus();
+              // Also start a short-lived poll to catch delayed webhooks
+              if (pollInterval) clearInterval(pollInterval);
+              pollInterval = setInterval(checkPaymentStatus, 2000);
+              // Stop polling after 10 seconds
+              setTimeout(() => {
+                if (pollInterval) {
+                  clearInterval(pollInterval);
+                  pollInterval = null;
+                }
+              }, 10000);
+            }
+          };
+
+          document.addEventListener('visibilitychange', onVisibilityChange);
         } catch (razorpayErr) {
           console.error('Razorpay error:', razorpayErr);
           // Update order status to 'Payment Failed'
