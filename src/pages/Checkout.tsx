@@ -56,6 +56,14 @@ const Checkout = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const ua = typeof navigator !== 'undefined' ? navigator.userAgent || '' : '';
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
+  const isWebView =
+    /(wv|webview|; wv\))/i.test(ua) ||
+    (window as any).ReactNativeWebView ||
+    /FBAN|FBAV|Instagram|Line\/|WhatsApp/i.test(ua);
+  const isMobileBrowser = isMobile && !isWebView;
+
   const form = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
@@ -91,6 +99,17 @@ const Checkout = () => {
       paymentMethod: data.paymentMethod,
       platform: navigator.userAgent,
     });
+
+    // In-app browsers (WhatsApp/Instagram/Facebook/etc.) block UPI intents.
+    // Prevent starting Razorpay in a webview to avoid stuck "processing" screens.
+    if (data.paymentMethod === 'Razorpay' && isWebView) {
+      toast({
+        title: 'Open in browser to pay',
+        description: 'UPI apps cannot open inside this app. Please open in Chrome/Safari or use COD.',
+        variant: 'destructive',
+      });
+      return;
+    }
 
     setIsSubmitting(true);
     try {
@@ -189,20 +208,11 @@ const Checkout = () => {
 
           console.log('Razorpay order created:', razorpayOrder.id);
 
-          // Detect device / webview to avoid Razorpay black flash on in-app browsers
-          const ua = navigator.userAgent || '';
-          const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
-          const isWebView =
-            /(wv|webview|; wv\))/i.test(ua) ||
-            (window as any).ReactNativeWebView ||
-            /FBAN|FBAV|Instagram|Line\//i.test(ua);
-          
           // Use safer flows per context:
           // - WebView: full-page redirect to Razorpay hosted page (avoids modal black flash)
           // - Mobile browser: UPI intent + redirect for better success
           // - Desktop: popup (redirect false)
           const callbackUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/razorpay-callback`;
-          const isMobileBrowser = isMobile && !isWebView;
           const webViewOverrides = isWebView
             ? {
                 redirect: true,
@@ -673,6 +683,11 @@ const Checkout = () => {
                     Payment Method: {form.watch('paymentMethod') === 'COD' ? 'Cash on Delivery (COD)' : 'Online Payment (Razorpay)'}<br />
                     All India Shipping
                   </p>
+                  {form.watch('paymentMethod') === 'Razorpay' && isWebView && (
+                    <div className="mt-3 text-sm text-yellow-800 bg-yellow-100 border border-yellow-200 rounded-md p-3 text-center">
+                      UPI apps cannot open inside this app/browser. Tap the menu and choose “Open in browser”, then retry Razorpay; or use Cash on Delivery.
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
