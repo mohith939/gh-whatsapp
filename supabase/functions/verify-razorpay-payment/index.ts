@@ -52,6 +52,13 @@ serve(async (req) => {
   try {
     const body = await req.json();
 
+    console.log('Incoming request to verify-razorpay-payment:', {
+      method: req.method,
+      url: req.url,
+      userAgent: req.headers.get('user-agent') ?? 'unknown',
+      body,
+    });
+
     // Validate input
     const validationResult = verifyPaymentSchema.safeParse(body);
     if (!validationResult.success) {

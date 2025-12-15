@@ -23,6 +23,13 @@ serve(async (req) => {
   try {
     const body = await req.json();
 
+    console.log('Incoming request to create-razorpay-order:', {
+      method: req.method,
+      url: req.url,
+      userAgent: req.headers.get('user-agent') ?? 'unknown',
+      body,
+    });
+
     // Validate input
     const validationResult = razorpayOrderSchema.safeParse(body);
     if (!validationResult.success) {

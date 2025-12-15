@@ -46,6 +46,12 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
+    console.log('Incoming request to create-order:', {
+      method: req.method,
+      url: req.url,
+      userAgent: req.headers.get('user-agent') ?? 'unknown',
+    })
+
     const body = await req.json()
     const { orderData } = body
 

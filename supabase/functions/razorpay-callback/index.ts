@@ -39,7 +39,13 @@ serve(async (req) => {
     const razorpay_payment_id = formData.get('razorpay_payment_id') as string;
     const razorpay_signature = formData.get('razorpay_signature') as string;
 
-    console.log('Razorpay callback received:', { razorpay_order_id, razorpay_payment_id });
+    console.log('Razorpay callback received:', {
+      method: req.method,
+      url: req.url,
+      userAgent: req.headers.get('user-agent') ?? 'unknown',
+      razorpay_order_id,
+      razorpay_payment_id,
+    });
 
     // Get the frontend URL from environment
     const frontendUrl = Deno.env.get('FRONTEND_URL') || 'https://goldenharvestrawpowders.com';

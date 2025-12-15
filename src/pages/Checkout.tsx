@@ -87,6 +87,11 @@ const Checkout = () => {
   const total = subtotal + shippingCost;
 
   const onSubmit = async (data: CheckoutFormData) => {
+    console.log('[Checkout] Submitting order', {
+      paymentMethod: data.paymentMethod,
+      platform: navigator.userAgent,
+    });
+
     setIsSubmitting(true);
     try {
       const orderItems = cartItems.map(item => ({
@@ -121,8 +126,22 @@ const Checkout = () => {
       });
 
       if (orderError || orderResponse?.error) {
-        console.error('Order creation error:', orderError || orderResponse?.error);
-        throw new Error('Failed to create order');
+        console.error('Order creation error:', {
+          orderError,
+          orderResponse,
+        });
+
+        toast({
+          title: 'Could not place order',
+          description:
+            (orderResponse as any)?.details?.[0]?.message ||
+            (orderResponse as any)?.error ||
+            orderError?.message ||
+            'Please check your details and try again.',
+          variant: 'destructive',
+        });
+
+        return;
       }
 
       const orderId = orderResponse.orderId;
@@ -150,7 +169,22 @@ const Checkout = () => {
           });
 
           if (razorpayError || razorpayOrder?.error) {
-            throw new Error(razorpayOrder?.error || 'Failed to create payment order');
+            console.error('Razorpay order creation error:', {
+              razorpayError,
+              razorpayOrder,
+            });
+
+            toast({
+              title: 'Payment could not be started',
+              description:
+                (razorpayOrder as any)?.details?.[0]?.message ||
+                (razorpayOrder as any)?.error ||
+                razorpayError?.message ||
+                'Please try again or choose COD.',
+              variant: 'destructive',
+            });
+
+            return;
           }
 
           console.log('Razorpay order created:', razorpayOrder.id);
