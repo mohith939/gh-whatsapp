@@ -163,27 +163,10 @@ const Checkout = () => {
             (window as any).ReactNativeWebView ||
             /FBAN|FBAV|Instagram|Line\//i.test(ua);
           
+          // Keep everything in the webview (no redirects/intents) to prevent blank flashes.
+          // We disable callback_url + UPI intent everywhere on mobile to stay in-app.
           const callbackUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/razorpay-callback`;
-
-          const mobileUpiIntentOptions = isMobile && !isWebView
-            ? {
-                // Force UPI intent only on real mobile browsers; avoid in webviews
-                method: 'upi',
-                upi: { flow: 'intent' },
-                redirect: true,
-                callback_url: callbackUrl,
-              }
-            : {};
-
-          const webViewSafeOverrides = isMobile && isWebView
-            ? {
-                // Keep Razorpay inside the webview to prevent blank/black flashes
-                redirect: false,
-                method: undefined,
-                callback_url: undefined,
-                upi: { flow: 'collect' },
-              }
-            : {};
+          const upiFlow = isMobile ? { upi: { flow: 'collect' } } : {};
 
           const options: any = {
             key: razorpayOrder.key_id,
@@ -192,10 +175,11 @@ const Checkout = () => {
             name: 'Golden Harvest',
             description: 'Order Payment',
             order_id: razorpayOrder.id,
-            // Desktop keeps the standard popup flow; mobile browser uses UPI intent + redirect
-            ...(isMobile ? { redirect: false } : { redirect: false }),
-            ...mobileUpiIntentOptions,
-            ...webViewSafeOverrides,
+            // Always keep checkout inside current context (avoids black flash on webviews)
+            redirect: false,
+            callback_url: undefined,
+            method: undefined,
+            ...upiFlow,
             prefill: {
               name: data.fullName,
               email: data.email || '',
