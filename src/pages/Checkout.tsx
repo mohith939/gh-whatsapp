@@ -168,6 +168,10 @@ const Checkout = () => {
               email: data.email || '',
               contact: data.phone,
             },
+            // Store order info for callback handling
+            notes: {
+              order_id: orderId,
+            },
             handler: async (response: any) => {
               try {
                 // Verify payment via edge function
@@ -220,10 +224,31 @@ const Checkout = () => {
                   variant: 'destructive',
                 });
               },
+              escape: false,
+              backdropclose: false,
             },
             theme: {
-              color: '#059669', // Primary green color
+              color: '#059669',
             },
+            // Enable UPI intent flow for mobile apps
+            config: {
+              display: {
+                blocks: {
+                  utib: {
+                    name: "Pay using UPI",
+                    instruments: [
+                      { method: "upi" }
+                    ]
+                  }
+                },
+                sequence: ["block.utib"],
+                preferences: {
+                  show_default_blocks: true
+                }
+              }
+            },
+            // Required for mobile UPI app redirects
+            redirect: false,
           };
 
           const rzp = new (window as any).Razorpay(options);
