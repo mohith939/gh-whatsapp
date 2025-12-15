@@ -55,6 +55,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [copying, setCopying] = useState(false);
 
   const ua = typeof navigator !== 'undefined' ? navigator.userAgent || '' : '';
   const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
@@ -63,6 +64,18 @@ const Checkout = () => {
     (window as any).ReactNativeWebView ||
     /FBAN|FBAV|Instagram|Line\/|WhatsApp/i.test(ua);
   const isMobileBrowser = isMobile && !isWebView;
+
+  // If user selects Razorpay inside a webview (e.g., WhatsApp), try to break out to Chrome once.
+  useEffect(() => {
+    const paymentMethod = form.getValues('paymentMethod');
+    if (paymentMethod === 'Razorpay' && isWebView && typeof window !== 'undefined') {
+      const chromeIntent = `intent://${window.location.host}${window.location.pathname}#Intent;scheme=${window.location.protocol.replace(':', '')};package=com.android.chrome;end`;
+      const timer = setTimeout(() => {
+        window.location.href = chromeIntent;
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [form, isWebView]);
 
   const form = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
@@ -704,6 +717,31 @@ const Checkout = () => {
                         >
                           Try Chrome (Android)
                         </a>
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            try {
+                              setCopying(true);
+                              await navigator.clipboard.writeText(window.location.href);
+                              toast({
+                                title: 'Link copied',
+                                description: 'Paste into Chrome/Safari to continue payment.',
+                              });
+                            } catch {
+                              toast({
+                                title: 'Could not copy link',
+                                description: 'Please copy the address bar manually.',
+                                variant: 'destructive',
+                              });
+                            } finally {
+                              setCopying(false);
+                            }
+                          }}
+                          className="px-3 py-2 rounded-md bg-white text-primary border border-primary text-sm font-medium hover:bg-primary/10 disabled:opacity-60"
+                          disabled={copying}
+                        >
+                          {copying ? 'Copying...' : 'Copy link'}
+                        </button>
                       </div>
                     </div>
                   )}
