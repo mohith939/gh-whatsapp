@@ -155,7 +155,10 @@ const Checkout = () => {
 
           console.log('Razorpay order created:', razorpayOrder.id);
 
-          // Open Razorpay checkout
+          // Get the callback URL for server-side handling (required for mobile UPI)
+          const callbackUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/razorpay-callback`;
+          
+          // Open Razorpay checkout with redirect mode for mobile compatibility
           const options = {
             key: razorpayOrder.key_id,
             amount: razorpayOrder.amount,
@@ -163,52 +166,15 @@ const Checkout = () => {
             name: 'Golden Harvest',
             description: 'Order Payment',
             order_id: razorpayOrder.id,
+            callback_url: callbackUrl,
+            redirect: true, // Enable redirect for mobile UPI apps
             prefill: {
               name: data.fullName,
               email: data.email || '',
               contact: data.phone,
             },
-            // Store order info for callback handling
             notes: {
               order_id: orderId,
-            },
-            handler: async (response: any) => {
-              try {
-                // Verify payment via edge function
-                const { data: verifyData, error: verifyError } = await supabase.functions.invoke('verify-razorpay-payment', {
-                  body: {
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_signature: response.razorpay_signature,
-                    order_id: orderId,
-                  },
-                });
-
-                if (verifyError || verifyData?.status !== 'ok') {
-                  throw new Error('Payment verification failed');
-                }
-
-                clearCart();
-                navigate('/order-confirmation', { state: { orderId } });
-
-                toast({
-                  title: 'Payment successful!',
-                  description: 'Your order has been confirmed and payment received.',
-                });
-              } catch (verifyErr) {
-                console.error('Payment verification error:', verifyErr);
-                // Update order status to 'Payment Failed'
-                await supabase
-                  .from('orders')
-                  .update({ order_status: 'Payment Failed' })
-                  .eq('id', orderId);
-
-                toast({
-                  title: 'Payment verification failed',
-                  description: 'Please contact support if amount was debited.',
-                  variant: 'destructive',
-                });
-              }
             },
             modal: {
               ondismiss: async () => {
@@ -230,25 +196,6 @@ const Checkout = () => {
             theme: {
               color: '#059669',
             },
-            // Enable UPI intent flow for mobile apps
-            config: {
-              display: {
-                blocks: {
-                  utib: {
-                    name: "Pay using UPI",
-                    instruments: [
-                      { method: "upi" }
-                    ]
-                  }
-                },
-                sequence: ["block.utib"],
-                preferences: {
-                  show_default_blocks: true
-                }
-              }
-            },
-            // Required for mobile UPI app redirects
-            redirect: false,
           };
 
           const rzp = new (window as any).Razorpay(options);
