@@ -57,6 +57,22 @@ const Checkout = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copying, setCopying] = useState(false);
 
+  const form = useForm<CheckoutFormData>({
+    resolver: zodResolver(checkoutSchema),
+    defaultValues: {
+      fullName: '',
+      phone: '',
+      email: '',
+      addressLine1: '',
+      addressLine2: '',
+      city: '',
+      state: '',
+      pincode: '',
+      orderNotes: '',
+      paymentMethod: 'COD',
+    },
+  });
+
   const ua = typeof navigator !== 'undefined' ? navigator.userAgent || '' : '';
   const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
   const isWebView =
@@ -76,22 +92,6 @@ const Checkout = () => {
       return () => clearTimeout(timer);
     }
   }, [form, isWebView]);
-
-  const form = useForm<CheckoutFormData>({
-    resolver: zodResolver(checkoutSchema),
-    defaultValues: {
-      fullName: '',
-      phone: '',
-      email: '',
-      addressLine1: '',
-      addressLine2: '',
-      city: '',
-      state: '',
-      pincode: '',
-      orderNotes: '',
-      paymentMethod: 'COD',
-    },
-  });
 
   useEffect(() => {
     if (cartItems.length === 0) {
