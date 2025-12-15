@@ -158,6 +158,18 @@ const Checkout = () => {
           // Detect if mobile device
           const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
           
+          const callbackUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/razorpay-callback`;
+
+          const mobileUpiOptions = isMobile
+            ? {
+                // Force UPI intent only on mobile browsers with server-side callback
+                method: 'upi',
+                upi: { flow: 'intent' },
+                redirect: true,
+                callback_url: callbackUrl,
+              }
+            : {};
+
           const options: any = {
             key: razorpayOrder.key_id,
             amount: razorpayOrder.amount,
@@ -165,10 +177,8 @@ const Checkout = () => {
             name: 'Golden Harvest',
             description: 'Order Payment',
             order_id: razorpayOrder.id,
-            // Force UPI intent on mobile browsers without a full-page redirect
-            method: 'upi',
-            upi: { flow: 'intent' },
-            redirect: false,
+            // Desktop keeps the standard popup flow; mobile uses UPI intent + redirect
+            ...(isMobile ? mobileUpiOptions : { redirect: false }),
             prefill: {
               name: data.fullName,
               email: data.email || '',
@@ -294,6 +304,14 @@ const Checkout = () => {
           // Fallback: when user returns from UPI app, the handler may not fire.
           // We poll the order status on visibility/focus and auto-complete if paid.
           let pollInterval: NodeJS.Timeout | null = null;
+          const cleanupVisibilityListener = () => {
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            if (pollInterval) {
+              clearInterval(pollInterval);
+              pollInterval = null;
+            }
+          };
+
           const checkPaymentStatus = async () => {
             const { data: orderData } = await supabase
               .from('orders')
@@ -302,8 +320,7 @@ const Checkout = () => {
               .single();
 
             if (orderData?.order_status === 'Paid') {
-              if (pollInterval) clearInterval(pollInterval);
-              document.removeEventListener('visibilitychange', onVisibilityChange);
+              cleanupVisibilityListener();
               clearCart();
               navigate('/order-confirmation', { state: { orderId } });
               toast({
@@ -331,7 +348,14 @@ const Checkout = () => {
           };
 
           document.addEventListener('visibilitychange', onVisibilityChange);
+          rzp.on('payment.failed', cleanupVisibilityListener);
+          rzp.on('modal.closed', cleanupVisibilityListener);
+
         } catch (razorpayErr) {
+          // Ensure we do not leak listeners on init errors
+          if (typeof document !== 'undefined') {
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+          }
           console.error('Razorpay error:', razorpayErr);
           // Update order status to 'Payment Failed'
           await supabase
