@@ -1,10 +1,28 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+// Validation schema for payment verification
+const verifyPaymentSchema = z.object({
+  razorpay_order_id: z.string().min(1).max(50).refine(
+    (val) => val.startsWith('order_'), 
+    { message: 'Invalid Razorpay order ID format' }
+  ),
+  razorpay_payment_id: z.string().min(1).max(50).refine(
+    (val) => val.startsWith('pay_'), 
+    { message: 'Invalid Razorpay payment ID format' }
+  ),
+  razorpay_signature: z.string().length(64).regex(
+    /^[a-f0-9]{64}$/, 
+    'Invalid signature format'
+  ),
+  order_id: z.string().uuid('Invalid order ID format')
+});
 
 // HMAC-SHA256 signature verification
 async function verifySignature(body: string, signature: string, secret: string): Promise<boolean> {
@@ -32,7 +50,28 @@ serve(async (req) => {
   }
 
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, order_id } = await req.json();
+    const body = await req.json();
+
+    // Validate input
+    const validationResult = verifyPaymentSchema.safeParse(body);
+    if (!validationResult.success) {
+      console.error('Validation failed:', validationResult.error.errors);
+      return new Response(
+        JSON.stringify({ 
+          status: 'validation_failed',
+          details: validationResult.error.errors.map(e => ({
+            path: e.path.join('.'),
+            message: e.message
+          }))
+        }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, order_id } = validationResult.data;
 
     console.log('Verifying payment:', { razorpay_order_id, razorpay_payment_id, order_id });
 
@@ -42,8 +81,8 @@ serve(async (req) => {
     }
 
     // Verify signature
-    const body = razorpay_order_id + '|' + razorpay_payment_id;
-    const isValid = await verifySignature(body, razorpay_signature, keySecret);
+    const signatureBody = razorpay_order_id + '|' + razorpay_payment_id;
+    const isValid = await verifySignature(signatureBody, razorpay_signature, keySecret);
 
     if (!isValid) {
       console.error('Invalid payment signature');

@@ -1,9 +1,18 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+// Validation schema for Razorpay order creation
+const razorpayOrderSchema = z.object({
+  amount: z.number().positive().max(10000000, 'Amount cannot exceed 10 million'),
+  currency: z.string().length(3).regex(/^[A-Z]{3}$/, 'Invalid currency code').default('INR'),
+  receipt: z.string().min(1).max(40, 'Receipt ID too long'),
+  notes: z.record(z.string().max(256)).optional()
+});
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -12,7 +21,28 @@ serve(async (req) => {
   }
 
   try {
-    const { amount, currency, receipt, notes } = await req.json();
+    const body = await req.json();
+
+    // Validate input
+    const validationResult = razorpayOrderSchema.safeParse(body);
+    if (!validationResult.success) {
+      console.error('Validation failed:', validationResult.error.errors);
+      return new Response(
+        JSON.stringify({ 
+          error: 'Validation failed', 
+          details: validationResult.error.errors.map(e => ({
+            path: e.path.join('.'),
+            message: e.message
+          }))
+        }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    const { amount, currency, receipt, notes } = validationResult.data;
 
     console.log('Creating Razorpay order:', { amount, currency, receipt });
 
