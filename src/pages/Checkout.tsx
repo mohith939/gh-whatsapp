@@ -132,6 +132,7 @@ const Checkout = () => {
         pincode: data.pincode,
         order_notes: data.orderNotes || null,
         items: orderItems,
+        // Server will recompute prices to prevent tampering; client fields are informational.
         subtotal,
         shipping_charge: shippingCost,
         total,
@@ -684,8 +685,26 @@ const Checkout = () => {
                     All India Shipping
                   </p>
                   {form.watch('paymentMethod') === 'Razorpay' && isWebView && (
-                    <div className="mt-3 text-sm text-yellow-800 bg-yellow-100 border border-yellow-200 rounded-md p-3 text-center">
-                      UPI apps cannot open inside this app/browser. Tap the menu and choose “Open in browser”, then retry Razorpay; or use Cash on Delivery.
+                    <div className="mt-3 text-sm text-yellow-800 bg-yellow-100 border border-yellow-200 rounded-md p-3 text-center space-y-2">
+                      <p className="text-sm">
+                        UPI apps cannot open inside this app/browser. Tap below to open in your mobile browser, then retry Razorpay; or use Cash on Delivery.
+                      </p>
+                      <div className="flex justify-center gap-2">
+                        <a
+                          href={window.location.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="px-3 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/90"
+                        >
+                          Open in browser
+                        </a>
+                        <a
+                          href={`intent://${window.location.host}${window.location.pathname}#Intent;scheme=${window.location.protocol.replace(':', '')};package=com.android.chrome;end`}
+                          className="px-3 py-2 rounded-md bg-white text-primary border border-primary text-sm font-medium hover:bg-primary/10"
+                        >
+                          Try Chrome (Android)
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>

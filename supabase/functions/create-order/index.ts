@@ -2,9 +2,14 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+const FRONTEND_URL = Deno.env.get('FRONTEND_URL') || ''
+const getCorsHeaders = (req: Request) => {
+  const origin = req.headers.get('origin') || ''
+  const allowedOrigin = FRONTEND_URL || origin || '*'
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  }
 }
 
 // Validation schemas
@@ -37,7 +42,7 @@ const orderSchema = z.object({
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
+    return new Response('ok', { headers: getCorsHeaders(req) })
   }
 
   try {
@@ -68,7 +73,7 @@ serve(async (req) => {
           }))
         }),
         {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
           status: 400,
         }
       )
@@ -76,11 +81,25 @@ serve(async (req) => {
 
     const validatedData = validationResult.data
 
-    console.log('Creating order for:', validatedData.customer_name)
+    // Recompute pricing server-side to prevent tampering
+    const subtotal = validatedData.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    const shipping_charge = subtotal >= 500 ? 0 : 50
+    const total = subtotal + shipping_charge
+
+    const orderPayload = {
+      ...validatedData,
+      subtotal,
+      shipping_charge,
+      total,
+      payment_method: validatedData.payment_method ?? 'COD',
+      order_status: validatedData.payment_method === 'Razorpay' ? 'Payment Pending' : 'Received',
+    }
+
+    console.log('Creating order for:', orderPayload.customer_name)
 
     const { data, error } = await supabaseClient
       .from('orders')
-      .insert(validatedData)
+      .insert(orderPayload)
       .select('id')
       .single()
 
@@ -94,7 +113,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ orderId: data.id }),
       {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
         status: 200,
       },
     )
@@ -102,7 +121,7 @@ serve(async (req) => {
     console.error('Error creating order:', error)
     const message = error instanceof Error ? error.message : 'Unknown error'
     return new Response(JSON.stringify({ error: message }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
       status: 400,
     })
   }

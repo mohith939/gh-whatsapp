@@ -1,9 +1,14 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+const FRONTEND_URL = Deno.env.get('FRONTEND_URL') || '';
+const getCorsHeaders = (req: Request) => {
+  const origin = req.headers.get('origin') || '';
+  const allowedOrigin = FRONTEND_URL || origin || '*';
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  };
 };
 
 // HMAC-SHA256 function using Web Crypto API
@@ -29,7 +34,7 @@ async function hmacSHA256(key: string, message: string): Promise<string> {
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { headers: getCorsHeaders(req) });
   }
 
   try {
@@ -78,40 +83,9 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Query orders table to find matching pending order
-    const { data: orders, error: queryError } = await supabase
-      .from('orders')
-      .select('id')
-      .eq('order_status', 'Payment Pending')
-      .order('created_at', { ascending: false })
-      .limit(10);
-
-    if (queryError || !orders || orders.length === 0) {
-      console.error('No pending orders found:', queryError);
-      return Response.redirect(`${frontendUrl}/checkout?payment_status=failed&reason=order_not_found`, 302);
-    }
-
-    // Update the most recent pending order
-    const orderId = orders[0].id;
-
-    // Update order status to 'Paid'
-    const { error: updateError } = await supabase
-      .from('orders')
-      .update({ 
-        order_status: 'Paid',
-        updated_at: new Date().toISOString()
-      })
-      .eq('id', orderId);
-
-    if (updateError) {
-      console.error('Failed to update order:', updateError);
-      return Response.redirect(`${frontendUrl}/checkout?payment_status=failed&reason=update_failed`, 302);
-    }
-
-    console.log('Order updated successfully:', orderId);
-
-    // Redirect to order confirmation page
-    return Response.redirect(`${frontendUrl}/order-confirmation?orderId=${orderId}&payment_status=success`, 302);
+    // WARNING: We cannot reliably map razorpay_order_id -> order_id here without stored mapping.
+    // To avoid updating the wrong order, we just acknowledge and redirect the user.
+    return Response.redirect(`${frontendUrl}/order-confirmation?payment_status=processing`, 302);
 
   } catch (error) {
     console.error('Callback processing error:', error);
