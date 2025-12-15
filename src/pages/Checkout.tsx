@@ -158,8 +158,6 @@ const Checkout = () => {
           // Detect if mobile device
           const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
           
-          // For mobile UPI intent to work, we need redirect: false
-          // The handler will verify payment after user returns from UPI app
           const options: any = {
             key: razorpayOrder.key_id,
             amount: razorpayOrder.amount,
@@ -167,6 +165,10 @@ const Checkout = () => {
             name: 'Golden Harvest',
             description: 'Order Payment',
             order_id: razorpayOrder.id,
+            // Force UPI intent on mobile browsers without a full-page redirect
+            method: 'upi',
+            upi: { flow: 'intent' },
+            redirect: false,
             prefill: {
               name: data.fullName,
               email: data.email || '',
