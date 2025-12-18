@@ -1,6 +1,3 @@
-# TODO: Fix Razorpay Payment Order Creation Error
+# TODO: Add Detailed Information to Shipping Page
 
-- [x] Edit `supabase/functions/create-razorpay-order/index.ts` to round the amount to integer using `Math.round(amount * 100)`
-- [x] Fix receipt length issue by using last 8 characters of orderId
-- [x] Deploy the updated edge function to Supabase
-- [x] Test the checkout process - order creation and Razorpay order creation successful, but api.razorpay.com connection refused (network/firewall issue)
+- [x] Update src/pages/Shipping.tsx with comprehensive shipping information including methods, costs, delivery times, and policies

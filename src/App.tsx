@@ -12,6 +12,9 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import BulkInquiry from './pages/BulkInquiry';
 import Testimonials from './pages/Testimonials';
+import Privacy from './pages/Privacy';
+import Returns from './pages/Returns';
+import Shipping from './pages/Shipping';
 import { CartProvider } from './contexts/CartContext';
 import { initGA, trackPageView } from './utils/analytics';
 import './index.css';
@@ -42,6 +45,9 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/bulk-inquiry" element={<BulkInquiry />} />
               <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/returns-refunds" element={<Returns />} />
+              <Route path="/shipping" element={<Shipping />} />
             </Routes>
           </main>
           <Footer />
