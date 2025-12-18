@@ -32,7 +32,7 @@ async function hmacSHA256(key: string, message: string): Promise<string> {
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: getCorsHeaders(req) });
+    return new Response(null, { headers: getCorsHeaders() });
   }
 
   try {

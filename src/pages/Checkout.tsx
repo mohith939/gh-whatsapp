@@ -379,15 +379,8 @@ const Checkout = () => {
 
           // Fallback: when user returns from UPI app, the handler may not fire.
           // We poll the order status on visibility/focus and auto-complete if paid.
-          let pollInterval: NodeJS.Timeout | null = null;
-          const cleanupVisibilityListener = () => {
-            document.removeEventListener('visibilitychange', onVisibilityChange);
-            if (pollInterval) {
-              clearInterval(pollInterval);
-              pollInterval = null;
-            }
-          };
-
+          let pollInterval: ReturnType<typeof setInterval> | null = null;
+          
           const checkPaymentStatus = async () => {
             const { data: orderData } = await supabase
               .from('orders')
@@ -423,15 +416,19 @@ const Checkout = () => {
             }
           };
 
+          const cleanupVisibilityListener = () => {
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            if (pollInterval) {
+              clearInterval(pollInterval);
+              pollInterval = null;
+            }
+          };
+
           document.addEventListener('visibilitychange', onVisibilityChange);
           rzp.on('payment.failed', cleanupVisibilityListener);
           rzp.on('modal.closed', cleanupVisibilityListener);
 
         } catch (razorpayErr) {
-          // Ensure we do not leak listeners on init errors
-          if (typeof document !== 'undefined') {
-            document.removeEventListener('visibilitychange', onVisibilityChange);
-          }
           console.error('Razorpay error:', razorpayErr);
           // Update order status to 'Payment Failed'
           await supabase

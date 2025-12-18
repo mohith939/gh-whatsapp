@@ -40,7 +40,7 @@ const orderSchema = z.object({
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: getCorsHeaders(req) })
+    return new Response('ok', { headers: getCorsHeaders() })
   }
 
   try {
@@ -71,7 +71,7 @@ serve(async (req) => {
           }))
         }),
         {
-          headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
+          headers: { ...getCorsHeaders(), 'Content-Type': 'application/json' },
           status: 400,
         }
       )
@@ -111,7 +111,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ orderId: data.id }),
       {
-        headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
+        headers: { ...getCorsHeaders(), 'Content-Type': 'application/json' },
         status: 200,
       },
     )
@@ -119,7 +119,7 @@ serve(async (req) => {
     console.error('Error creating order:', error)
     const message = error instanceof Error ? error.message : 'Unknown error'
     return new Response(JSON.stringify({ error: message }), {
-      headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
+      headers: { ...getCorsHeaders(), 'Content-Type': 'application/json' },
       status: 400,
     })
   }

@@ -20,7 +20,7 @@ const razorpayOrderSchema = z.object({
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: getCorsHeaders(req) });
+    return new Response(null, { headers: getCorsHeaders() });
   }
 
   try {
@@ -47,7 +47,7 @@ serve(async (req) => {
         }),
         { 
           status: 400, 
-          headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } 
+          headers: { ...getCorsHeaders(), 'Content-Type': 'application/json' } 
         }
       );
     }
@@ -99,14 +99,14 @@ serve(async (req) => {
 
     // Only return the public key_id; never return the secret.
     return new Response(JSON.stringify({ ...order, key_id: keyId }), {
-      headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
+      headers: { ...getCorsHeaders(), 'Content-Type': 'application/json' },
     });
   } catch (error: unknown) {
     console.error('Error creating Razorpay order:', error);
     const message = error instanceof Error ? error.message : 'Unknown error';
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
-      headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
+      headers: { ...getCorsHeaders(), 'Content-Type': 'application/json' },
     });
   }
 });
