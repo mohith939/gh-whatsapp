@@ -2,18 +2,8 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-let SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-
-// Use localhost only in development if no URL is provided
-if (import.meta.env.DEV && !SUPABASE_URL) {
-  SUPABASE_URL = 'http://localhost:54321';
-}
-
-// Ensure we have valid environment variables
-if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-  console.error('Missing Supabase environment variables. Please check VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY');
-}
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
