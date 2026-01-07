@@ -1,13 +1,37 @@
-# TODO: Update GST Code and Home Page Layout Adjustments
+# SEO Canonical Tag and Indexing Fix
 
-- [x] Update GST code in Footer.tsx to "37CTWPJ4314B1ZN"
-- [x] Adjust home page (Index.tsx) layout sizes to medium instead of large by setting font-size to 80% in index.css
-- [x] Reduce spacing on mobile between "From Our Villages to Your Home" section and the above box
-- [x] Remove "---" from the paragraph in "From Our Villages to Your Home" section
-- [x] Reduce spacing between "Follow Us on Instagram" section and the above box (reduced Farmer Testimonials padding from py-16 to py-12)
-- [x] Reduce the size of the green color box (certifications scroller) for FSSAI and GMP (reduced padding from py-12 to py-8)
-- [x] Reduce footer size in Footer.tsx as it's too lengthy with lots of spacing
-- [x] Add notification "product is added to the cart" when adding to cart on desktop in CartContext.tsx
-- [x] Add Toaster component to App.tsx to display notifications
-- [x] On desktop, reduce size of "From Our Villages to Your Home" paragraph and image to medium
-- [ ] Test the changes and ensure responsiveness
+## Plan to Resolve Google Search Console Issue: "Page is not indexed: Alternative page with proper canonical tag"
+
+### Information Gathered
+- Index.tsx has canonical meta tag set to https://www.ghrawpowders.com
+- Other pages (About, Shop, Contact, ProductDetail, Cart, Checkout, OrderConfirmation, Privacy, Terms, Shipping, Returns, BulkInquiry) are missing canonical tags
+- No sitemap.xml or robots.txt present in public folder
+- Product data available for generating sitemap URLs
+
+### Plan
+- [ ] Create public/sitemap.xml with all site URLs (home, shop, about, contact, bulk-inquiry, privacy, terms, shipping, returns, and all product detail pages)
+- [ ] Create public/robots.txt to allow crawling
+- [ ] Add canonical meta tags to all pages missing them using consistent URL https://www.ghrawpowders.com
+- [ ] Ensure all canonical URLs are consistent across the site
+
+### Dependent Files to be Edited
+- public/sitemap.xml (new file)
+- public/robots.txt (new file)
+- src/pages/About.tsx
+- src/pages/Shop.tsx
+- src/pages/Contact.tsx
+- src/pages/ProductDetail.tsx
+- src/pages/Cart.tsx
+- src/pages/Checkout.tsx
+- src/pages/OrderConfirmation.tsx
+- src/pages/Privacy.tsx
+- src/pages/Terms.tsx
+- src/pages/Shipping.tsx
+- src/pages/Returns.tsx
+- src/pages/BulkInquiry.tsx
+
+### Followup Steps
+- [ ] Submit sitemap.xml to Google Search Console
+- [ ] Request re-indexing of pages
+- [ ] Monitor Search Console for indexing status
+- [ ] Test canonical tags are properly set

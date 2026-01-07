@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { CheckCircle, Users, Award, Leaf, Heart, Truck } from 'lucide-react';
 import heroImage from '@/assets/hero-bg.jpg';
+import arjunPhoto from '@/assets/arjun_photo.png';
 
 const About = () => {
   return (
@@ -43,24 +44,39 @@ const About = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="animate-slide-in-left">
                 <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">
-                  From Farm to Your Home
+                  Our Journey
                 </h2>
                 <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-                  Golden Harvest was born from a simple belief: that the purest nutrition comes directly from nature, not from factories. We work with thousands of farmers across rural India to bring you the freshest, most nutrient-rich powders available.
+                  Golden harvest is not just a brand it is a journey born from struggle, belief and purpose. I am Arjun Kumar Bandari, raised in a simple rural family where hard work was a way of life. My parents may not be educated but they taught me the true value of effort, honesty and resilience.
+                </p>
+                <p className="text-lg text-foreground/80 leading-relaxed mb-6">
+                  The idea behind Golden Harvest came as I observed the food market: one truth became impossible to ignore—many products labelled as healthy were filled with chemicals and preservatives. The most powerful question arose: can we provide nutrition in its purest, most natural form?
+                </p>
+                <p className="text-lg text-foreground/80 leading-relaxed mb-6">
+                  The question became the turning point, transforming a vision into reality. The journey was not easy, but our one principle never changed: 1. No compromise on quality, 2. No chemicals, 3. No preservatives. Only pure fruits and vegetables, nothing else.
+                </p>
+                <p className="text-lg text-foreground/80 leading-relaxed mb-6">
+                  Why the name Golden Harvest? Golden = premium quality and trust, and Harvest = hard work of farmers. Our mission is simple: To bring nature's goodness directly from farms to kitchens without any manipulation.
+                </p>
+                <p className="text-lg text-foreground/80 leading-relaxed mb-6">
+                  Our products: We carefully produce raw powders from Banana, carrot, beetroot, lemon, curry leaves, moringa, papaya leaf, coconut, tomato, and more. Each product made with specific purpose.
+                </p>
+                <p className="text-lg text-foreground/80 leading-relaxed mb-6">
+                  At Golden Harvest, profit is never placed above people. It stands for: trust, purity, honesty. This is not just a business—it is my identity and commitment to healthier families and a better future.
                 </p>
                 <p className="text-lg text-foreground/80 leading-relaxed mb-8">
-                  Every product in our range tells a story of dedication, tradition, and pure agricultural excellence. From the sun-kissed fields of Rajasthan to the fertile plains of Punjab, we ensure that every vegetable and fruit is harvested at peak ripeness and processed with care to retain its natural goodness.
+                  Our vision: 1. To create employment in rural areas, 2. Support farmers by giving fair value, 3. Make healthy nutrition accessible to every Indian kitchen. We invite you to be a part of this journey from our family to yours. Thank you.
                 </p>
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
                   <Link to="/shop">Explore Our Range</Link>
                 </Button>
               </div>
               <div className="relative animate-slide-in-right">
-                <div className="aspect-square bg-muted rounded-2xl overflow-hidden shadow-2xl">
+                <div className="aspect-[3/4] bg-muted rounded-2xl overflow-hidden shadow-2xl max-w-sm mx-auto">
                   <img
-                    src={heroImage}
+                    src={arjunPhoto}
                     alt="Farmers harvesting fresh produce"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="absolute -bottom-6 -left-6 bg-card p-4 rounded-lg shadow-lg border">

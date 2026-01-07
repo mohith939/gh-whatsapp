@@ -214,15 +214,14 @@ const Contact = () => {
                     <Mail className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-primary mb-1">Email</h3>
-                      <p className="text-foreground/70">info@goldenharvest.com</p>
-                      <p className="text-sm text-foreground/60">We respond within 2-4 hours</p>
+                      <p className="text-foreground/70">goldenharvest0648@gmail.com</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 animate-fade-in-delay-4">
                     <Phone className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-primary mb-1">Phone</h3>
-                      <p className="text-foreground/70">+91 9876543210</p>
+                      <p className="text-foreground/70">+91 9949589098</p>
                       <p className="text-sm text-foreground/60">Mon-Fri, 9 AM - 6 PM IST</p>
                     </div>
                   </div>
@@ -230,7 +229,7 @@ const Contact = () => {
                     <MapPin className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-primary mb-1">Address</h3>
-                      <p className="text-foreground/70">Golden Harvest Farms<br />Rural India</p>
+                      <p className="text-foreground/70">Chinna Thulugu Gara, Srikakulam</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 animate-fade-in-delay-6">

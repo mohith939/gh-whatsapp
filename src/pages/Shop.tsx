@@ -4,12 +4,33 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { products } from '@/data/products';
+import { useCart } from '@/contexts/CartContext';
+import { Minus, Plus } from 'lucide-react';
 
 const Shop = () => {
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('featured');
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
 
-  const categories = ['Flakes', 'Fruit Powders', 'Vegetable Powder', 'Leafy Vegetable Powder'];
+  const { addToCart } = useCart();
+
+  const categories = ['Fruit Powders', 'Vegetable Powder', 'Leafy Vegetable Powder'];
+
+  const updateQuantity = (productId: string, newQuantity: number) => {
+    setQuantities(prev => ({
+      ...prev,
+      [productId]: Math.max(1, Math.min(10, newQuantity))
+    }));
+  };
+
+  const getQuantity = (productId: string) => {
+    return quantities[productId] || 1;
+  };
+
+  const handleAddToCart = (product: any) => {
+    const quantity = getQuantity(product.id);
+    addToCart(product, product.variants[0], quantity);
+  };
 
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = products;
@@ -37,6 +58,55 @@ const Shop = () => {
     return sorted;
   }, [categoryFilter, sortBy]);
 
+  // Generate structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Golden Harvest Raw Powders - Shop All Products",
+    "description": "Browse our complete collection of 16 pure, raw powders. All products are lab-tested, FSSAI certified, and available in multiple pack sizes.",
+    "numberOfItems": filteredAndSortedProducts.length,
+    "itemListElement": filteredAndSortedProducts.map((product, index) => ({
+      "@type": "Product",
+      "position": index + 1,
+      "name": product.name,
+      "description": product.longDescription,
+      "image": product.imageUrls.length > 0 ? product.imageUrls : [product.imageUrl],
+      "offers": {
+        "@type": "Offer",
+        "price": product.variants[0].price,
+        "priceCurrency": "INR",
+        "priceValidUntil": "2027-07-07",
+        "availability": "https://schema.org/InStock",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "INR"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "IN"
+          }
+        },
+        "hasMerchantReturnPolicy": true
+      },
+      "brand": {
+        "@type": "Brand",
+        "name": "Golden Harvest"
+      },
+      ...(product.averageRating && {
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": product.averageRating,
+          "reviewCount": product.reviews?.length || 0,
+          "bestRating": 5,
+          "worstRating": 1
+        }
+      })
+    }))
+  };
+
   return (
     <div className="w-full py-12">
       <div className="container mx-auto px-4">
@@ -45,7 +115,7 @@ const Shop = () => {
             Shop All Products
           </h1>
           <p className="text-foreground text-lg max-w-2xl">
-            Browse our complete collection of 19 pure, raw powders. All products are lab-tested, FSSAI certified, and available in multiple pack sizes.
+            Browse our complete collection of 16 pure, raw powders. All products are lab-tested, FSSAI certified, and available in multiple pack sizes.
           </p>
         </div>
 

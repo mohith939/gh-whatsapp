@@ -1,0 +1,26 @@
+{
+  "name": "Golden Harvest Raw Powders",
+  "short_name": "Golden Harvest",
+  "description": "Clean, raw, chemical-free powders made from fresh farm produce — naturally pure. Lab-tested quality, FSSAI certified, direct from farmers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8B4513",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/company_logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/company_logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

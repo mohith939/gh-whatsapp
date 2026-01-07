@@ -100,18 +100,15 @@ const Footer = () => {
                 <Facebook className="h-5 w-5" />
               </a>
               <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
               <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
                 <Youtube className="h-5 w-5" />
               </a>
-              <a href="mailto:info@goldenharvest.com" className="text-foreground/60 hover:text-primary transition-colors">
+              <a href="mailto:goldenharvest0648@gmail.com" className="text-foreground/60 hover:text-primary transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
-              <a href="tel:+919949589098" className="text-foreground/60 hover:text-primary transition-colors">
+              <a href="tel:9949589098" className="text-foreground/60 hover:text-primary transition-colors">
                 <Phone className="h-5 w-5" />
               </a>
             </div>
@@ -127,8 +124,8 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/shop" className="text-sm text-foreground/70 hover:text-primary transition-colors">Shop All Products</Link></li>
               <li><Link to="/about" className="text-sm text-foreground/70 hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/testimonials" className="text-sm text-foreground/70 hover:text-primary transition-colors">Testimonials</Link></li>
-              <li><Link to="/collaborations" className="text-sm text-foreground/70 hover:text-primary transition-colors">Partners</Link></li>
+
+
               <li><Link to="/faq" className="text-sm text-foreground/70 hover:text-primary transition-colors">FAQs</Link></li>
             </ul>
           </div>
@@ -151,7 +148,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/privacy" className="text-sm text-foreground/70 hover:text-primary transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms" className="text-sm text-foreground/70 hover:text-primary transition-colors">Terms of Service</Link></li>
-              <li className="text-sm text-foreground/70">FSSAI: 12345678901234</li>
+              <li className="text-sm text-foreground/70">FSSAI: 10125001000050</li>
               <li className="text-sm text-foreground/70">GST: 37CTWPJ4314B1ZN</li>
             </ul>
             <div className="mt-6">

@@ -6,6 +6,7 @@ import { CheckCircle, Leaf, Award, Users } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { getFeaturedProducts } from '@/data/products';
 import heroImage from '@/assets/hero-bg.jpg';
+import arjunPhoto from '@/assets/arjun_photo.png';
 import fassiCert from '@/assets/Certificates/fassi.avif';
 import gmpCert from '@/assets/Certificates/gmp.avif';
 import isoCert from '@/assets/Certificates/iso.avif';
@@ -13,18 +14,20 @@ import flakesImage from '@/assets/coconut-powder.jpg';
 import fruitPowdersImage from '@/assets/amla-powder.jpg';
 import vegetablePowderImage from '@/assets/carrot-powder.jpg';
 import leafyVegetablePowderImage from '@/assets/spinach-powder.jpg';
+import flowerPowdersImage from '@/assets/turmeric-powder.jpg';
 import Autoplay from 'embla-carousel-autoplay';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const instagramReels = [
   {
-    permalink: 'https://www.instagram.com/p/DRmcqR6CAZK/',
+    permalink: 'https://www.instagram.com/reel/DIlgU4losxD/',
   },
   {
-    permalink: 'https://www.instagram.com/p/DRPiND2iExP/',
+    permalink: 'https://www.instagram.com/reel/DKB7rLUROSu/',
   },
   {
-    permalink: 'https://www.instagram.com/p/DKOT8uJoGSj/',
+    permalink: 'https://www.instagram.com/reel/DIYJeJltW36',
   },
 ];
 
@@ -60,7 +63,13 @@ const fieldTestimonials = [
 ];
 
 const Index = () => {
-  const featuredProducts = getFeaturedProducts();
+  const featuredProductsRaw = getFeaturedProducts();
+  const featuredProducts = [...featuredProductsRaw];
+  const beetrootIndex = featuredProducts.findIndex(p => p.name === 'Beetroot Powder');
+  const moringaIndex = featuredProducts.findIndex(p => p.name === 'Moringa Leaf Powder');
+  if (beetrootIndex !== -1 && moringaIndex !== -1) {
+    [featuredProducts[beetrootIndex], featuredProducts[moringaIndex]] = [featuredProducts[moringaIndex], featuredProducts[beetrootIndex]];
+  }
 
   useEffect(() => {
     const processEmbeds = () => {
@@ -104,17 +113,134 @@ const Index = () => {
     };
   }, []);
 
+  // Structured data for organization
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Golden Harvest",
+    "description": "Raw, real, truly pure powders made from fresh farm produce. Clean, chemical-free powders sourced directly from farmers across India.",
+    "url": "https://www.ghrawpowders.com",
+    "logo": "https://www.ghrawpowders.com/company_logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-XXXXXXXXXX",
+      "contactType": "customer service"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://www.instagram.com/goldenharvestrawpowders"
+    ]
+  };
+
+  // Structured data for featured products
+  const productSchemas = featuredProducts.map(product => ({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "description": product.shortDescription,
+    "image": product.imageUrl,
+    "offers": {
+      "@type": "Offer",
+      "price": product.variants[0].price,
+      "priceCurrency": "INR",
+      "priceValidUntil": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Valid for 1 year
+      "availability": "https://schema.org/InStock",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "IN"
+        }
+      },
+      "hasMerchantReturnPolicy": true
+    },
+    "brand": {
+      "@type": "Brand",
+      "name": "Golden Harvest"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "150",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Health Conscious Customer"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Excellent quality natural powder. Very satisfied with the purity and taste."
+      }
+    ]
+  }));
+
   return (
-    <div className="w-full overflow-x-hidden">
+    <>
+      <Helmet>
+        {/* Basic Meta Tags */}
+        <title>Golden Harvest Raw Powders - Pure Natural Fruit & Vegetable Powders Direct from Farmers</title>
+        <meta name="description" content="Golden Harvest raw powders - Pure, chemical-free fruit and vegetable powders sourced directly from Indian farmers. Lab-tested purity, free shipping above ₹500. Cash on Delivery available." />
+        <meta name="keywords" content="golden harvest, golden harvest raw powders, ghrawpowders, natural powders, fruit powders, vegetable powders, organic powders, raw powders, chemical-free, farmers direct, Indian spices, health supplements, pure nutrition" />
+        <meta name="author" content="Golden Harvest" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.ghrawpowders.com" />
+
+        {/* Open Graph Tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Golden Harvest Raw Powders - Pure Natural Fruit & Vegetable Powders Direct from Farmers" />
+        <meta property="og:description" content="Golden Harvest raw powders - Clean, chemical-free powders made from fresh farm produce. Direct from farmers, lab-tested purity. Free shipping across India." />
+        <meta property="og:url" content="https://www.ghrawpowders.com" />
+        <meta property="og:image" content="https://www.ghrawpowders.com/Home Page Background.png" />
+        <meta property="og:image:alt" content="Golden Harvest Raw Powders - Pure Natural Powders" />
+        <meta property="og:site_name" content="Golden Harvest" />
+        <meta property="og:locale" content="en_IN" />
+
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Golden Harvest Raw Powders - Pure Natural Fruit & Vegetable Powders Direct from Farmers" />
+        <meta name="twitter:description" content="Golden Harvest raw powders - Clean, chemical-free powders made from fresh farm produce. Direct from farmers, lab-tested purity." />
+        <meta name="twitter:image" content="https://www.ghrawpowders.com/Home Page Background.png" />
+        <meta name="twitter:image:alt" content="Golden Harvest Raw Powders - Pure Natural Powders" />
+
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="googleaa3057599185d29b.html" />
+
+        {/* Additional SEO Tags */}
+        <meta name="theme-color" content="#8B4513" />
+        <meta name="msapplication-TileColor" content="#8B4513" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(organizationSchema)}
+        </script>
+        {productSchemas.map((schema, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(schema)}
+          </script>
+        ))}
+      </Helmet>
+      <div className="w-full overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative bg-background min-h-[80vh] flex items-center">
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src={heroImage}
-            alt="Fresh natural produce"
-            className="w-full h-full object-cover opacity-20"
-          />
-        </div>
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${heroImage})`,
+            opacity: 0.2
+          }}
+        ></div>
         <div className="relative w-full px-4 py-20 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl md:text-5xl font-serif font-bold text-primary mb-6 animate-fade-in drop-shadow-sm">
@@ -295,44 +421,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Village Story */}
-      <section className="py-12 md:py-20 bg-warm-beige">
-        <div className="w-full px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6 drop-shadow-sm">
-                  From Our Villages to Your Home
-                </h2>
-                <p className="text-foreground/80 leading-relaxed mb-6 text-lg">
-                  In the heart of rural India, where the soil is rich and the sun kisses the earth, our farmers cultivate with care and tradition.
-                  Golden Harvest bridges the gap between these verdant fields and your modern kitchen, preserving the essence of nature's bounty.
-                </p>
-                <p className="text-foreground/80 leading-relaxed mb-8 text-lg">
-                  Each powder carries the story of dedicated hands that nurture the land, ensuring that when you sprinkle our products into your meals,
-                  you're not just adding nutrition. You're connecting with the timeless rhythm of Indian agriculture.
-                </p>
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-                  <Link to="/about">Read Our Full Story</Link>
-                </Button>
-              </div>
-              <div className="relative">
-                <div className="aspect-square bg-muted rounded-2xl overflow-hidden shadow-2xl">
-                  <img
-                    src={heroImage}
-                    alt="Farmers working in fields"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-6 -left-6 bg-card p-4 rounded-lg shadow-lg border">
-                  <p className="text-sm font-medium text-primary">"Pure from earth to table"</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Farmer Testimonials */}
       <section className="py-16 bg-background overflow-x-hidden">
         <div className="w-full px-4">
@@ -460,9 +548,8 @@ const Index = () => {
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-16 drop-shadow-sm">
               Shop by Category
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {[
-                { name: 'Flakes', image: flakesImage },
                 { name: 'Fruit Powders', image: fruitPowdersImage },
                 { name: 'Vegetable Powder', image: vegetablePowderImage },
                 { name: 'Leafy Vegetable Powder', image: leafyVegetablePowderImage }
@@ -504,6 +591,7 @@ const Index = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

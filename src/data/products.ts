@@ -11,13 +11,11 @@ import curryLeafPowderImage from '@/assets/curry-leaf-powder.jpg';
 import betelLeafPowderImage from '@/assets/betel-leaf-powder.jpg';
 import coconutPowderImage from '@/assets/coconut-powder.jpg';
 import datesPowderImage from '@/assets/dates-powder.jpg';
-import guavaPowderImage from '@/assets/guava-powder.jpg';
 import lemonPowderImage from '@/assets/lemon-powder.jpg';
 import papayaPowderImage from '@/assets/papaya-powder.jpg';
 import tomatoPowderImage from '@/assets/tomato-powder.jpg';
 import neemPowderImage from '@/assets/neem-powder.jpg';
 import spinachPowderImage from '@/assets/spinach-powder.jpg';
-import turmericPowderImage from '@/assets/turmeric-powder.jpg';
 import amlaPowderImage from '@/assets/amla-powder.jpg';
 
 export interface ProductVariant {
@@ -67,24 +65,18 @@ export interface Product {
 export const products: Product[] = [
   {
     id: "banana-powder",
-    name: "BANANA POWDER",
-    shortDescription: "A naturally sweet, nutrient-dense powder made from sun-ripened bananas.",
-    longDescription: "Golden Harvest Banana Powder is made from fully ripe, chemical-free bananas that are cleaned, sliced, and dehydrated at low temperatures to retain natural sweetness and nutrients. Perfect for babies, adults, athletes, and baking recipes.",
+    name: "Banana Powder",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Natural energy booster",
-      "Gentle on digestion",
-      "Rich in potassium",
-      "Helps maintain satiety",
-      "Naturally sweet (no sugar added)",
-      "Ideal for infants' porridges",
-      "Great for baking and desserts"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Mix in milk, water, porridges\nAdd to smoothies and shakes\nUse in baking (cakes, muffins)\nBaby food preparations",
-    dosage: "Adults: 2–3 tbsp/day\nChildren: 1–2 tsp/day\nBabies: as advised",
-    safety: "Avoid if allergic to bananas\nIntroduce slowly for infants",
-    storage: "Store in an airtight container, away from moisture and heat.",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Fruit Powders"],
-    howItMade: "Sourcing: Ripe local bananas\nCleaning: RO-washed\nDrying: Low-heat dehydration\nGrinding: Fine micro-grinding\nTesting: Purity & quality\nPacking: Airtight pouches",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: [
       "100% natural",
       "No sugar",
@@ -92,9 +84,8 @@ export const products: Product[] = [
       "Fresh banana taste"
     ],
     seoKeywords: {
-      primary: "banana powder",
-      secondary: ["banana powder for kids", "banana powder for smoothies"],
-      longTail: ["natural banana powder for babies"]
+      primary: "banana powder benefits",
+      secondary: ["natural banana powder", "banana powder for health"]
     },
     imageUrl: bananaPowderImage,
     imageUrls: [bananaPowderImage, bananaPowderBackImage, bananaPowderBowlImage, bananaPowderBenefitsImage],
@@ -132,31 +123,26 @@ export const products: Product[] = [
   },
   {
     id: "beetroot-powder",
-    name: "BEETROOT POWDER",
-    shortDescription: "A vibrant, nutrient-rich powder made from fresh farm beetroots.",
-    longDescription: "Golden Harvest Beetroot Powder is a clean, preservative-free superfood made from dehydrated beetroots. Known for its natural colour and earthy sweetness, it's great for smoothies, rotis, soups, and natural food coloring.",
+    name: "Beetroot Powder",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Supports stamina",
-      "Natural food color",
-      "Daily nutrient support",
-      "Rich in antioxidants",
-      "Boosts natural energy"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Mix in water, smoothies\nAdd to dough, soups, gravies\nUse as natural colour",
-    dosage: "1–2 tsp/day",
-    safety: "Not advised for oxalate-sensitive individuals.",
-    storage: "Cool, dry, airtight.",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Vegetable Powder"],
-    howItMade: "Beetroots → Cleaned → Sliced → Low-temp dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: [
       "No colours",
       "No preservatives",
       "100% pure beetroot"
     ],
     seoKeywords: {
-      primary: "beetroot powder",
-      secondary: ["beet powder", "natural beetroot colour"],
-      longTail: ["beetroot powder for smoothies"]
+      primary: "beetroot powder benefits",
+      secondary: ["natural beetroot powder", "beetroot powder for health"]
     },
     imageUrl: beetrootPowderImage,
     imageUrls: [beetrootPowderImage],
@@ -169,34 +155,35 @@ export const products: Product[] = [
   {
     id: "moringa-powder",
     name: "MORINGA LEAF POWDER",
-    shortDescription: "Pure moringa leaves dried and powdered for daily nutrition.",
-    longDescription: "Made from organically grown moringa leaves, this powder is rich in micronutrients and antioxidants. Ideal for mixing into juices, water, or curries.",
+    shortDescription: "Premium organic moringa leaf powder packed with essential nutrients and antioxidants.",
+    longDescription: "Our premium Moringa Leaf Powder is sourced from organically grown moringa trees and processed using traditional methods to preserve all natural nutrients. Known as the 'miracle tree', moringa is rich in vitamins, minerals, and antioxidants that support overall wellness, boost immunity, and provide natural energy. Perfect for those seeking a nutrient-dense superfood to enhance their daily nutrition.",
     benefits: [
-      "Nutrient-rich",
-      "Supports daily wellness",
-      "Helps natural energy",
-      "Natural antioxidants",
-      "Supports immunity"
+      "Rich in vitamins A, C, and E",
+      "High in calcium and iron",
+      "Supports immune function",
+      "Natural energy booster",
+      "Antioxidant properties",
+      "Supports healthy digestion"
     ],
-    usage: "Warm water\nSmoothies\nCurries & soups",
-    dosage: "1 tsp/day",
-    safety: "Avoid during pregnancy without guidance.",
-    storage: "Airtight, away from sunlight.",
+    usage: "Mix 1 teaspoon with water, juice, or smoothies. Can also be added to soups, curries, or baked goods for an extra nutritional boost.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Leafy Vegetable Powder"],
-    howItMade: "Leaves → Washed → Shade dried → Fine ground → Packed",
+    howItMade: "Fresh moringa leaves are carefully selected, washed, shade-dried naturally, and finely ground to preserve nutrients.",
     highlights: [
       "Pure leaf powder",
       "No additives",
       "Naturally nutrient-rich"
     ],
     seoKeywords: {
-      primary: "moringa powder",
-      secondary: ["drumstick leaf powder"],
-      longTail: ["moringa for daily nutrition"]
+      primary: "moringa powder benefits",
+      secondary: ["organic moringa powder", "moringa leaf powder"]
     },
     imageUrl: moringaPowderImage,
     imageUrls: [moringaPowderImage],
     variants: [
+      { weight: '100g', price: 1, originalPrice: 1, discountPercentage: 0, stock: 100, sku: 'MOR-100' },
       { weight: '150g', price: 229, originalPrice: 270, discountPercentage: 15, stock: 55, sku: 'MOR-150' },
       { weight: '500g', price: 723, originalPrice: 850, discountPercentage: 15, stock: 30, sku: 'MOR-500' }
     ],
@@ -205,24 +192,21 @@ export const products: Product[] = [
   {
     id: "ginger-powder",
     name: "Ginger Powder",
-    shortDescription: "Sun-dried ginger powder with strong aroma and warmth.",
-    longDescription: "Golden Harvest Ginger Powder is made from mature ginger rhizomes that are cleaned, sliced, and sun-dried to preserve their natural oils and pungency. Perfect for teas, cooking, and traditional wellness drinks.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Supports healthy digestion",
-      "Warming spice",
-      "Culinary versatility",
-      "Traditional wellness ingredient"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Teas, curries, kadha, baking",
-    dosage: "½–1 tsp/day",
-    safety: "Avoid excessive consumption. Consult doctor if on blood-thinning medication.",
-    storage: "Store in an airtight container in a cool, dry place",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Vegetable Powder"],
-    howItMade: "Fresh ginger → Cleaned → Sliced → Sun-dried → Ground → Quality checked → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: ["Aromatic", "No additives", "Pure ginger"],
     seoKeywords: {
-      primary: "ginger powder",
-      secondary: ["dry ginger powder", "sonth powder"]
+      primary: "ginger powder benefits",
+      secondary: ["natural ginger powder", "ginger powder for health"]
     },
     imageUrl: gingerPowderImage,
     imageUrls: [gingerPowderImage],
@@ -234,24 +218,21 @@ export const products: Product[] = [
   {
     id: "garlic-powder",
     name: "Garlic Powder",
-    shortDescription: "Aromatic dehydrated garlic powder for instant flavour.",
-    longDescription: "Made from fresh garlic cloves that are peeled, sliced, and dehydrated at controlled temperatures. Our garlic powder retains its strong aroma and adds instant flavor to any dish without the hassle of peeling and chopping.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Strong, authentic flavour",
-      "Easy seasoning solution",
-      "Long shelf life",
-      "Convenient cooking aid"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Gravies, marinades, seasoning",
-    dosage: "As per recipe",
-    safety: "Safe for daily use. May cause digestive discomfort if consumed in large quantities.",
-    storage: "Store in an airtight container away from moisture",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Vegetable Powder"],
-    howItMade: "Garlic cloves → Peeled → Sliced → Low-temp dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: ["100% garlic", "No preservatives", "Dehydrated naturally"],
     seoKeywords: {
-      primary: "garlic powder",
-      secondary: ["dehydrated garlic", "garlic seasoning powder"]
+      primary: "garlic powder benefits",
+      secondary: ["natural garlic powder", "garlic powder for health"]
     },
     imageUrl: garlicPowderImage,
     imageUrls: [garlicPowderImage],
@@ -261,55 +242,23 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "turmeric-powder",
-    name: "Turmeric Powder",
-    shortDescription: "High-colour turmeric from pure desi rhizomes.",
-    longDescription: "Our turmeric powder is made from premium quality desi turmeric rhizomes grown in chemical-free farms. The rhizomes are cleaned, boiled, dried, and ground to produce a vibrant yellow powder with high curcumin content.",
-    benefits: [
-      "Antioxidant-rich",
-      "Daily spice for immunity",
-      "Excellent for cooking",
-      "Natural golden colour"
-    ],
-    usage: "Curries, milk, kadha, smoothies",
-    dosage: "½–1 tsp/day",
-    safety: "Safe for daily use. Avoid if allergic. Consult doctor if on specific medications.",
-    storage: "Store in an airtight container away from light and moisture",
-    category: ["Vegetable Powder"],
-    howItMade: "Turmeric rhizomes → Cleaned → Boiled → Dried → Ground → Quality tested → Packed",
-    highlights: ["No fillers", "High colour", "Pure turmeric"],
-    seoKeywords: {
-      primary: "turmeric powder",
-      secondary: ["haldi powder", "curcumin powder"]
-    },
-    imageUrl: turmericPowderImage,
-    imageUrls: [turmericPowderImage],
-    variants: [
-      { weight: '150g', price: 120, originalPrice: 141, discountPercentage: 15, stock: 70, sku: 'TUR-150' },
-      { weight: '500g', price: 360, originalPrice: 424, discountPercentage: 15, stock: 50, sku: 'TUR-500' }
-    ]
-  },
-  {
     id: "amla-powder",
     name: "Amla Powder",
-    shortDescription: "Indian gooseberry powder — natural Vitamin C source.",
-    longDescription: "Golden Harvest Amla Powder is made from fresh Indian gooseberries (amla) that are shade-dried to preserve their natural Vitamin C content. Known for its immunity and hair benefits, this tangy powder is a wellness staple.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Supports immune function",
-      "Hair and skin benefits",
-      "Supports digestion",
-      "Rich in Vitamin C"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Warm water, smoothies, hair masks",
-    dosage: "1 tsp/day",
-    safety: "Safe for most people. May interact with diabetes medication. Consult doctor if unsure.",
-    storage: "Store in an airtight container in a cool, dry place",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Fruit Powders"],
-    howItMade: "Fresh amla → Washed → Shade-dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: ["Shade-dried", "Nutrient-dense", "Pure amla"],
     seoKeywords: {
-      primary: "amla powder",
-      secondary: ["gooseberry powder", "Indian gooseberry powder"]
+      primary: "amla powder benefits",
+      secondary: ["natural amla powder", "amla powder for health"]
     },
     imageUrl: amlaPowderImage,
     imageUrls: [amlaPowderImage],
@@ -321,24 +270,21 @@ export const products: Product[] = [
   {
     id: "neem-powder",
     name: "Neem Powder",
-    shortDescription: "Pure neem leaf powder for skin and wellness.",
-    longDescription: "Made from neem leaves sourced from mature neem trees. The leaves are shade-dried and ground into a fine powder, preserving their natural properties. Used traditionally for skin care and wellness support.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Supports skin health",
-      "Natural detox support",
-      "Hair pack uses",
-      "Traditional wellness herb"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Water rinses, face/hair packs",
-    dosage: "½ tsp/day (topical as needed)",
-    safety: "Not for internal use during pregnancy. External use generally safe. Patch test before use.",
-    storage: "Store in an airtight container away from moisture",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Leafy Vegetable Powder"],
-    howItMade: "Neem leaves → Cleaned → Shade-dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: ["Leaf-only powder", "No fillers", "Pure neem"],
     seoKeywords: {
-      primary: "neem powder",
-      secondary: ["neem leaf powder", "azadirachta indica powder"]
+      primary: "neem powder benefits",
+      secondary: ["natural neem powder", "neem powder for health"]
     },
     imageUrl: neemPowderImage,
     imageUrls: [neemPowderImage],
@@ -350,24 +296,21 @@ export const products: Product[] = [
   {
     id: "carrot-powder",
     name: "Carrot Powder",
-    shortDescription: "Natural carrot powder high in beta-carotene & colour.",
-    longDescription: "Made from fresh, sweet carrots that are washed, sliced, and dehydrated at low temperatures to retain their natural beta-carotene and vibrant orange colour. Perfect for baby food, smoothies, and baking.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Vitamin A precursor",
-      "Eye and skin support",
-      "Baby-friendly nutrition",
-      "Natural orange colour"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Smoothies, soups, baking",
-    dosage: "1–2 tsp/day",
-    safety: "Safe for all ages including infants. Introduce gradually to babies. May cause orange tint to skin in large amounts (harmless).",
-    storage: "Store in an airtight container away from light",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Vegetable Powder"],
-    howItMade: "Fresh carrots → Washed → Sliced → Low-temp dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: ["Natural orange", "Nutrient-retentive processing", "Pure carrot"],
     seoKeywords: {
-      primary: "carrot powder",
-      secondary: ["dried carrot powder", "carrot powder for babies"]
+      primary: "carrot powder benefits",
+      secondary: ["natural carrot powder", "carrot powder for health"]
     },
     imageUrl: carrotPowderImage,
     imageUrls: [carrotPowderImage],
@@ -379,24 +322,21 @@ export const products: Product[] = [
   {
     id: "spinach-powder",
     name: "Spinach Powder",
-    shortDescription: "Nutrient-packed spinach powder for daily iron & greens.",
-    longDescription: "Golden Harvest Spinach Powder is made from fresh palak leaves that are thoroughly washed, shade-dried, and ground into a fine powder. A convenient way to add greens to your daily diet.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Rich in iron",
-      "Packed with vitamins",
-      "Easy to add to food",
-      "Daily greens boost"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Smoothies, dough, soups",
-    dosage: "1 tsp/day",
-    safety: "Safe for most people. High in oxalates - those with kidney issues should limit intake. Consult doctor if on blood thinners.",
-    storage: "Store in an airtight container away from heat and moisture",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Leafy Vegetable Powder"],
-    howItMade: "Fresh spinach → Washed → Shade-dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: ["Shade-dried leaves", "Nutrient retention", "Pure spinach"],
     seoKeywords: {
-      primary: "spinach powder",
-      secondary: ["palak powder", "dried spinach powder"]
+      primary: "spinach powder benefits",
+      secondary: ["natural spinach powder", "spinach powder for health"]
     },
     imageUrl: spinachPowderImage,
     imageUrls: [spinachPowderImage],
@@ -408,24 +348,21 @@ export const products: Product[] = [
   {
     id: "curry-leaf-powder",
     name: "Curry Leaf Powder",
-    shortDescription: "Aromatic curry leaf powder rich in minerals and flavour.",
-    longDescription: "Made from fresh curry leaves (kadi patta) that are plucked, cleaned, and shade-dried to preserve their distinctive aroma and nutrients. An essential ingredient in South Indian cooking and wellness practices.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Supports digestion",
-      "Flavour enhancer",
-      "Iron source",
-      "Traditional cooking ingredient"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Curries, seasoning, rice mixes",
-    dosage: "As per recipe",
-    safety: "Safe for culinary use. Generally well-tolerated. Start with small amounts to test tolerance.",
-    storage: "Store in an airtight container to retain aroma",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Leafy Vegetable Powder"],
-    howItMade: "Fresh curry leaves → Cleaned → Shade-dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: ["Dried fresh curry leaves", "Aromatic finish", "Pure kadi patta"],
     seoKeywords: {
-      primary: "curry leaf powder",
-      secondary: ["kadi patta powder", "dried curry leaves powder"]
+      primary: "curry leaf powder benefits",
+      secondary: ["natural curry leaf powder", "curry leaf powder for health"]
     },
     imageUrl: curryLeafPowderImage,
     imageUrls: [curryLeafPowderImage],
@@ -437,28 +374,25 @@ export const products: Product[] = [
   {
     id: "betel-leaf-powder",
     name: "Betel Leaf Powder",
-    shortDescription: "Traditional betel leaf powder for oral health and wellness.",
-    longDescription: "Golden Harvest Betel Leaf Powder is made from fresh betel leaves that are cleaned, dried, and ground into a fine powder. Known for its traditional use in oral care and digestive support, this powder preserves the natural properties of betel leaves.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Supports oral health",
-      "Traditional digestive aid",
-      "Natural breath freshener",
-      "Supports overall wellness"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Oral care, traditional preparations",
-    dosage: "½–1 tsp/day (external use)",
-    safety: "External use only. Not for internal consumption. Consult healthcare provider before use.",
-    storage: "Store in an airtight container away from moisture",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Leafy Vegetable Powder"],
-    howItMade: "Fresh betel leaves → Cleaned → Dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: [
       "Traditional herb",
       "Natural properties",
       "Pure betel leaf"
     ],
     seoKeywords: {
-      primary: "betel leaf powder",
-      secondary: ["paan leaf powder", "betel powder"]
+      primary: "betel leaf powder benefits",
+      secondary: ["natural betel leaf powder", "betel leaf powder for health"]
     },
     imageUrl: betelLeafPowderImage,
     imageUrls: [betelLeafPowderImage],
@@ -470,28 +404,25 @@ export const products: Product[] = [
   {
     id: "coconut-powder",
     name: "Coconut Powder",
-    shortDescription: "Desiccated coconut powder for cooking and baking.",
-    longDescription: "Made from fresh coconut meat that is dried and ground into a fine powder. This versatile powder adds a rich, tropical flavor to various dishes and is perfect for both sweet and savory recipes.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Rich in healthy fats",
-      "Natural flavor enhancer",
-      "Versatile cooking ingredient",
-      "Supports energy needs"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Baking, curries, smoothies, desserts",
-    dosage: "As per recipe",
-    safety: "Safe for daily use. May cause digestive discomfort in large amounts.",
-    storage: "Store in an airtight container in a cool, dry place",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Flakes"],
-    howItMade: "Fresh coconut → Meat extracted → Dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: [
       "Desiccated coconut",
       "Natural flavor",
       "Versatile use"
     ],
     seoKeywords: {
-      primary: "coconut powder",
-      secondary: ["desiccated coconut powder", "coconut flour"]
+      primary: "coconut powder benefits",
+      secondary: ["natural coconut powder", "coconut powder for health"]
     },
     imageUrl: coconutPowderImage,
     imageUrls: [coconutPowderImage],
@@ -503,28 +434,25 @@ export const products: Product[] = [
   {
     id: "dates-powder",
     name: "Dates Powder",
-    shortDescription: "Natural sweetener powder from sun-dried dates.",
-    longDescription: "Golden Harvest Dates Powder is made from premium quality dates that are pitted, dried, and ground into a fine powder. This natural sweetener is rich in natural sugars and minerals, perfect for healthy baking and sweetening.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Natural sweetener",
-      "Rich in minerals",
-      "Energy booster",
-      "Healthy baking alternative"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Baking, smoothies, desserts, energy bars",
-    dosage: "1–2 tbsp/day",
-    safety: "Safe for most people. May cause digestive discomfort if consumed in large amounts. High in natural sugars.",
-    storage: "Store in an airtight container away from moisture",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Fruit Powders"],
-    howItMade: "Fresh dates → Pitted → Dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: [
       "Natural sweetener",
       "No added sugar",
       "Rich in nutrients"
     ],
     seoKeywords: {
-      primary: "dates powder",
-      secondary: ["date powder", "dried dates powder"]
+      primary: "dates powder benefits",
+      secondary: ["natural dates powder", "dates powder for health"]
     },
     imageUrl: datesPowderImage,
     imageUrls: [datesPowderImage],
@@ -534,63 +462,27 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "guava-powder",
-    name: "Guava Powder",
-    shortDescription: "Nutrient-rich guava powder for daily wellness.",
-    longDescription: "Made from fresh guava fruit that is cleaned, dried, and ground into a fine powder. Rich in vitamin C and fiber, this powder is an excellent addition to smoothies and wellness drinks.",
-    benefits: [
-      "High in vitamin C",
-      "Rich in fiber",
-      "Supports immune function",
-      "Natural energy source"
-    ],
-    usage: "Smoothies, juices, wellness drinks",
-    dosage: "1–2 tsp/day",
-    safety: "Safe for most people. May cause digestive discomfort if consumed in large amounts.",
-    storage: "Store in an airtight container in a cool, dry place",
-    category: ["Fruit Powders"],
-    howItMade: "Fresh guava → Cleaned → Dried → Ground → Packed",
-    highlights: [
-      "Vitamin C rich",
-      "Natural fiber",
-      "Immune support"
-    ],
-    seoKeywords: {
-      primary: "guava powder",
-      secondary: ["dried guava powder", "guava fruit powder"]
-    },
-    imageUrl: guavaPowderImage,
-    imageUrls: [guavaPowderImage],
-    variants: [
-      { weight: '150g', price: 195, originalPrice: 229, discountPercentage: 15, stock: 40, sku: 'GUA-150' },
-      { weight: '500g', price: 570, originalPrice: 671, discountPercentage: 15, stock: 20, sku: 'GUA-500' }
-    ]
-  },
-  {
     id: "lemon-powder",
     name: "Lemon Powder",
-    shortDescription: "Tangy lemon powder for flavor and wellness.",
-    longDescription: "Golden Harvest Lemon Powder is made from fresh lemons that are dried and ground into a fine powder. This versatile powder adds a bright, tangy flavor to dishes and drinks while providing natural wellness benefits.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Natural flavor enhancer",
-      "Supports digestion",
-      "Rich in vitamin C",
-      "Antioxidant properties"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Drinks, marinades, baking, teas",
-    dosage: "½–1 tsp/day",
-    safety: "Safe for daily use. May cause digestive discomfort in large amounts. Avoid if allergic to citrus.",
-    storage: "Store in an airtight container away from moisture",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Digestion", "Wellness"],
-    howItMade: "Fresh lemons → Dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: [
       "Natural tanginess",
       "Vitamin C source",
       "Versatile flavor"
     ],
     seoKeywords: {
-      primary: "lemon powder",
-      secondary: ["dried lemon powder", "lemon zest powder"]
+      primary: "lemon powder benefits",
+      secondary: ["natural lemon powder", "lemon powder for health"]
     },
     imageUrl: lemonPowderImage,
     imageUrls: [lemonPowderImage],
@@ -601,29 +493,26 @@ export const products: Product[] = [
   },
   {
     id: "papaya-powder",
-    name: "Papaya Powder",
-    shortDescription: "Digestive enzyme-rich papaya powder for wellness.",
-    longDescription: "Made from fresh papaya fruit that is dried and ground into a fine powder. Rich in papain enzyme, this powder supports digestion and provides natural wellness benefits.",
+    name: "Papaya Leaf Powder",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Supports digestion",
-      "Rich in papain enzyme",
-      "Natural wellness aid",
-      "Supports overall health"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Smoothies, wellness drinks, marinades",
-    dosage: "½–1 tsp/day",
-    safety: "Safe for most people. May cause digestive discomfort if consumed in large amounts. Avoid during pregnancy.",
-    storage: "Store in an airtight container in a cool, dry place",
-    category: ["Digestion", "Wellness"],
-    howItMade: "Fresh papaya → Dried → Ground → Packed",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
+    category: ["Leafy Vegetable Powder", "Wellness"],
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: [
-      "Digestive enzyme rich",
-      "Natural papain",
-      "Wellness support"
+      "Immune support",
+      "Natural antioxidants",
+      "Wellness powder"
     ],
     seoKeywords: {
-      primary: "papaya powder",
-      secondary: ["dried papaya powder", "papaya enzyme powder"]
+      primary: "papaya leaf powder benefits",
+      secondary: ["natural papaya leaf powder", "papaya leaf powder for health"]
     },
     imageUrl: papayaPowderImage,
     imageUrls: [papayaPowderImage],
@@ -635,28 +524,25 @@ export const products: Product[] = [
   {
     id: "tomato-powder",
     name: "Tomato Powder",
-    shortDescription: "Concentrated tomato powder for cooking and nutrition.",
-    longDescription: "Golden Harvest Tomato Powder is made from fresh tomatoes that are dried and ground into a fine powder. This concentrated powder adds rich flavor and nutrition to various dishes and is perfect for soups, sauces, and seasonings.",
+    shortDescription: "Made from carefully selected fresh raw materials and processed naturally.",
+    longDescription: "Made from carefully selected fresh raw materials and processed naturally.",
     benefits: [
-      "Rich in lycopene",
-      "Natural flavor enhancer",
-      "Supports immune function",
-      "Antioxidant properties"
+      "Supports overall health and daily nutrition."
     ],
-    usage: "Soups, sauces, seasoning, baking",
-    dosage: "As per recipe",
-    safety: "Safe for daily use. May cause digestive discomfort in large amounts.",
-    storage: "Store in an airtight container away from moisture",
+    usage: "Mix with water, milk, or food.",
+    dosage: "½ to 1 teaspoon daily.",
+    safety: "Consult a doctor if pregnant or under medication.",
+    storage: "Store in a cool, dry place. Keep airtight.",
     category: ["Vegetable Powder"],
-    howItMade: "Fresh tomatoes → Dried → Ground → Packed",
+    howItMade: "Cleaned, naturally dried, and finely powdered.",
     highlights: [
       "Lycopene rich",
       "Natural color",
       "Versatile cooking"
     ],
     seoKeywords: {
-      primary: "tomato powder",
-      secondary: ["dried tomato powder", "tomato seasoning powder"]
+      primary: "tomato powder benefits",
+      secondary: ["natural tomato powder", "tomato powder for health"]
     },
     imageUrl: tomatoPowderImage,
     imageUrls: [tomatoPowderImage],

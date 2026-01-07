@@ -40,30 +40,42 @@ const OrderConfirmation = () => {
             </div>
             
             <h1 className="text-3xl font-serif font-bold text-primary mb-4">
-              Order Confirmed!
+              Thank You for Your Order!
             </h1>
-            
+
             {orderId && (
               <p className="text-lg text-foreground/80 mb-6">
                 Your order <span className="font-semibold">#{String(orderId).slice(0, 8)}</span> has been received successfully.
               </p>
             )}
-            
-            <div className="bg-warm-beige p-6 rounded-lg mb-8">
+
+            <div className="bg-warm-beige p-6 rounded-lg mb-6">
+              <h2 className="font-semibold text-primary mb-3">Order Summary</h2>
+              <p className="text-sm text-foreground/80 mb-4">
+                Thank you for choosing Golden Harvest Raw Powders. We appreciate your business and are committed to providing you with the highest quality products.
+              </p>
+              <p className="text-sm text-foreground/80">
+                You will be updated soon on WhatsApp with order tracking details and any important updates.
+              </p>
+            </div>
+
+            <div className="bg-primary/5 p-6 rounded-lg mb-8">
               <h2 className="font-semibold text-primary mb-3">What happens next?</h2>
               <ul className="text-sm text-foreground/80 space-y-2 text-left">
                 {isOnlinePayment ? (
                   <>
-                    <li>• Your payment has been received successfully</li>
+                    <li>• Your payment has been processed successfully</li>
                     <li>• Your order will be carefully packed and dispatched within 24-48 hours</li>
-                    <li>• You will receive tracking details via SMS</li>
+                    <li>• You will receive tracking details via SMS and WhatsApp</li>
+                    <li>• Delivery typically takes 3-6 working days</li>
                   </>
                 ) : (
                   <>
                     <li>• We will call you to confirm your COD order within 24 hours</li>
                     <li>• Your order will be carefully packed and dispatched within 24-48 hours</li>
-                    <li>• You will receive tracking details via SMS</li>
+                    <li>• You will receive tracking details via SMS and WhatsApp</li>
                     <li>• Pay in cash when you receive your order</li>
+                    <li>• Delivery typically takes 3-6 working days</li>
                   </>
                 )}
               </ul>

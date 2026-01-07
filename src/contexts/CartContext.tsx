@@ -20,6 +20,7 @@ interface CartContextType {
   updateQuantity: (productId: string, variantWeight: string, quantity: number) => void;
   clearCart: () => void;
   getCartTotal: () => number;
+  getCartTotalWeight: () => number;
   getCartCount: () => number;
   addToWishlist: (productId: string) => void;
   removeFromWishlist: (productId: string) => void;
@@ -105,6 +106,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return cartItems.reduce((total, item) => total + item.variant.price * item.quantity, 0);
   };
 
+  const getCartTotalWeight = () => {
+    return cartItems.reduce((total, item) => {
+      const weightInKg = parseFloat(item.variant.weight.replace('g', '')) / 1000;
+      return total + (weightInKg * item.quantity);
+    }, 0);
+  };
+
   const getCartCount = () => {
     return cartItems.reduce((count, item) => count + item.quantity, 0);
   };
@@ -138,6 +146,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updateQuantity,
         clearCart,
         getCartTotal,
+        getCartTotalWeight,
         getCartCount,
         addToWishlist,
         removeFromWishlist,
